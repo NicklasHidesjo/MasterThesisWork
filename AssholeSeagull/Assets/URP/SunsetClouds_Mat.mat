@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SunsetClouds_Mat
+  m_Shader: {fileID: -6465566751694194690, guid: ee455b7784f6ed947bcba8a9f3134685, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_24babda0e4844cfc9327f59bf411fd4a: 154.01
+    - Vector1_29baaa82541b4fa8bd3e0cdf15f51952: 0.2
+    - Vector1_65ff4488bec84365b11f4f26e2a48b40: 0.32
+    - Vector1_c158da10e5b8424eb7a5c1cf06aa2119: 60.91
+    m_Colors:
+    - Color_d03d2323f23948198004c210263c45a1: {r: 2.1302495, g: 0.76963395, b: 0, a: 1}
+    - Vector2_8153b745ba884e7f8cc748fa5515675e: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_db692f55d07d45de8155b975fcf58100: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

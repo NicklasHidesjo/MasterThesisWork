@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 64ecce21b72441e4eada5c1f77ee9bf2
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Calose FREE
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 034fccaf4caaa2a43a87c0d9bb4e110a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
