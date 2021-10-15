@@ -4,104 +4,130 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    float gameTimer = 0f;
-    [SerializeField] float gameDuration = 60f;
-    public float GameDuration => gameDuration;
+	float gameTimer = 0f;
+	[SerializeField] float gameDuration = 60f;
+	public float GameDuration => gameDuration;
 
-    [SerializeField] string SceneName;
+	[SerializeField] string SceneName;
 
-    public int score = 0;
-    bool isGameOver = false;
-    SceneLoader sceneLoader;
-    Plate plate;
+	public int score = 0; // make this private
+	bool isGameOver = false;
+	SceneLoader sceneLoader;
+	Plate plate;
 
-    bool freeRoam;
-    public bool FreeRoam => freeRoam;
+	bool freeRoam;
+	public bool FreeRoam => freeRoam;
 
-    private void Start()
-    {
-        sceneLoader = FindObjectOfType<SceneLoader>();
-        plate = FindObjectOfType<Plate>();
+	private void Start()
+	{
+		sceneLoader = FindObjectOfType<SceneLoader>();
+		plate = FindObjectOfType<Plate>();
 
-        if(sceneLoader.GetSceneName() == SceneName)
-        {
-            freeRoam = true;
-        }
-    }
+		// check if we are in FreeRoam
+		if(sceneLoader.GetSceneName() == SceneName)
+		{
+			freeRoam = true;
+		} // make this not rely on a string 
+	}
 
-    private void Update()
-    {
-        if(isGameOver)
-        {
-            return;
-        }
+	private void Update()
+	{
+		// check if times up 
+		if(isGameOver) // this might not be needed.
+		{
+			// return/ exit and don't run the code below.
+			return;
+		}
 
-        if(freeRoam)
-        {
-            return;
-        }
+		// check if we are in free roam.
+		if(freeRoam)
+		{
+			// return/ exit and don't run the code below.
+			return;
+		}
 
-        gameTimer += Time.deltaTime;
+		// increase our gameTimer
+		gameTimer += Time.deltaTime;
 
-        if(gameTimer > gameDuration)
-        {
-            Debug.Log("Time Over!");
-            isGameOver = true;
-            FinishSandwich(false);
-        }
-    }
+		// check if gameTimer is larger then gameDuration
+		if(gameTimer > gameDuration)
+		{
+			Debug.Log("Time Over!");
 
-    public void FinishSandwich(bool Finished)
-    {
-        foreach (var food in plate.SandwichPieces)
-        {
-            score += food.GetScore();
-        }
+			// set game over.
+			isGameOver = true;
+			
+			// Finish the sandwich
+			FinishSandwich(false);
+		}
+	}
 
-        if(freeRoam)
-        {
-            PlayerPrefs.SetInt("newHighscore", 0);
-            PlayerPrefs.SetInt("currentFreeRoamScore", score);
-            int highscore = PlayerPrefs.GetInt("freeRoamHighscore", 0);
+	public void FinishSandwich(bool Finished)
+	{
+		// go trough every food that is on the plate on the sandwich
+		foreach (var food in plate.SandwichPieces)
+		{
+			// get the score for each food.
+			score += food.GetScore();
+		}
 
-            if (!Finished)
-            {
-                score -= 1;
-                score = (int)Mathf.Clamp(score, 0, Mathf.Infinity);
-            }
+		// check if we are in freeRoam
+		if (freeRoam)
+		{
+			// set our playerprefs for new highscore and also our currentScore.
+			PlayerPrefs.SetInt("newHighscore", 0);
+			PlayerPrefs.SetInt("currentFreeRoamScore", score);
 
-            if (score > highscore)
-            {
-                PlayerPrefs.SetInt("newHighscore", 1);
-                PlayerPrefs.SetInt("freeRoamHighscore", score);
-            }
+			// get the highscore
+			int highscore = PlayerPrefs.GetInt("freeRoamHighscore", 0);
 
-            Debug.Log("Score: " + score);
+			// check if we didnt finish our sandwich
+			if (!Finished)
+			{
+				score -= 1; // make this a changable variable in a score related script.
+				score = (int)Mathf.Clamp(score, 0, Mathf.Infinity); // remove this clamp (as we want to allow for negative scores)
+			}
 
-            sceneLoader.LoadScene("FreeRoamEndScene");
-        }
-        else
-        {
-            
-        PlayerPrefs.SetInt("newHighscore", 0);
-        PlayerPrefs.SetInt("currentScore", score);
-        int highscore = PlayerPrefs.GetInt("highscore", 0);
+			// check if our score is higher then our highscore
+			if (score > highscore)
+			{
+				// set the newHighscore flag and also our highscore for freeroam.
+				PlayerPrefs.SetInt("newHighscore", 1);
+				PlayerPrefs.SetInt("freeRoamHighscore", score);
+			}
 
-        if(!Finished)
-        {
-            score -= 1;
-            score = (int)Mathf.Clamp(score, 0, Mathf.Infinity);
-        }
+			Debug.Log("Score: " + score); // remove this.
 
-        if(score > highscore)
-        {
-            PlayerPrefs.SetInt("newHighscore", 1);
-            PlayerPrefs.SetInt("highscore", score);
-        }
+			// load our FreeRoamEndScene.
+			sceneLoader.LoadScene("FreeRoamEndScene");
+		}
+		else
+		{
+			// set our playerprefs for new highscore and also our currentScore.
+			PlayerPrefs.SetInt("newHighscore", 0);
+			PlayerPrefs.SetInt("currentScore", score);
 
-        Debug.Log("Score: " + score);
+			// get our highscore
+			int highscore = PlayerPrefs.GetInt("highscore", 0);
 
-        sceneLoader.LoadScene("EndScene");
-        }
-    }
+			if (!Finished)
+			{
+				score -= 1; // make this a changable variable in a score related script.
+				score = (int)Mathf.Clamp(score, 0, Mathf.Infinity); // remove this clamp (as we want to allow for negative scores)
+			}
+
+			// check if our score is higher then our highscore
+			if (score > highscore)
+			{
+				// set the newHighscore flag and also our highscore.
+				PlayerPrefs.SetInt("newHighscore", 1);
+				PlayerPrefs.SetInt("highscore", score);
+			}
+
+			Debug.Log("Score: " + score); // remove this.
+
+			// load our EndScene
+			sceneLoader.LoadScene("EndScene");
+		}
+	}
 }

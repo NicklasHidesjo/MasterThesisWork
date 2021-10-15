@@ -7,6 +7,21 @@ using Valve.VR.Extras;
 
 public class AudioManager : MonoBehaviour
 {
+    // this script does the same as MainMenuPointer 
+
+    // the only difference is that this has sliders for music and also 
+    // a value that we increase the volume with
+
+    // it also saves and loads the volumes to playerprefs and sets the mixer 
+    // to use the correct volumes.
+
+    // look into the possibility to make the sliders be slidable using the pointers 
+    // not only button presses. (also look into making it possible to just 
+    // press anywhere on the slider and have the volume jump to it.
+    // in other words rework the volume sliders.
+
+
+
     [SerializeField] SteamVR_LaserPointer rightHand;
     [SerializeField] SteamVR_LaserPointer leftHand;
 

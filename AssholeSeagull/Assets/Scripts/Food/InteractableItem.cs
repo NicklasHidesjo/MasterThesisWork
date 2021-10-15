@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// check if this script is in use (currently only used by BottomBun) and remove if not
+// BottomBun might not be in use either.
 public class InteractableItem : MonoBehaviour
 {
 	public Vector3 Velocity => body.velocity;

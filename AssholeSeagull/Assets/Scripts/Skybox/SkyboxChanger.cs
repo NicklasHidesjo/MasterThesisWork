@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class SkyboxChanger : MonoBehaviour
 {
+    // if this is not used remove it.
+
     public Material[] Skyboxes;
     private Dropdown _dropdown;
 

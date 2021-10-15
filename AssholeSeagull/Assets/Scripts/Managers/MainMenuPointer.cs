@@ -5,8 +5,18 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Valve.VR.Extras;
 
-public class MainMenuPointer : MonoBehaviour
+public class MainMenuPointer : MonoBehaviour // rename to something better
 {
+    // this script uses events from SteamVR_LaserPointer 
+    // to see if either the right or left hand clicks any
+    // buttons. 
+
+    // look into removing the if else if statement and just have a bunch of if statements
+
+    // look into the posibility for it to not require being buttons in the canvas
+    // but just objects with colliders.
+
+
     [SerializeField] SteamVR_LaserPointer rightHand;
     [SerializeField] SteamVR_LaserPointer leftHand;
 
@@ -25,14 +35,6 @@ public class MainMenuPointer : MonoBehaviour
 
     public void PointerClick(object sender, PointerEventArgs e)
     {
-/*        if (e.target.name == "Cube")
-        {
-            PlayButtonSound();
-            sceneLoader.LoadScene("GameScene");
-            Debug.Log("Cube was clicked");
-        }
-*/
-
         if (e.target.name == "Play")
         {
             PlayButtonSound();

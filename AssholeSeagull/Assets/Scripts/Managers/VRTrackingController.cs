@@ -14,11 +14,14 @@ public class VRTrackingController : MonoBehaviour
 
 	private void Update()
     {
+        // check so that our steamCamera has moved
         if(steamCamera.transform.position.y > 0)
         {
+            // check so that our cameraRig hasn't been changed yet
             if(cameraRig.transform.position.y == 0)
             {
                 Debug.Log("Recentering");
+                // Recenter the camera to where the player is.
                 Recenter();
             }
         }
@@ -26,8 +29,10 @@ public class VRTrackingController : MonoBehaviour
 
     private void Recenter()
     {
+        // check so that we have a desired position for our head.
         if (desiredHeadPosition != null)
         {
+            // Change the actuall position and recenter it
             ResetSeatedPos(desiredHeadPosition);
         }
         else
@@ -43,12 +48,14 @@ public class VRTrackingController : MonoBehaviour
             //ROTATION
             // Get current head heading in scene (y-only, to avoid tilting the floor)
             float offsetAngle = steamCamera.rotation.eulerAngles.y;
+
             // Now rotate CameraRig in opposite direction to compensate
             cameraRig.Rotate(0f, -offsetAngle, 0f);
 
             //POSITION
             // Calculate postional offset between CameraRig and Camera
             Vector3 offsetPos = steamCamera.position - cameraRig.position;
+
             // Reposition CameraRig to desired position minus offset
             cameraRig.position = (desiredHeadPos.position - offsetPos);
 

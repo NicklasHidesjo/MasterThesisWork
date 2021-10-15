@@ -5,6 +5,9 @@ using TMPro;
 
 public class EndScreen : MonoBehaviour
 {
+    // this is the same as FreeRoamEndScreen 
+    // look into combining these two and have only one endScreen script.
+
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI highscoreText;
 

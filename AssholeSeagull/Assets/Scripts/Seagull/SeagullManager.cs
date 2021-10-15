@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SeagullManager : MonoBehaviour
 {
+    // this script will be rewritten and changed, to a great extent
+
     //Food Packages
     [SerializeField] Transform breadPackage;
     [SerializeField] Transform cheesePackage;
@@ -31,16 +33,19 @@ public class SeagullManager : MonoBehaviour
 
     private void OnEnable()
     {
+        // starts a corutine of spawning our seagulls.
         StartCoroutine("SpawnSeagull");
     }
 
     private void OnDisable()
     {
+        // stops all corutines to make sure they don't run in the background
         StopAllCoroutines();
     }
 
     public void Despawn(GameObject seagull)
     {
+        // despawns and destroys the seagull 
         Destroy(seagull);
         currentNumberOfSeagulls--;
     }
@@ -49,12 +54,14 @@ public class SeagullManager : MonoBehaviour
     {
         while(true)
         {       
+            // checks if the currentNumberOfSeagulls we have is less then our maximum.
             if (currentNumberOfSeagulls < maxNumberOfSeagulls)
             {
                 yield return new WaitForSeconds(spawnIntervalls);
-
+                // gets a random spawnpoint.
                 randomSpawnPoint = Random.Range(0, 3);
 
+                // sets our randomSpawnPoint to one of them.
                 if (randomSpawnPoint == 0)
                 {
                     seagullMovement = Instantiate(seagullPrefab, seagullSpawnPointsOne.position, Quaternion.identity);
@@ -71,16 +78,23 @@ public class SeagullManager : MonoBehaviour
                     RandomEndPoint();
                 }
 
+                // this might(will) be removed but it sets so that we can scare the
+                // seagull in another script.
                 scareBird.seagullMovement = seagullMovement;
 
+                // sets the different points for the seagull to shit on i think
+                // this will be needed to be changed
                 seagullMovement.BreadPackage = breadPackage;
                 seagullMovement.HamPackage = hamPackage;
                 seagullMovement.CheesePackage = cheesePackage;
 
+                // sets the seagullManager of the seagull.
                 seagullMovement.seagullManager = this;
 
+                // increases the number of seagulls.
                 currentNumberOfSeagulls++;
 
+                // initializes the seagull.
                 seagullMovement.Init();
             }
 
@@ -90,7 +104,8 @@ public class SeagullManager : MonoBehaviour
 
     void RandomEndPoint()
     {
-        randomSpawnPoint = Random.Range(0, 3);
+        // gets a random endPoint for the seagull.
+        randomSpawnPoint = Random.Range(0, 3); // rename this to be better named.
 
         if (randomSpawnPoint == 0)
         {

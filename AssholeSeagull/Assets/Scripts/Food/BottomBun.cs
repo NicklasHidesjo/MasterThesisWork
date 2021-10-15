@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// check if this script is being used (remove is not)
 public class BottomBun : MonoBehaviour
 {
     [SerializeField] LayerMask layer;

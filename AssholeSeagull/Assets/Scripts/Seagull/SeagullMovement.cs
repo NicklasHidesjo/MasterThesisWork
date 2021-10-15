@@ -4,242 +4,294 @@ using UnityEngine;
 
 public class SeagullMovement : MonoBehaviour
 {
-    State currentState;
-    enum State
-    {
-        PoopingPackage,
-        PoopingFood
-    }
-    [SerializeField] Animator seagullAnimator;
+	// this script will be rewriten using animation events'
+	// proper state machines and audio managers
+	// this script will be split into several smaller ones.
 
-    public int randomPackage;
-    public Transform flightEnd;
+	// make each seagull have it's own audiosource to allow for spatial sound.
 
-    public SeagullManager seagullManager;
-    FoodTracker foodTracker;
+	// our state machine (will be changed into a finite statemachine instead of enums)
+	State currentState;
+	enum State
+	{
+		PoopingPackage,
+		PoopingFood
+	}
 
-    Pooping pooping;
-    FoodItem foodItem;
+	// our animator
+	[SerializeField] Animator seagullAnimator;
 
-    [SerializeField] AudioClip poopingSound;
-    [SerializeField] AudioClip seagullSound;
-    [SerializeField] AudioClip scaredSound;
-    SoundSingleton soundSingleton;
 
-    public Vector3 targetPosition;
-    
-    [SerializeField] float speed = 10f;
-    [SerializeField] float endSpeed = 5f;
-    [SerializeField] float acceleration = 0.5f;
-    [SerializeField] float deacceleration = 0.5f;
-    [SerializeField] float minSpeed = 1f;
+	public int randomPackage;
 
-    public bool isPoopingTime = false;
-    bool hasPooped = false;
-    bool flyingAway = false;
-    public bool inDistance = false;
-    bool isScared = false;
+	public Transform flightEnd;
+	public SeagullManager seagullManager;
+	FoodTracker foodTracker;
 
-    float poopingTimer;
+	Pooping pooping;
 
-    //Food Packages
-    [SerializeField] Transform breadPackage;
-    public Transform BreadPackage
-    {
-        get
-        {
-            return breadPackage;
-        }
-        set
-        {
-            breadPackage = value;
-        }
-    }
+	FoodItem foodItem; // do we use this?
+	
+	[Header("Sounds")]
+	[SerializeField] AudioClip poopingSound;
+	[SerializeField] AudioClip seagullSound;
+	[SerializeField] AudioClip scaredSound;
+	SoundSingleton soundSingleton;
 
-    [SerializeField] Transform cheesePackage;
-    public Transform CheesePackage
-    {
-        get
-        {
-            return cheesePackage;
-        }
-        set
-        {
-            cheesePackage = value;
-        }
-    }
+	[Header("Speed settings")]
+	[SerializeField] float speed = 10f;
+	[SerializeField] float endSpeed = 5f;
+	[SerializeField] float acceleration = 0.5f;
+	[SerializeField] float deacceleration = 0.5f;
+	[SerializeField] float minSpeed = 1f;
 
-    [SerializeField] Transform hamPackage;
+	public Vector3 targetPosition;
+	
+	public bool isPoopingTime = false;
+	bool hasPooped = false;
+	bool flyingAway = false;
+	public bool inDistance = false;
+	bool isScared = false;
 
-    public Transform HamPackage
-    {
-        get
-        {
-            return hamPackage;
-        }
-        set
-        {
-            hamPackage = value;
-        }
-    }
+	float poopingTimer;
+	[Header("Transforms")]
+	//Food Packages 
+	// remove serializefield and look into making them get
+	// a list of all packages in the scene.
+	[SerializeField] Transform breadPackage;
+	public Transform BreadPackage
+	{
+		get
+		{
+			return breadPackage;
+		}
+		set
+		{
+			breadPackage = value;
+		}
+	}
 
-    public void Init()
-    {
-        soundSingleton = FindObjectOfType<SoundSingleton>();
-        soundSingleton.SeagullFx(seagullSound);
+	[SerializeField] Transform cheesePackage;
+	public Transform CheesePackage
+	{
+		get
+		{
+			return cheesePackage;
+		}
+		set
+		{
+			cheesePackage = value;
+		}
+	}
 
-        int randomState = Random.Range(0, 2);
+	[SerializeField] Transform hamPackage; 
 
-        if (randomState == 0)
-        {
-            currentState = State.PoopingFood;
-        }
-        else if (randomState == 1)
-        {
-            currentState = State.PoopingPackage;
-        }
+	public Transform HamPackage
+	{
+		get
+		{
+			return hamPackage;
+		}
+		set
+		{
+			hamPackage = value;
+		}
+	}
 
-        if(currentState == State.PoopingPackage)
-        {
-            FoodTarget();
-        }
-        else if(currentState == State.PoopingFood)
-        {
-            FoodItemTarget();
-        }
+	public void Init()
+	{
+		// gets our audioSource.
+		soundSingleton = FindObjectOfType<SoundSingleton>();
+		// plays a seagull clip.
+		soundSingleton.SeagullFx(seagullSound);
 
-        pooping = GetComponent<Pooping>();
-        transform.LookAt(targetPosition);
-    }
+		// sets the state our bird will get. this is the only place we set the state?
+		int randomState = Random.Range(0, 2);
+		if (randomState == 0)
+		{
+			currentState = State.PoopingFood;
+		}
+		else if (randomState == 1)
+		{
+			currentState = State.PoopingPackage;
+		}
+		if(currentState == State.PoopingPackage)
+		{
+			FoodTarget();
+		}
+		else if(currentState == State.PoopingFood)
+		{
+			FoodItemTarget();
+		}
 
-    void Update()
-    {       
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+		// gets our pooping component.
+		pooping = GetComponent<Pooping>();
 
-        //framme vid food
-        if (transform.position == targetPosition && !isPoopingTime && !isScared)
-        {
-            speed = endSpeed; 
-            seagullAnimator.SetBool("Pooping", true);
-            isPoopingTime = true;
-        }
+		// rotates our bird to look at our targetPosition.
+		transform.LookAt(targetPosition);
+	}
 
-        //Dags att bajsa
-        if (isPoopingTime == true)
-        {
-            poopingTimer += Time.deltaTime;
+	void Update()
+	{       
+		// moves our bird.
+		transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-            if (poopingTimer > 1f && !hasPooped)
-            {
-                FindObjectOfType<SoundSingleton>().PoopOnFood(poopingSound);
+		// Checks if we have arrived at target.
+		if (transform.position == targetPosition && !isPoopingTime && !isScared)
+		{
+			// sets our speed.
+			speed = endSpeed; 
+			// sets our animation
+			seagullAnimator.SetBool("Pooping", true);
+			// sets a bool 
+			isPoopingTime = true; // this will probably be removed.
+		}
 
-                pooping.Poop();
-                hasPooped = true;
-                seagullAnimator.SetTrigger("FlyAway");
-                seagullAnimator.SetBool("Pooping", false);
-            }
+		// checks if it should poop.
+		if (isPoopingTime == true)
+		{
+			poopingTimer += Time.deltaTime;
 
-            //Dags att flyga iväg
-            if (poopingTimer > 2.8f && !flyingAway)
-            {
-                targetPosition = flightEnd.position;
-                transform.LookAt(targetPosition);
+			if (poopingTimer > 1f && !hasPooped)
+			{
+				// we get the soundsingleton instead of using the variable we saved (why???)
+				FindObjectOfType<SoundSingleton>().PoopOnFood(poopingSound);
 
-                flyingAway = true;
-            }  
-        }
+				//bird poops.
+				pooping.Poop();
 
-        if (flyingAway)
-        {
-            speed += acceleration * Time.deltaTime;
-        }
-        else if (speed > minSpeed)
-        {
-            speed -= deacceleration * Time.deltaTime;
-        }
-        else if(speed < minSpeed)
-        {
-            speed = minSpeed;
-        }
+				// sets that we have pooped
+				hasPooped = true;
+				// sets a trigger in our animator
+				seagullAnimator.SetTrigger("FlyAway");
+				// sets a bool in our animator
+				seagullAnimator.SetBool("Pooping", false);
+			}
 
-        //Despawna fågel
-        if (transform.position == targetPosition && flyingAway)
-        { 
-            seagullManager.Despawn(gameObject);
-        }
-    }
+			// checks if its time to fly away
+			if (poopingTimer > 2.8f && !flyingAway)
+			{
+				// sets new target point
+				targetPosition = flightEnd.position;
+				// rotates our bird towards that position.
+				transform.LookAt(targetPosition);
 
-    //FoodItems är target point
-    void FoodItemTarget()
-    {
-        foodTracker = FindObjectOfType<FoodTracker>();
-        Transform target = foodTracker.GetRandomTarget();
+				// sets flying away to true.
+				flyingAway = true;
+			}  
+		}
 
-        if(target == null)
-        {
-            Debug.Log("Target position is null");
-            FoodTarget();
-            return;
-        }
+		// checks if we are flying away
+		if (flyingAway)
+		{
+			speed += acceleration * Time.deltaTime;
+		}
+		// what is this below and what does it do?? 
+		else if (speed > minSpeed)
+		{
+			speed -= deacceleration * Time.deltaTime;
+		}
+		else if(speed < minSpeed)
+		{
+			speed = minSpeed;
+		}
 
-        targetPosition = target.position;
+		// despawn our bird.
+		if (transform.position == targetPosition && flyingAway)
+		{ 
+			seagullManager.Despawn(gameObject);
+		}
+	}
 
-        if (targetPosition == Vector3.zero)
-        {
-            FoodTarget();
-            return;
-        }
+	void FoodItemTarget()
+	{
+		// gets the FoodTracker
+		foodTracker = FindObjectOfType<FoodTracker>();
+		// gets a FoodItem target 
+		Transform target = foodTracker.GetRandomTarget(); // rename this to TryGetRandomTarget or something similar
 
-        targetPosition.y = transform.position.y;
-    }
+		// check if our target is null.
+		if(target == null)
+		{
+			Debug.Log("Target position is null");
+			// get a package as target instead.
+			FoodTarget();
+			// return/exit and don't do any of the code below
+			return;
+		}
 
-    //FoodPackage är target point
-    private void FoodTarget()
-    {
-        randomPackage = Random.Range(0, 3);
+		// sets our targetPosition
+		targetPosition = target.position;
 
-        if (randomPackage == 0)
-        {
-            targetPosition = new Vector3(breadPackage.position.x, transform.position.y, breadPackage.position.z);
-        }
-        else if (randomPackage == 1)
-        {
-            targetPosition = new Vector3(hamPackage.position.x, transform.position.y, hamPackage.position.z);
-        }
-        else if (randomPackage == 2)
-        {
-            targetPosition = new Vector3(cheesePackage.position.x, transform.position.y, cheesePackage.position.z);
-        }
-        else
-        {
-            Debug.LogError("No food was found!");
-        }
-    }
+		// checks if our targetPosition is 0
+		if (targetPosition == Vector3.zero)
+		{
+			// get a package as target instead.
+			FoodTarget();
+			// return/exit and don't do any of the code below
+			return;
+		}
 
-    //Spelare skrämmer fågel
-    public void Scared()
-    {
-        if(isPoopingTime)
-        {
-            return;
-        }
+		// sets targetPosition.y to be that of our own position.y (to now make the bird swoop down for shitting)
+		targetPosition.y = transform.position.y;
+	}
 
-        if(isScared == false)
-        {
-            FindObjectOfType<SoundSingleton>().SeagullFx(scaredSound);
-            isScared = true;
-            targetPosition = flightEnd.position;
-            transform.LookAt(targetPosition);
+	
+	private void FoodTarget()
+	{
+		// get a random package
+		randomPackage = Random.Range(0, 3); // change this to be dynamic with every package
 
-            flyingAway = true;
-        }
-    }
+		// sets target based on the randomPackage int
+		if (randomPackage == 0)
+		{
+			targetPosition = new Vector3(breadPackage.position.x, transform.position.y, breadPackage.position.z);
+		}
+		else if (randomPackage == 1)
+		{
+			targetPosition = new Vector3(hamPackage.position.x, transform.position.y, hamPackage.position.z);
+		}
+		else if (randomPackage == 2)
+		{
+			targetPosition = new Vector3(cheesePackage.position.x, transform.position.y, cheesePackage.position.z);
+		}
+		else
+		{
+			Debug.LogError("No food was found!");
+		}
+	}
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        if(collider.gameObject.name == "ScareDistance" && !flyingAway)
-        {
-            inDistance = true;
-        }
-    }
+	public void Scared()
+	{
+		// checks if bird is pooping
+		if(isPoopingTime)
+		{
+			// return/exit don't do any of the code below.
+			return;
+		}
+		// check if not already scared?
+		if(isScared == false)
+		{
+			// again using the findobject instead of our variable we saved?
+			FindObjectOfType<SoundSingleton>().SeagullFx(scaredSound);
+			// setting that we are scared
+			isScared = true;
+			// making our target position our endposition.
+			targetPosition = flightEnd.position;
+			// changes our rotation to look at the endpoint.
+			transform.LookAt(targetPosition);
+			// sets a bool for flying away.
+			flyingAway = true;
+		}
+	}
+
+	private void OnTriggerEnter(Collider collider)
+	{
+		// this checks if we are in distance to scare with a collider? 
+		// i do not think this will be used. im sure this won't be used.
+		if(collider.gameObject.name == "ScareDistance" && !flyingAway)
+		{
+			inDistance = true;
+		}
+	}
 }
