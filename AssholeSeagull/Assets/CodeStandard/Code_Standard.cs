@@ -87,10 +87,10 @@ public class Code_Standard: MonoBehaviour
 	#region Method Order Convention
 	// Methods should be written in the order they are called.
 	// public methods should be at the bottom of the script.
-	// Link to the docs on order of execution https://docs.unity3d.com/Manual/ExecutionOrder.html
 
 	// Unitys own methods (awake,start,update,onEnable,onDisable)
 	// should be in their execution order and all other methods inbetween.
+	// Link to the docs on order of execution https://docs.unity3d.com/Manual/ExecutionOrder.html
 
 	// Do
 	private void Awake()
@@ -99,7 +99,7 @@ public class Code_Standard: MonoBehaviour
 	}
 	private void AwakeCalledMethod()
 	{
-
+		CalledFromMany();
 	}
 
 	private void OnEnable()
@@ -108,7 +108,7 @@ public class Code_Standard: MonoBehaviour
 	}
 	private void OnEnableCalledMethod()
 	{
-
+		CalledFromMany();
 	}
 
 	private void Start()
@@ -126,7 +126,7 @@ public class Code_Standard: MonoBehaviour
 	}
 	private void OnUpdateCalledMethod()
 	{
-
+		CalledFromMany();
 	}
 
 	private void OnDisable()
@@ -135,7 +135,7 @@ public class Code_Standard: MonoBehaviour
 	}
 	private void OnDisableCalledMethod()
 	{
-
+		CalledFromMany();
 	}
 
 	private void OnDestroy()
@@ -143,6 +143,11 @@ public class Code_Standard: MonoBehaviour
 		OnDestroyCalledMethod();
 	}
 	private void OnDestroyCalledMethod()
+	{
+
+	}
+
+	private void CalledFromMany()
 	{
 
 	}
@@ -301,6 +306,7 @@ public class Code_Standard: MonoBehaviour
 	[Header("Header Usage")]
 
 	[Header("Do")]
+
 	[Header("Speed Settings")]
 	[SerializeField] private float myVelocity = 10f;
 	[SerializeField] private float myVelocityIncrease = 1f;
@@ -328,11 +334,11 @@ public class Code_Standard: MonoBehaviour
 	[Header("ToolTip usage")]
 
 	[Header("Do")]
-	[Tooltip("This is the increase in speed (m/s) that the ball gets")]
+	[Tooltip("This is the increase in speed(m/s) that the ball gets")]
 	[SerializeField] private float speedIncrease = 0.5f;
 
 	[Header("Don't")]
-	[SerializeField] private float ballSpeedIncreaseInms = 0.5f;
+	[SerializeField] private float ballSpeedIncreaseInMeterPerSecond = 0.5f;
 	#endregion
 
 	#region Properties Convention
@@ -362,7 +368,7 @@ public class Code_Standard: MonoBehaviour
 		myNumber = value;
 	}
 
-	// Make properties instead of public methods.
+	// Make properties instead of public variables.
 
 	/// <Reasons>
 	/// 1. Properties allow for some protection. For example you can write your own 
