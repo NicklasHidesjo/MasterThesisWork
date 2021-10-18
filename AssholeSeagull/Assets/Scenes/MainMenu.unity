@@ -5670,6 +5670,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7987544829710943021, guid: 8609e74fd8bda0f4bbcff20cb9a65cbb, type: 3}
+      propertyPath: tracks.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7987544829710943023, guid: 8609e74fd8bda0f4bbcff20cb9a65cbb, type: 3}
       propertyPath: m_Name
       value: BackgroundMusic

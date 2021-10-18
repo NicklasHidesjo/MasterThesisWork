@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f4628589cc8804984bc55fea8f0518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: be592b5b82f1c6244ac425ac6a844dc7, type: 3}
-  - {fileID: 8300000, guid: 6a4c4e608edd4f043abf54132e16b9ac, type: 3}
+  tracks:
   - {fileID: 8300000, guid: f00d36a9dd61c124a8a89e5471b402df, type: 3}
+  - {fileID: 8300000, guid: 6a4c4e608edd4f043abf54132e16b9ac, type: 3}
+  - {fileID: 8300000, guid: be592b5b82f1c6244ac425ac6a844dc7, type: 3}

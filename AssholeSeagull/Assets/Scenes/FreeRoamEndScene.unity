@@ -2184,7 +2184,7 @@ MonoBehaviour:
   newRecordObject: {fileID: 2070468352}
   celebrationSoundPlayer: {fileID: 296698840}
   celebrationSound: {fileID: 8300000, guid: 75ed659975fdc6045b44a2fefa6522c4, type: 3}
-  CelebrationCanvasObject: {fileID: 0}
+  CelebrationCanvasObject: {fileID: 2070468352}
 --- !u!4 &1684283531
 Transform:
   m_ObjectHideFlags: 0
