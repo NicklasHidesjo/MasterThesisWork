@@ -4,30 +4,34 @@ using UnityEngine;
 
 public class BackgroundMusicPlayer : MonoBehaviour
 {
-    [SerializeField] AudioClip[] tracks;
-    AudioSource audioSource;
+    [SerializeField] private AudioClip[] tracks;
+    private AudioSource audioSource;
 
-    int trackIndex;
+    private int trackIndex = 0;
 
     private void Awake()
-    {
-        // gets all the BackgroundMusicPlayers in the current scene.
-        BackgroundMusicPlayer[] backgroundMusicPlayers = FindObjectsOfType<BackgroundMusicPlayer>();
-       
-        // checks if there is more then 1 BackgroundMusicPlayer.
-        if(backgroundMusicPlayers.Length > 1)
-        {
-            // destroys itself if more then one is found
-            Destroy(gameObject);
-        }
-        else
-        {
-            // if it's alone it sets itself to DontDestroyOnLoad.
-            DontDestroyOnLoad(gameObject);
-        }
-    }
+	{
+		CheckForOtherPlayers();
+	}
+	private void CheckForOtherPlayers()
+	{
+		// gets all the BackgroundMusicPlayers in the current scene.
+		BackgroundMusicPlayer[] backgroundMusicPlayers = FindObjectsOfType<BackgroundMusicPlayer>();
 
-    void Start()
+		// checks if there is more then 1 BackgroundMusicPlayer.
+		if (backgroundMusicPlayers.Length > 1)
+		{
+			// destroys itself if more then one is found
+			Destroy(gameObject);
+		}
+		else
+		{
+			// if it's alone it sets itself to DontDestroyOnLoad.
+			DontDestroyOnLoad(gameObject);
+		}
+	}
+
+	private void Start()
     {
         // sets our trackindex to be zero.
         trackIndex = 0; // make random? 
@@ -40,18 +44,25 @@ public class BackgroundMusicPlayer : MonoBehaviour
         // increases trackIndex
         IncreaseAudioIndex();
     }
-
-    void Update()
+    
+    private void FixedUpdate()
     {
         // checks if we have audio still playing.
-        if(!audioSource.isPlaying)
+        if (!audioSource.isPlaying)
         {
-            // plays the next track in our list of tracks
-            PlayNextTrack();
-            // increases the trackIndex.
-            IncreaseAudioIndex();
+            ChangeTrack();
         }
     }
+
+    private void ChangeTrack()
+    {
+        // plays the next track in our list of tracks
+        PlayNextTrack();
+
+        IncreaseAudioIndex();
+
+    }
+
     private void PlayNextTrack()
     {
         // change the clip in our audioSource

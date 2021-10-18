@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Pooping : MonoBehaviour
 {
-    [SerializeField] GameObject poopPrefab;
-    [SerializeField] Transform spawnPosition;
-
-    float despawnTimer; // remove unused variable
+    [SerializeField] private GameObject poopPrefab;
+    [SerializeField] private Transform spawnPosition;
 
     public void Poop()
     {

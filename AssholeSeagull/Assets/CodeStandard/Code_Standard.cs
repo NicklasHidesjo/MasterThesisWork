@@ -273,13 +273,13 @@ public class Code_Standard: MonoBehaviour
 
 	#region Variable Convention
 	[Header("Variable Convention")]
-	// Always set a variables default value
+	// Always set a variables default value unless it's a [SerializeField]
 	// Do
-	[SerializeField] private float aFloat = 1f;
+	[SerializeField] private float aFloat;
 	private float bFloat = 1f;
 
 	// Don't 
-	[SerializeField] private float cFloat;
+	[SerializeField] private float cFloat = 1f;
 	private float dFloat;
 
 	// group variables togheter

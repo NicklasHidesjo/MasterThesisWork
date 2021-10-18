@@ -22,34 +22,43 @@ public class AudioManager : MonoBehaviour
 
 
 
-    [SerializeField] SteamVR_LaserPointer rightHand;
-    [SerializeField] SteamVR_LaserPointer leftHand;
+    [SerializeField] private SteamVR_LaserPointer rightHand;
+    [SerializeField] private SteamVR_LaserPointer leftHand;
 
-    [SerializeField] Slider masterSlider = null;
-    [SerializeField] Slider musicSlider = null;
-    [SerializeField] Slider effectsSlider = null;
+    [SerializeField] private Slider masterSlider = null;
+    [SerializeField] private Slider musicSlider = null;
+    [SerializeField] private Slider effectsSlider = null;
 
-    [SerializeField] AudioMixer mixer;
+    [SerializeField] private AudioMixer mixer;
 
     [Tooltip("The change that soundvolumes have when pushing either + or - buttons.")]
-    [SerializeField] float soundIncrement;
+    [SerializeField] private float soundIncrement;
 
-    AudioSource buttonPlayer;
+    private AudioSource buttonPlayer;
 
-    float masterVolume;
-    float musicVolume;
-    float effectsVolume;
+    private float masterVolume;
+    private float musicVolume;
+    private float effectsVolume;
 
-    float lowestSound = 0.0000001f;
+    private float lowestSound = 0.0000001f;
 
     private void Start()
+	{
+		SubscribeToEvents();
+
+		GetReferences();
+
+		LoadVolume();
+	}
+
+	private void SubscribeToEvents()
+	{
+		rightHand.PointerClick += PointerClick;
+		leftHand.PointerClick += PointerClick;
+	}
+    private void GetReferences()
     {
-        rightHand.PointerClick += PointerClick;
-        leftHand.PointerClick += PointerClick;
-
         buttonPlayer = GetComponent<AudioSource>();
-
-        LoadVolume();
     }
 
     public void PointerClick(object sender, PointerEventArgs e)
@@ -61,20 +70,21 @@ public class AudioManager : MonoBehaviour
             masterVolume = Mathf.Clamp(masterVolume, lowestSound, 1f);
             SaveVolume();
         }
-        else if (e.target.name == "Increase Master")
+        if (e.target.name == "Increase Master")
         {
             Debug.Log("sound +");
             masterVolume += soundIncrement;
             masterVolume = Mathf.Clamp(masterVolume, lowestSound, 1f);
             SaveVolume();
         }
+
         if (e.target.name == "Decrease Music")
         {
             musicVolume -= soundIncrement;
             musicVolume = Mathf.Clamp(musicVolume, lowestSound, 1f);
             SaveVolume();
         }
-        else if (e.target.name == "Increase Music")
+        if (e.target.name == "Increase Music")
 		{
             musicVolume += soundIncrement;
             musicVolume = Mathf.Clamp(musicVolume, lowestSound, 1f);
@@ -87,7 +97,7 @@ public class AudioManager : MonoBehaviour
             effectsVolume = Mathf.Clamp(effectsVolume, lowestSound, 1f);
             SaveVolume();
         }
-        else if (e.target.name == "Increase Effects")
+        if (e.target.name == "Increase Effects")
 		{
             effectsVolume += soundIncrement;
             effectsVolume = Mathf.Clamp(effectsVolume, lowestSound, 1f);
@@ -95,7 +105,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void LoadVolume()
+    private void LoadVolume()
     {
         masterVolume = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
         effectsVolume = PlayerPrefs.GetFloat("EffectsVolume", 0.5f);
@@ -108,7 +118,7 @@ public class AudioManager : MonoBehaviour
         effectsSlider.value = effectsVolume;
         SetVolume("Effects", effectsVolume);
     }
-    void SaveVolume()
+    private void SaveVolume()
     {
         buttonPlayer.Play();
 
@@ -130,8 +140,12 @@ public class AudioManager : MonoBehaviour
 	}
 
     private void OnDestroy()
-    {
-        rightHand.PointerClick -= PointerClick;
-        leftHand.PointerClick -= PointerClick;
-    }
+	{
+		UnsubscribeFromEvents();
+	}
+	private void UnsubscribeFromEvents()
+	{
+		rightHand.PointerClick -= PointerClick;
+		leftHand.PointerClick -= PointerClick;
+	}
 }

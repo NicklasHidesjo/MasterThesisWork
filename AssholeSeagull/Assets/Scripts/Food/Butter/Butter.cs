@@ -55,7 +55,6 @@ public class Butter : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		// here i do need it as i need to know if you exit with the knife or not.
 		if(other.gameObject.GetComponent<ButterBlade>())
 		{
 			knife = null;

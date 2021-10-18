@@ -7,10 +7,10 @@ public class VRTrackingController : MonoBehaviour
 {
  
     [Tooltip("Desired head position of player when seated")]
-    [SerializeField] Transform desiredHeadPosition;
+    [SerializeField] private Transform desiredHeadPosition;
 
-    [SerializeField] Transform steamCamera;
-    [SerializeField] Transform cameraRig;
+    [SerializeField] private Transform steamCamera;
+    [SerializeField] private Transform cameraRig;
 
 	private void Update()
     {

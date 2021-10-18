@@ -5,7 +5,7 @@ using UnityEngine;
 public class ButterActivator : MonoBehaviour
 {
 	// our butter object that we will toggle.
-    [SerializeField] GameObject butter;
+    [SerializeField] private GameObject butter;
 
 	private void OnTriggerEnter(Collider other)
 	{

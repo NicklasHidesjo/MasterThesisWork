@@ -17,23 +17,29 @@ public class MainMenuPointer : MonoBehaviour // rename to something better
     // but just objects with colliders.
 
 
-    [SerializeField] SteamVR_LaserPointer rightHand;
-    [SerializeField] SteamVR_LaserPointer leftHand;
+    [SerializeField] private SteamVR_LaserPointer rightHand;
+    [SerializeField] private SteamVR_LaserPointer leftHand;
 
-    SceneLoader sceneLoader;
-    AudioSource buttonPlayer;
+    private SceneLoader sceneLoader;
+    private AudioSource buttonPlayer;
 
     private void Start()
-    {
-        rightHand.PointerClick += PointerClick;
-        leftHand.PointerClick += PointerClick;
+	{
+		SubscribeToEvents();
+		GetReferences();
+	}
+	private void SubscribeToEvents()
+	{
+		rightHand.PointerClick += PointerClick;
+		leftHand.PointerClick += PointerClick;
+	}
+	private void GetReferences()
+	{
+		buttonPlayer = FindObjectOfType<AudioSource>();
+		sceneLoader = FindObjectOfType<SceneLoader>();
+	}
 
-        buttonPlayer = FindObjectOfType<AudioSource>();
-
-        sceneLoader = FindObjectOfType<SceneLoader>();
-    }
-
-    public void PointerClick(object sender, PointerEventArgs e)
+	public void PointerClick(object sender, PointerEventArgs e)
     {
         if (e.target.name == "Play")
         {
@@ -42,25 +48,25 @@ public class MainMenuPointer : MonoBehaviour // rename to something better
             Debug.Log("Button was clicked");
         }
 
-        else if(e.target.name == "Replay")
+        if(e.target.name == "Replay")
         {
             PlayButtonSound();
             sceneLoader.LoadScene("GameScene");
         }    
 
-        else if (e.target.name == "Quit")
+        if (e.target.name == "Quit")
         {
             PlayButtonSound();
             sceneLoader.Quit();
         }
 
-        else if(e.target.name == "Main Menu")
+        if(e.target.name == "Main Menu")
 		{
             PlayButtonSound();
             sceneLoader.LoadScene(0);
 		}
 
-        else if(e.target.name == "Free Roam")
+        if(e.target.name == "Free Roam")
         {
             PlayButtonSound();
             sceneLoader.LoadScene("FreeRoamMode");
@@ -73,8 +79,12 @@ public class MainMenuPointer : MonoBehaviour // rename to something better
     }
 
     private void OnDestroy()
-    {
-        rightHand.PointerClick -= PointerClick;
-        leftHand.PointerClick -= PointerClick;
-    }
+	{
+		UnsubscribeFromEvents();
+	}
+	private void UnsubscribeFromEvents()
+	{
+		rightHand.PointerClick -= PointerClick;
+		leftHand.PointerClick -= PointerClick;
+	}
 }

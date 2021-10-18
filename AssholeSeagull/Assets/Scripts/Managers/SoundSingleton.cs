@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundSingleton : MonoBehaviour // change name for something better
+public class SoundSingleton : MonoBehaviour // change name for something better as it's no longer a singleton
 {
     [SerializeField] AudioSource seagullAudio;
     [SerializeField] AudioSource poopAudio;

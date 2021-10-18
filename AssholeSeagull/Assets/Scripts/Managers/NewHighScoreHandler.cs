@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class NewHighScoreHandler : MonoBehaviour
 {
-    [SerializeField] GameObject newRecordObject;
-    [SerializeField] AudioSource celebrationSoundPlayer;
-    [SerializeField] AudioClip celebrationSound;
-    [SerializeField] GameObject CelebrationCanvasObject;
+    [SerializeField] private GameObject newRecordObject;
+    [SerializeField] private AudioSource celebrationSoundPlayer;
+    [SerializeField] private AudioClip celebrationSound;
+    [SerializeField] private GameObject CelebrationCanvasObject;
 
     // maybe the sound related things here should be set into a audio script that
     // handles all audio everywhere.

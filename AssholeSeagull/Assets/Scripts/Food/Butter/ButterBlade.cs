@@ -5,7 +5,7 @@ using UnityEngine;
 public class ButterBlade : MonoBehaviour // rename this script to something better
 {
 	// the object that is our butter object on the knife.
-	[SerializeField] GameObject butterOnKnife;
+	[SerializeField] private GameObject butterOnKnife;
 	
 	private bool butterOnBlade;
 
