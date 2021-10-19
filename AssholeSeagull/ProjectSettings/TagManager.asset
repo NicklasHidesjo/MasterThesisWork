@@ -10,6 +10,7 @@ TagManager:
   - KnifeBlade
   - Plate
   - FxTemporaire
+  - FoodPackage
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - Knife
   - Seagull
   - KnifeOnly
-  - 
-  - 
+  - Poop
+  - FoodSpawner
   - 
   - 
   - 

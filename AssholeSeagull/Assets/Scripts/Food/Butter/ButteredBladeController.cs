@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButterBlade : MonoBehaviour // rename this script to something better
+public class ButteredBladeController : MonoBehaviour // rename this script to something better
 {
 	// the object that is our butter object on the knife.
 	[SerializeField] private GameObject butterOnKnife;

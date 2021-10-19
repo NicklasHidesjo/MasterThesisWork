@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3392547103531048245}
   - component: {fileID: 33029139387828927}
   - component: {fileID: 1559875207572194933}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FoodSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,9 +269,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodItem: {fileID: 4503281328503389362, guid: 08b209d003f23c2469fd3eb50fc53dbb, type: 3}
   foodName: Ham
-  poop: {fileID: 6925330863442785536}
   spawnPosition: {fileID: 3392547103531048245}
-  spoiledFoods: 0
+  poop: {fileID: 6925330863442785536}
+  poopOnFoodSound: {fileID: 8300000, guid: 22c735ff877fadc4bbae400bfdbc48bd, type: 3}
 --- !u!1 &8006574426917612777
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,10 +282,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3579768320126567963}
   - component: {fileID: 2073319722039463896}
-  - component: {fileID: 4587119360055596721}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: FoodPackage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -318,19 +317,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3493735189799817691, guid: 21b523d2999f45f48a6a7abb7a4f5595, type: 3}
---- !u!114 &4587119360055596721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8006574426917612777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2898b5770067edf4db0e305275fa4511, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poopOnFoodSound: {fileID: 8300000, guid: 22c735ff877fadc4bbae400bfdbc48bd, type: 3}
 --- !u!1001 &859716439827031192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,7 +371,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 21b523d2999f45f48a6a7abb7a4f5595, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ab067a2f40e2f424bacb03831e0e0552, type: 2}
+      objectReference: {fileID: 2100000, guid: 18383e17b9ca47e4dbada5ab0759de3b, type: 2}
     - target: {fileID: 919132149155446097, guid: 21b523d2999f45f48a6a7abb7a4f5595, type: 3}
       propertyPath: m_Name
       value: Ham_Package

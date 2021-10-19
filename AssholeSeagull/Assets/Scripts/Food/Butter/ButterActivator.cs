@@ -13,7 +13,7 @@ public class ButterActivator : MonoBehaviour
 		if(other.CompareTag("KnifeBlade"))
 		{
 			// Get the blade that is colliding.
-			ButterBlade blade = other.GetComponent<ButterBlade>();
+			ButteredBladeController blade = other.GetComponent<ButteredBladeController>();
 
 			// make sure its not null
 			if(blade == null) { return; }

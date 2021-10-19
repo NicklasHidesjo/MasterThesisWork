@@ -20,7 +20,6 @@ public class VRTrackingController : MonoBehaviour
             // check so that our cameraRig hasn't been changed yet
             if(cameraRig.transform.position.y == 0)
             {
-                Debug.Log("Recentering");
                 // Recenter the camera to where the player is.
                 Recenter();
             }
@@ -58,8 +57,6 @@ public class VRTrackingController : MonoBehaviour
 
             // Reposition CameraRig to desired position minus offset
             cameraRig.position = (desiredHeadPos.position - offsetPos);
-
-            Debug.Log("Seat recentered!");
         }
         else
         {

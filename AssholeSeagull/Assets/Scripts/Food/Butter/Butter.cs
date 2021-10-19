@@ -1,61 +1,70 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Butter : MonoBehaviour
 {
-	float butteringDone;
+	private float butteredPercentage;
 
 	[Tooltip("The threshold for each butter-stage to be initiated at.")]
-	[SerializeField] List<float> butterStageInitiation;
+	[SerializeField] private List<float> butterStageInitiation;
 
 	[Tooltip("The objects to be toggled on/off based on the buttered amount")]
-	[SerializeField] GameObject[] butterObjects;
+	[SerializeField] private GameObject[] butterObjects;
 
-	ButterVelocity knife;
+	private KnifeVelocity knife;
 
 	private void Update()
 	{
-		if (knife == null) { return; }
+		if (knife == null) 
+		{ 
+			return; 
+		}
 
 		// increase the amount that is buttered.
-		butteringDone += knife.Velocity;
+		butteredPercentage += knife.Velocity;
 
 		ChangeButterStage();
 	}
 
 	private void ChangeButterStage()
 	{
-		// make the guts of this into one or two methods?
-		// One for deactivating all and one for activating the one we want,
-		// using parameters in the activation method.
-		if (butteringDone > butterStageInitiation[1] && !butterObjects[2].activeSelf)
+		if (butteredPercentage > butterStageInitiation[1] && !butterObjects[2].activeSelf)
 		{
-			butterObjects[0].SetActive(false);
-			butterObjects[1].SetActive(true);
-			butterObjects[2].SetActive(false);
+			DeactivateAll();
+			ActivateButterStage(butterObjects[2]);
+		}
+		else if (butteredPercentage > butterStageInitiation[0] && !butterObjects[2].activeSelf)
+		{
+			DeactivateAll();
+			ActivateButterStage(butterObjects[1]);
+		}
+	}
 
-		}
-		else if (butteringDone > butterStageInitiation[0] && !butterObjects[1].activeSelf)
-		{
-			butterObjects[0].SetActive(false);
-			butterObjects[1].SetActive(false);
-			butterObjects[2].SetActive(true);
-		}
+	private void DeactivateAll()
+	{
+		butterObjects[0].SetActive(false);
+		butterObjects[1].SetActive(false);
+		butterObjects[2].SetActive(false);
+	}
+	private void ActivateButterStage(GameObject gameObject)
+	{
+		gameObject.SetActive(true);
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
 		// do i need this null check? (seeing as i check for null in update)
-		if(other.gameObject.GetComponent<ButterBlade>())
+		if(other.gameObject.GetComponent<ButteredBladeController>())
 		{
-			knife = other.GetComponentInChildren<ButterVelocity>();
+			knife = other.GetComponentInChildren<KnifeVelocity>();
 		}
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		if(other.gameObject.GetComponent<ButterBlade>())
+		if(other.gameObject.GetComponent<ButteredBladeController>())
 		{
 			knife = null;
 		}

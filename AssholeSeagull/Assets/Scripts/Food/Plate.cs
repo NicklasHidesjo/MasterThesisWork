@@ -5,19 +5,25 @@ using UnityEngine;
 public class Plate : MonoBehaviour
 {
     [Tooltip("The maximum height that the sandwich can have (in unity units)")]
-    [SerializeField] float rayDistance = 100f;
+    [SerializeField] private float rayDistance;
     [Tooltip("The layer that only food is on")]
-    [SerializeField] LayerMask foodLayer;
+    [SerializeField] private LayerMask foodLayer;
 
     // a list of everything that is on the plate/sandwich
-    List<FoodItem> sandwichPieces = new List<FoodItem>();
-    public List<FoodItem> SandwichPieces { get { return sandwichPieces; } }
+    [SerializeField] private List<FoodItem> sandwichPieces = new List<FoodItem>();
+    public List<FoodItem> SandwichPieces 
+    { 
+        get 
+        { 
+            return sandwichPieces; 
+        } 
+    }
 
-    bool sandwichIsFinished;
-
+    private bool sandwichIsFinished;
 
     private void Update()
     {
+
         // check if we have finished the sandwich
         if (sandwichIsFinished)
         {
@@ -38,7 +44,7 @@ public class Plate : MonoBehaviour
         FinishSandwich();
     }
 
-    bool FirstFoodOnPlate()
+    private bool FirstFoodOnPlate()
     {
         // get the direction to cast the ray
         Vector3 plateVector = new Vector3(0, rayDistance, 0);
@@ -50,6 +56,10 @@ public class Plate : MonoBehaviour
         {
             // get the collisions FoodItem(food)
             FoodItem food = hit.collider.gameObject.GetComponent<FoodItem>();
+
+            // check if we can just return if food.Buttered.
+            // move the null check down and just set
+            // what food is in this linecast.
 
             // check if its null
             if(food == null)
@@ -69,12 +79,11 @@ public class Plate : MonoBehaviour
                 return true;
             }
         }
-       
         // if we do not hit anything on the foodLayed we return false
         return false;
     }
 
-    void AddFoodToList()
+    private void AddFoodToList()
     {
         // Go trough all the items on the list.
 		foreach (var food in sandwichPieces)
@@ -91,7 +100,6 @@ public class Plate : MonoBehaviour
 
         // cast a ray upwards to hit all on foodLayer that are above and store in our array.
         hits = Physics.RaycastAll(transform.position, transform.forward, rayDistance, foodLayer);
-        
         // check if we have more then 0 elements in our array.
         if(hits.Length > 0)
         {
@@ -100,9 +108,8 @@ public class Plate : MonoBehaviour
             {
                 // we get the FoodItem
                 FoodItem food = hits[i].collider.GetComponent<FoodItem>();
-
                 // we check if it's moving or in one of our hands
-                if(food.IsMoving() || food.InHand)
+                if(food.Moving || food.InHand)
 				{
                     // continue on with the next element and skip this one.
                     continue;
@@ -114,10 +121,10 @@ public class Plate : MonoBehaviour
             } // look into making this a foreach instead
         }
 
-        Debug.DrawRay(transform.position, transform.forward, Color.blue);
+
     }
 
-    void FinishSandwich()
+    private void FinishSandwich()
     {
         // using a foreach loop go through each FoodItem in our sandwichPieces list
 		foreach (var food in sandwichPieces)

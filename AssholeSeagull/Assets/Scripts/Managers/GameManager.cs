@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 		foreach (var food in plate.SandwichPieces)
 		{
 			// get the score for each food.
-			score += food.GetScore();
+			score += food.GetComponent<FoodScore>().GetScore();
 		}
 
 		// check if we are in freeRoam
@@ -96,8 +96,6 @@ public class GameManager : MonoBehaviour
 				PlayerPrefs.SetInt("freeRoamHighscore", score);
 			}
 
-			Debug.Log("Score: " + score); // remove this.
-
 			// load our FreeRoamEndScene.
 			sceneLoader.LoadScene("FreeRoamEndScene");
 		}
@@ -123,8 +121,6 @@ public class GameManager : MonoBehaviour
 				PlayerPrefs.SetInt("newHighscore", 1);
 				PlayerPrefs.SetInt("highscore", score);
 			}
-
-			Debug.Log("Score: " + score); // remove this.
 
 			// load our EndScene
 			sceneLoader.LoadScene("EndScene");

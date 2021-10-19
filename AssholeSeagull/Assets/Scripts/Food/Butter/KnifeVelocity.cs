@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButterVelocity : MonoBehaviour // rename this script to something better
+public class KnifeVelocity : MonoBehaviour
 {
     private float velocity;
     public float Velocity
     {
-        get { return velocity; }
+        get 
+		{ 
+			return velocity; 
+		}
     }
 
     private Vector3 previousPos;
 
-    void Start()
+    private void Start()
 	{
 		InitiatePreviousPos();
 	}
@@ -24,7 +27,7 @@ public class ButterVelocity : MonoBehaviour // rename this script to something b
 		SetPreviousPos(currentPos);
 	}
 
-	void Update()
+	private void Update()
 	{
 		SetBladeVelocity();
 	}

@@ -10,7 +10,7 @@ public class ButterPackage : MonoBehaviour
 		if (other.CompareTag("KnifeBlade"))
 		{
 			// get the blade component
-			ButterBlade blade = other.GetComponent<ButterBlade>();
+			ButteredBladeController blade = other.GetComponent<ButteredBladeController>();
 			
 			// check if the blade is null
 			if(blade == null) { return; }

@@ -29,8 +29,6 @@ public class SeagullMovement : MonoBehaviour
 	FoodTracker foodTracker;
 
 	Pooping pooping;
-
-	FoodItem foodItem; // do we use this?
 	
 	[Header("Sounds")]
 	[SerializeField] AudioClip poopingSound;

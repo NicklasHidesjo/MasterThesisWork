@@ -1695,11 +1695,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8916402399794109887, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.859
+      value: 2.896
       objectReference: {fileID: 0}
     - target: {fileID: 8916402399794109887, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.228
+      value: -1.352
       objectReference: {fileID: 0}
     - target: {fileID: 8916402399794109887, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1921,7 +1921,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe3506629ea14b4889cef36970bdc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodTransformList: []
 --- !u!114 &455969990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3366,10 +3365,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09badd300855377458cf5e1f1aee205b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scareRadius: 5
   seagullLayer:
     serializedVersion: 2
     m_Bits: 1024
+  scareRadius: 5
   scareVelocityThreshold: 5
   headTransform: {fileID: 238550177}
   rightHandTransform: {fileID: 238550176}
@@ -4982,6 +4981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed7319b06137234388f139460346447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goalRotation: 360
 --- !u!1001 &1544933995
 PrefabInstance:
   m_ObjectHideFlags: 0

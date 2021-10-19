@@ -212,9 +212,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodItem: {fileID: 3832869185125561017, guid: 567ccd320a0993543a1048f3fcf070da, type: 3}
   foodName: Tomato
+  spawnPosition: {fileID: 5388341317386955056}
   poop: {fileID: 455711356144259687}
-  spawnPosition: {fileID: 7726186987519427994, guid: 567ccd320a0993543a1048f3fcf070da, type: 3}
-  spoiledFoods: 0
+  poopOnFoodSound: {fileID: 8300000, guid: 22c735ff877fadc4bbae400bfdbc48bd, type: 3}
 --- !u!1 &1559699301760539689
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 4569118861947054965}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: FoodPackage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 5388341317386955056}
   - component: {fileID: 8404446753923433831}
   - component: {fileID: 206119855285450968}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FoodSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
+  m_Size: {x: 0.3, y: 0.3, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4095425820231491993
 PrefabInstance:
@@ -350,15 +350,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1035033e3f8f2724fa2de4112dc8bb13, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.000000014901161
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1035033e3f8f2724fa2de4112dc8bb13, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.000000017520822
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1035033e3f8f2724fa2de4112dc8bb13, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1035033e3f8f2724fa2de4112dc8bb13, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

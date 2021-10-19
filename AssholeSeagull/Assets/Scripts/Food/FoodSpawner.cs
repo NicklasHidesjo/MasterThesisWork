@@ -5,6 +5,7 @@ using UnityEngine;
 public class FoodSpawner : MonoBehaviour
 {
 	private FoodPackage package;
+
 	private void Start()
 	{
 		GetReferences();
@@ -18,23 +19,24 @@ public class FoodSpawner : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		// check so that we have the correct tag.
-		if(other.CompareTag("Food"))
-		{
-			TryAddingFoodToContainer(other);
-		}
+		TryAddingFoodToContainer(other);
 	}
 
 	private void TryAddingFoodToContainer(Collider other)
 	{
-		// Get the FoodItem component of the object that entered our collider.
-		FoodItem food = other.GetComponent<FoodItem>();
-
-		// check if the FoodItem(food) is not null 
-		if (food != null) // make this into a if null return?
+		// check so that we have the correct tag.
+		if (other.CompareTag("Food"))
 		{
-			// start the process of adding the FoodItem(food) to the container.
-			package.AddFoodToContainer(food);
+
+			// Get the FoodItem component of the object that entered our collider.
+			FoodItem food = other.GetComponent<FoodItem>();
+
+			// check if the FoodItem(food) is not null 
+			if (food != null) // make this into a if null return?
+			{
+				// start the process of adding the FoodItem(food) to the container.
+				package.AddFoodToContainer(food);
+			}
 		}
 	}
 

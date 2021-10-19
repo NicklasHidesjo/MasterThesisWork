@@ -174,10 +174,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2934383458857909003}
   - component: {fileID: 4843545053135868065}
-  - component: {fileID: 8245832956158267674}
   m_Layer: 0
   m_Name: Bread_MeshCollider
-  m_TagString: Untagged
+  m_TagString: FoodPackage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,19 +209,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8065805863044592461, guid: 76b3e28cecb73c344b1570685b6cfaf0, type: 3}
---- !u!114 &8245832956158267674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2896912241814832267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2898b5770067edf4db0e305275fa4511, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poopOnFoodSound: {fileID: 8300000, guid: 22c735ff877fadc4bbae400bfdbc48bd, type: 3}
 --- !u!1 &7685560494329656662
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,9 +257,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodItem: {fileID: -7339756543294674793, guid: 9b1c76de4f645ad448a89cc3fef9c5f4, type: 3}
   foodName: Bread
-  poop: {fileID: 997042677067829873}
   spawnPosition: {fileID: 4702336324981991718}
-  spoiledFoods: 0
+  poop: {fileID: 997042677067829873}
+  poopOnFoodSound: {fileID: 8300000, guid: 22c735ff877fadc4bbae400bfdbc48bd, type: 3}
 --- !u!1 &8953406500410178553
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +271,7 @@ GameObject:
   - component: {fileID: 4702336324981991718}
   - component: {fileID: 9162469896042694001}
   - component: {fileID: 673709199480256718}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FoodSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +433,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 76b3e28cecb73c344b1570685b6cfaf0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ab067a2f40e2f424bacb03831e0e0552, type: 2}
+      objectReference: {fileID: 2100000, guid: 18383e17b9ca47e4dbada5ab0759de3b, type: 2}
     - target: {fileID: 919132149155446097, guid: 76b3e28cecb73c344b1570685b6cfaf0, type: 3}
       propertyPath: m_Name
       value: Bread_Package
