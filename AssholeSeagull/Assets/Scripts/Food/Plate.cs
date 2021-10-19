@@ -103,22 +103,22 @@ public class Plate : MonoBehaviour
         // check if we have more then 0 elements in our array.
         if(hits.Length > 0)
         {
-            // with a for-loop we go trough the entire array of hits.
-            for (int i = 0; i < hits.Length; i++)
-            {
+            // with a for-each loop we go trough the entire array of hits.
+			foreach (var hit in hits)
+			{
                 // we get the FoodItem
-                FoodItem food = hits[i].collider.GetComponent<FoodItem>();
+                FoodItem food = hit.collider.GetComponent<FoodItem>();
                 // we check if it's moving or in one of our hands
-                if(food.Moving || food.InHand)
-				{
+                if (food.Moving || food.InHand)
+                {
                     // continue on with the next element and skip this one.
                     continue;
-				}
+                }
                 // add the piece of food to our list of sandwichPieces
                 sandwichPieces.Add(food);
                 // set that the food is on the plate.
                 food.OnPlate = true;
-            } // look into making this a foreach instead
+            }
         }
 
 

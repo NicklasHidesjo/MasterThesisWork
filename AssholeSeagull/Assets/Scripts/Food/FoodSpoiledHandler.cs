@@ -50,6 +50,7 @@ public class FoodSpoiledHandler : MonoBehaviour
         if (IsMoving())
         {
             food.Moving = true;
+            // return/exit and don't run the code below
             return;
         }
         else
@@ -67,6 +68,8 @@ public class FoodSpoiledHandler : MonoBehaviour
         // set isSpoiled based on if our timer is larger then our spoilTime
         food.IsSpoiled = timer > spoilTime;
 
+        // this code doesn't do anything as i forgot what i was writing the code for
+        // (will remain until i remove or remember)
         if(food.IsSpoiled != alreadySpoiled)
 		{
             alreadySpoiled = true;
