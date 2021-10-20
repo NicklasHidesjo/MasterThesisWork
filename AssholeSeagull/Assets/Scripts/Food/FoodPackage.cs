@@ -48,7 +48,7 @@ public class FoodPackage : MonoBehaviour
                 // smear poop on any food that is spawned lying in the package.
                 SmearPoopInPackage();
 
-                FindObjectOfType<SoundSingleton>().SeagullFx(poopOnFoodSound);
+                FindObjectOfType<AudioPlayer>().SeagullFx(poopOnFoodSound);
             }
         }
     }

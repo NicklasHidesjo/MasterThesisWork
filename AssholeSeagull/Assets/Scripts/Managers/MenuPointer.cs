@@ -5,17 +5,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Valve.VR.Extras;
 
-public class MainMenuPointer : MonoBehaviour // rename to something better
+public class MenuPointer : MonoBehaviour // rename to something better
 {
     // this script uses events from SteamVR_LaserPointer 
     // to see if either the right or left hand clicks any
     // buttons. 
 
-    // look into removing the if else if statement and just have a bunch of if statements
 
     // look into the posibility for it to not require being buttons in the canvas
     // but just objects with colliders.
-
 
     [SerializeField] private SteamVR_LaserPointer rightHand;
     [SerializeField] private SteamVR_LaserPointer leftHand;

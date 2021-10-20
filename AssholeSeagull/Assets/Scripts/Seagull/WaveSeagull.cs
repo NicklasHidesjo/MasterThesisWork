@@ -151,7 +151,6 @@ public class WaveSeagull : MonoBehaviour
     }
     private void PlayShooSound()
     {
-
         int randomSoundIndex = 0;
         // a do-while loop that gets a random clip and does so until it 
         // gets one that isn't the previously used clip.
@@ -163,12 +162,14 @@ public class WaveSeagull : MonoBehaviour
 
         // sets the lastSoundIndex to be that of the randomSoundIndex (so it's updated)
         lastSoundIndex = randomSoundIndex;
+        
+                // sets the audioplayers clip to that of the element at randomSoundIndex
+                // in our shooSounds array
+                shooPlayer.clip = shooSounds[randomSoundIndex];
 
-        // sets the audioplayers clip to that of the element at randomSoundIndex
-        // in our shooSounds array
-        shooPlayer.clip = shooSounds[randomSoundIndex];
+                // play the clip.
+                shooPlayer.Play();
 
-        // play the clip.
-        shooPlayer.Play();
+        //AudioPlayer.PlaySound(shooPlayer, shooSounds[randomSoundIndex]);
     }
 }

@@ -34,7 +34,7 @@ public class SeagullMovement : MonoBehaviour
 	[SerializeField] AudioClip poopingSound;
 	[SerializeField] AudioClip seagullSound;
 	[SerializeField] AudioClip scaredSound;
-	SoundSingleton soundSingleton;
+	AudioPlayer soundSingleton;
 
 	[Header("Speed settings")]
 	[SerializeField] float speed = 10f;
@@ -99,7 +99,7 @@ public class SeagullMovement : MonoBehaviour
 	public void Init()
 	{
 		// gets our audioSource.
-		soundSingleton = FindObjectOfType<SoundSingleton>();
+		soundSingleton = FindObjectOfType<AudioPlayer>();
 		// plays a seagull clip.
 		soundSingleton.SeagullFx(seagullSound);
 
@@ -153,7 +153,7 @@ public class SeagullMovement : MonoBehaviour
 			if (poopingTimer > 1f && !hasPooped)
 			{
 				// we get the soundsingleton instead of using the variable we saved (why???)
-				FindObjectOfType<SoundSingleton>().PoopOnFood(poopingSound);
+				FindObjectOfType<AudioPlayer>().PoopOnFood(poopingSound);
 
 				//bird poops.
 				pooping.Poop();
@@ -271,7 +271,7 @@ public class SeagullMovement : MonoBehaviour
 		if(isScared == false)
 		{
 			// again using the findobject instead of our variable we saved?
-			FindObjectOfType<SoundSingleton>().SeagullFx(scaredSound);
+			FindObjectOfType<AudioPlayer>().SeagullFx(scaredSound);
 			// setting that we are scared
 			isScared = true;
 			// making our target position our endposition.
