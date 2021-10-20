@@ -5,23 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-	// add a reload scene method 
-	// allowing players to restart.
 
+	public void ReloadScene ()
+    {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
-	// loads a specific scene using it's buildindex
-	public void LoadScene(int index)
-	{
-		SceneManager.LoadScene(index);
-	}
-
-	// load a specific scene using it's name
+	// load a specific scene using its name
 	public void LoadScene(string scene)
 	{
 		SceneManager.LoadScene(scene);
 	}
 
-	// quits the application
 	public void Quit()
 	{
 		Application.Quit();
