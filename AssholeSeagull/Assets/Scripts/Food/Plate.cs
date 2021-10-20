@@ -48,17 +48,12 @@ public class Plate : MonoBehaviour
 
     private bool FirstFoodOnPlate()
     {
-        // get the direction to cast the ray
-        Vector3 plateVector = new Vector3(0, rayDistance, 0);
         // create a null RaycastHit object.
         RaycastHit hit;
-
 
         // cast a ray in the direction of plateVector
         if (Physics.SphereCast(transform.position, rayRadius, transform.forward, out hit, rayDistance, foodLayer))
         {
-            Debug.Log(hit.collider?.gameObject.name);
-
             // get the collisions FoodItem(food)
             FoodItem food = hit.collider.gameObject.GetComponent<FoodItem>();
 
@@ -102,7 +97,6 @@ public class Plate : MonoBehaviour
 
         // create an array to store all that our ray hits.
         RaycastHit[] hits;
-
         // cast a ray upwards to hit all on foodLayer that are above and store in our array.
         hits = Physics.SphereCastAll(transform.position, rayRadius, transform.forward, rayDistance, foodLayer);
         // check if we have more then 0 elements in our array.
