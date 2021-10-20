@@ -1,7 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <TODO>
+/// we will be redoing this to a DontDestroyOnLoad or perhaps a Singleton
+/// SO with all game settings 
+/// enum to keep tabs on game status
+/// game duration
+/// enum to keep tabs on game mode
+/// move game timer to its own script
+/// convert scene loader to DontDestroyOnLoad or Singleton
+/// score manager that sets game managers score (so we can remove plate reference)
+/// </summary>
 public class GameManager : MonoBehaviour
 {
 	float gameTimer = 0f;
@@ -10,7 +19,7 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] string SceneName;
 
-	public int score = 0; // make this private
+	private int score = 0; 
 	bool isGameOver = false;
 	SceneLoader sceneLoader;
 	Plate plate;

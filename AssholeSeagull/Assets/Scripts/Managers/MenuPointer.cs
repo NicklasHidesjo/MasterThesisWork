@@ -61,7 +61,7 @@ public class MenuPointer : MonoBehaviour // rename to something better
         if(e.target.name == "Main Menu")
 		{
             PlayButtonSound();
-            sceneLoader.LoadScene(0);
+            sceneLoader.LoadScene("MainMenu");
 		}
 
         if(e.target.name == "Free Roam")
