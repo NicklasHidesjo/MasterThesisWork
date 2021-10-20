@@ -33,7 +33,7 @@ public class MenuPointer : MonoBehaviour // rename to something better
 	}
 	private void GetReferences()
 	{
-		buttonPlayer = FindObjectOfType<AudioSource>();
+		buttonPlayer = GetComponent<AudioSource>();
 		sceneLoader = FindObjectOfType<SceneLoader>();
 	}
 

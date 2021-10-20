@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 8262480149989617032}
   - component: {fileID: 1412975229880032322}
   m_Layer: 0
-  m_Name: Plate_02_Prefab
+  m_Name: Plate_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,6 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayDistance: 100
+  rayRadius: 0.1
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
+  sandwichPieces: []

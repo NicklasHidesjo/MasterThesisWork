@@ -6,6 +6,8 @@ public class Plate : MonoBehaviour
 {
     [Tooltip("The maximum height that the sandwich can have (in unity units)")]
     [SerializeField] private float rayDistance;
+    [Tooltip("The radius of detection of the ray from the center of the plate")]
+    [SerializeField] private float rayRadius;
     [Tooltip("The layer that only food is on")]
     [SerializeField] private LayerMask foodLayer;
 
@@ -51,9 +53,12 @@ public class Plate : MonoBehaviour
         // create a null RaycastHit object.
         RaycastHit hit;
 
+
         // cast a ray in the direction of plateVector
-        if (Physics.Linecast(transform.position, transform.position + plateVector, out hit, foodLayer))
+        if (Physics.SphereCast(transform.position, rayRadius, transform.forward, out hit, rayDistance, foodLayer))
         {
+            Debug.Log(hit.collider?.gameObject.name);
+
             // get the collisions FoodItem(food)
             FoodItem food = hit.collider.gameObject.GetComponent<FoodItem>();
 
@@ -99,7 +104,7 @@ public class Plate : MonoBehaviour
         RaycastHit[] hits;
 
         // cast a ray upwards to hit all on foodLayer that are above and store in our array.
-        hits = Physics.RaycastAll(transform.position, transform.forward, rayDistance, foodLayer);
+        hits = Physics.SphereCastAll(transform.position, rayRadius, transform.forward, rayDistance, foodLayer);
         // check if we have more then 0 elements in our array.
         if(hits.Length > 0)
         {
@@ -147,4 +152,10 @@ public class Plate : MonoBehaviour
             FindObjectOfType<GameManager>().FinishSandwich(true);
 		}
     }
+
+	private void OnDrawGizmos()
+	{
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, rayRadius);
+	}
 }
