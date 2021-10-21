@@ -33,7 +33,7 @@ public class FoodSpoiledHandler : MonoBehaviour
     void Update()
     {
         // check if we are in FreeRoam
-        if (gameManager.FreeRoam)
+        if (gameManager.Settings.AlwaysFreshFood)
         {
             // return/exit and don't run the code below
             return;
