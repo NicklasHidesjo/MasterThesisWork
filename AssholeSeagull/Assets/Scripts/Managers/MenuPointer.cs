@@ -18,7 +18,6 @@ public class MenuPointer : MonoBehaviour // rename to something better
     [SerializeField] private SteamVR_LaserPointer rightHand;
     [SerializeField] private SteamVR_LaserPointer leftHand;
 
-    private SceneLoader sceneLoader;
     private AudioSource buttonPlayer;
 
     private void Start()
@@ -34,7 +33,6 @@ public class MenuPointer : MonoBehaviour // rename to something better
 	private void GetReferences()
 	{
 		buttonPlayer = GetComponent<AudioSource>();
-		sceneLoader = FindObjectOfType<SceneLoader>();
 	}
 
 	public void PointerClick(object sender, PointerEventArgs e)
@@ -42,32 +40,32 @@ public class MenuPointer : MonoBehaviour // rename to something better
         if (e.target.name == "Play")
         {
             PlayButtonSound();
-            sceneLoader.LoadScene("GameScene");
+            SceneLoader.LoadScene("GameScene");
             Debug.Log("Button was clicked");
         }
 
         if(e.target.name == "Replay")
         {
             PlayButtonSound();
-            sceneLoader.LoadScene("GameScene");
+            SceneLoader.LoadScene("GameScene");
         }    
 
         if (e.target.name == "Quit")
         {
             PlayButtonSound();
-            sceneLoader.Quit();
+            SceneLoader.Quit();
         }
 
         if(e.target.name == "Main Menu")
 		{
             PlayButtonSound();
-            sceneLoader.LoadScene("MainMenu");
+            SceneLoader.LoadScene("MainMenu");
 		}
 
         if(e.target.name == "Free Roam")
         {
             PlayButtonSound();
-            sceneLoader.LoadScene("FreeRoamMode");
+            SceneLoader.LoadScene("FreeRoamMode");
         }
     }
 

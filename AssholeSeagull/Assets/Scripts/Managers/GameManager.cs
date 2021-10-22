@@ -16,6 +16,7 @@ public enum GameStatus
 	ingame,
 	gameover
 }
+
 public class GameManager : MonoBehaviour
 {
 	private float gameTimer = 0f;
@@ -23,10 +24,21 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameSettings settings;
 	private int score = 0;
 	private bool isGameOver = false;
-	private SceneLoader sceneLoader;
 	private Plate plate;
 
-	public GameSettings Settings
+    public int Score
+    {
+        get
+        {
+            return score;
+        }
+        set
+        {
+            score = value;
+        }
+    }
+
+    public GameSettings Settings
     {
 		get
         {
@@ -49,7 +61,6 @@ public class GameManager : MonoBehaviour
 	}
 	private void Start()
 	{
-		sceneLoader = FindObjectOfType<SceneLoader>();
 		plate = FindObjectOfType<Plate>();
 	}
 	private void Update()
@@ -89,76 +100,14 @@ public class GameManager : MonoBehaviour
             // get the score for each food.
             score += food.GetComponent<FoodScore>().GetScore();
         }
-        switch (settings.GameMode)
-        {
-            case GameModes.normal:
-                LoadEndScene(Finished);
-                break;
-            case GameModes.sandbox:
-                LoadFreeRoamEndScene(Finished);
-                break;
-            case GameModes.peaceful:
-                break;
-            case GameModes.chaos:
-                break;
-            default:
-                Debug.LogError("gamemode not found in switch "+ settings.GameMode);
-                break;
-        }
-    }
-
-    private void LoadEndScene(bool Finished)
-    {
-        // set our playerprefs for new highscore and also our currentScore.
-        PlayerPrefs.SetInt("newHighscore", 0);
-        PlayerPrefs.SetInt("currentScore", score);
-
-        // get our highscore
-        int highscore = PlayerPrefs.GetInt("highscore", 0);
 
         if (!Finished)
         {
             score -= 1; // make this a changable variable in a score related script.
             score = (int)Mathf.Clamp(score, 0, Mathf.Infinity); // remove this clamp (as we want to allow for negative scores)
-        }
-
-        // check if our score is higher then our highscore
-        if (score > highscore)
-        {
-            // set the newHighscore flag and also our highscore.
-            PlayerPrefs.SetInt("newHighscore", 1);
-            PlayerPrefs.SetInt("highscore", score);
         }
 
         // load our EndScene
-        sceneLoader.LoadScene("EndScene");
-    }
-
-    private void LoadFreeRoamEndScene(bool Finished)
-    {
-        // set our playerprefs for new highscore and also our currentScore.
-        PlayerPrefs.SetInt("newHighscore", 0);
-        PlayerPrefs.SetInt("currentFreeRoamScore", score);
-
-        // get the highscore
-        int highscore = PlayerPrefs.GetInt("freeRoamHighscore", 0);
-
-        // check if we didnt finish our sandwich
-        if (!Finished)
-        {
-            score -= 1; // make this a changable variable in a score related script.
-            score = (int)Mathf.Clamp(score, 0, Mathf.Infinity); // remove this clamp (as we want to allow for negative scores)
-        }
-
-        // check if our score is higher then our highscore
-        if (score > highscore)
-        {
-            // set the newHighscore flag and also our highscore for freeroam.
-            PlayerPrefs.SetInt("newHighscore", 1);
-            PlayerPrefs.SetInt("freeRoamHighscore", score);
-        }
-
-        // load our FreeRoamEndScene.
-        sceneLoader.LoadScene("FreeRoamEndScene");
+        SceneLoader.LoadScene("EndScene");
     }
 }

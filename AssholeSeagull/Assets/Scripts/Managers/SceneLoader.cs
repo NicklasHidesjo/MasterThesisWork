@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public static class SceneLoader
 {
-
-	public void ReloadScene ()
+	public static void ReloadScene ()
     {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 	// load a specific scene using its name
-	public void LoadScene(string scene)
+	public static void LoadScene(string scene)
 	{
 		SceneManager.LoadScene(scene);
 	}
 
-	public void Quit()
+	public static void Quit()
 	{
 		Application.Quit();
 	}
 
 	// returns the name of the currently active scene.
-	public string GetSceneName()
+	public static string GetSceneName()
     {
 		return SceneManager.GetActiveScene().name;
     }
