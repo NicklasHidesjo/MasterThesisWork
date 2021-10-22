@@ -20,6 +20,7 @@ public class EndScreen : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+
         int highscore = 0;
         bool newHighscore = false;
 

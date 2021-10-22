@@ -18,7 +18,11 @@ public class MenuPointer : MonoBehaviour // rename to something better
     [SerializeField] private SteamVR_LaserPointer rightHand;
     [SerializeField] private SteamVR_LaserPointer leftHand;
 
+    [SerializeField] private GameSettings normalMode;
+    [SerializeField] private GameSettings peacefulMode;
+
     private AudioSource buttonPlayer;
+    private GameManager gameManager;
 
     private void Start()
 	{
@@ -32,7 +36,8 @@ public class MenuPointer : MonoBehaviour // rename to something better
 	}
 	private void GetReferences()
 	{
-		buttonPlayer = GetComponent<AudioSource>();
+        gameManager = FindObjectOfType<GameManager>();
+        buttonPlayer = GetComponent<AudioSource>();
 	}
 
 	public void PointerClick(object sender, PointerEventArgs e)
@@ -40,17 +45,25 @@ public class MenuPointer : MonoBehaviour // rename to something better
         if (e.target.name == "Play")
         {
             PlayButtonSound();
-            SceneLoader.LoadScene("GameScene");
-            Debug.Log("Button was clicked");
+            gameManager.Settings = normalMode;
+            Debug.Log(gameManager.Settings);
+            LoadGame();
         }
-
-        if(e.target.name == "Replay")
+        if (e.target.name == "Free Roam")
         {
             PlayButtonSound();
-            SceneLoader.LoadScene("GameScene");
-        }    
+            gameManager.Settings = peacefulMode;
+            Debug.Log(gameManager.Settings);
+            LoadGame();
+        }
+        if (e.target.name == "Replay")
+		{
+			PlayButtonSound();
+			LoadGame();
+		}
 
-        if (e.target.name == "Quit")
+
+		if (e.target.name == "Quit")
         {
             PlayButtonSound();
             SceneLoader.Quit();
@@ -62,14 +75,15 @@ public class MenuPointer : MonoBehaviour // rename to something better
             SceneLoader.LoadScene("MainMenu");
 		}
 
-        if(e.target.name == "Free Roam")
-        {
-            PlayButtonSound();
-            SceneLoader.LoadScene("FreeRoamMode");
-        }
+
     }
 
-    public void PlayButtonSound()
+	private void LoadGame()
+	{
+		SceneLoader.LoadScene("GameScene");
+	}
+
+	public void PlayButtonSound()
     {
         buttonPlayer.Play();
     }

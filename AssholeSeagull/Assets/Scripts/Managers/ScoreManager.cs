@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
     {
 		plate = FindObjectOfType<Plate>();
 		gameManager = FindObjectOfType<GameManager>();
-    }
+	}
 	public void FinishSandwich(bool Finished)
 	{
 		int score = 0;

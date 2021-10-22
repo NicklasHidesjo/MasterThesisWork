@@ -11,7 +11,7 @@ public class GameTimer : MonoBehaviour
 	{
 		GameManager gameManager = FindObjectOfType<GameManager>();
 
-        if (gameManager.Settings.TimerOff)
+		if (gameManager.Settings.TimerOff)
         {
 			enabled = false;
         }

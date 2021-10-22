@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <TODO>
-/// score manager that sets game managers score (so we can remove plate reference)
+/// Use the GameStatus enum to track what state our game is in.
 /// </summary>
 
 public enum GameStatus
@@ -15,9 +15,8 @@ public enum GameStatus
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField] private GameSettings settings;
+	[SerializeField] private GameSettings settings = null;
 	private int score = 0;
-	private Plate plate;
 
 	public int Score
 	{
@@ -39,6 +38,7 @@ public class GameManager : MonoBehaviour
 		}
 		set
 		{
+			Debug.Log(value);
 			settings = value;
 		}
 	}
@@ -51,9 +51,5 @@ public class GameManager : MonoBehaviour
 		}
 		DontDestroyOnLoad(gameObject);
 
-	}
-	private void Start()
-	{
-		plate = FindObjectOfType<Plate>();
 	}
 }

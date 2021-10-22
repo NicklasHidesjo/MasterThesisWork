@@ -10,6 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1ed92b7cbdd2204ba7f077a5305fcb2, type: 3}
-  m_Name: SandboxMode
+  m_Name: PeacefulMode
   m_EditorClassIdentifier: 
-  gameDuration: 60
+  GameMode: 2
+  GameDuration: 60
+  TimerOff: 1
+  AlwaysFreshFood: 1
+  SeagullsDontAttack: 1
+  SeagullAmount: 1
+  SeagullSpawnInterval: 5

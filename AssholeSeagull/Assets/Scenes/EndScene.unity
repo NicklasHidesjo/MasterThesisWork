@@ -6544,6 +6544,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightHand: {fileID: 1287406196}
   leftHand: {fileID: 1287406198}
+  normalMode: {fileID: 0}
+  peacefulMode: {fileID: 0}
 --- !u!4 &1199608055
 Transform:
   m_ObjectHideFlags: 0
