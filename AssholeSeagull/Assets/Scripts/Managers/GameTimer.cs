@@ -9,13 +9,11 @@ public class GameTimer : MonoBehaviour
 
 	private void Start()
 	{
-		GameManager gameManager = FindObjectOfType<GameManager>();
-
-		if (gameManager.Settings.TimerOff)
+		if (GameManager.Settings.TimerOff)
         {
 			enabled = false;
         }
-		gameDuration = gameManager.Settings.GameDuration;
+		gameDuration = GameManager.Settings.GameDuration;
 	}
 	private void Update()
 	{

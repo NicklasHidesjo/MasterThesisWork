@@ -22,7 +22,6 @@ public class MenuPointer : MonoBehaviour // rename to something better
     [SerializeField] private GameSettings peacefulMode;
 
     private AudioSource buttonPlayer;
-    private GameManager gameManager;
 
     private void Start()
 	{
@@ -36,7 +35,6 @@ public class MenuPointer : MonoBehaviour // rename to something better
 	}
 	private void GetReferences()
 	{
-        gameManager = FindObjectOfType<GameManager>();
         buttonPlayer = GetComponent<AudioSource>();
 	}
 
@@ -45,15 +43,15 @@ public class MenuPointer : MonoBehaviour // rename to something better
         if (e.target.name == "Play")
         {
             PlayButtonSound();
-            gameManager.Settings = normalMode;
-            Debug.Log(gameManager.Settings);
+            GameManager.Settings = normalMode;
+            Debug.Log(GameManager.Settings);
             LoadGame();
         }
         if (e.target.name == "Free Roam")
         {
             PlayButtonSound();
-            gameManager.Settings = peacefulMode;
-            Debug.Log(gameManager.Settings);
+            GameManager.Settings = peacefulMode;
+            Debug.Log(GameManager.Settings);
             LoadGame();
         }
         if (e.target.name == "Replay")

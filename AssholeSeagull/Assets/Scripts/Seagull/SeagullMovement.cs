@@ -6,9 +6,11 @@ public class SeagullMovement : MonoBehaviour
 {
 	// this script will be rewriten using animation events'
 	// proper state machines and audio managers
-	// this script will be split into several smaller ones.
+	// this script might be split into several smaller ones.
 
 	// make each seagull have it's own audiosource to allow for spatial sound.
+
+	// Make an event that seagull manager subscribes to (so that we can remove the seagulls)
 
 	// our state machine (will be changed into a finite statemachine instead of enums)
 	State currentState;
@@ -21,21 +23,23 @@ public class SeagullMovement : MonoBehaviour
 	// our animator
 	[SerializeField] Animator seagullAnimator;
 
-
+	// make all of this private
 	public int randomPackage;
-
 	public Transform flightEnd;
 	private SeagullManager seagullManager;
 	FoodTracker foodTracker;
 
 	Pooping pooping;
 	
+
+	// this will be in a SeagullSoundManager script 
 	[Header("Sounds")]
 	[SerializeField] AudioClip poopingSound;
 	[SerializeField] AudioClip seagullSound;
 	[SerializeField] AudioClip scaredSound;
 	AudioPlayer soundSingleton;
 
+	// settings as these will be in a scriptable object (to be able to create different Seagulls with different speeds and such)
 	[Header("Speed settings")]
 	[SerializeField] float speed = 10f;
 	[SerializeField] float endSpeed = 5f;
@@ -43,8 +47,11 @@ public class SeagullMovement : MonoBehaviour
 	[SerializeField] float deacceleration = 0.5f;
 	[SerializeField] float minSpeed = 1f;
 
+
+	// make this private 
 	public Vector3 targetPosition;
 	
+	// alot of these bools will be removed as we change to animation events.
 	public bool isPoopingTime = false;
 	bool hasPooped = false;
 	bool flyingAway = false;
@@ -57,6 +64,10 @@ public class SeagullMovement : MonoBehaviour
 	// remove serializefield and look into making them get
 	// a list of all packages in the scene.
 	[SerializeField] Transform breadPackage;
+	[SerializeField] Transform cheesePackage;
+	[SerializeField] Transform hamPackage; 
+
+	// remove these as we will only have a list that we set in the SeagullManager.
 	public Transform BreadPackage
 	{
 		get
@@ -68,8 +79,6 @@ public class SeagullMovement : MonoBehaviour
 			breadPackage = value;
 		}
 	}
-
-	[SerializeField] Transform cheesePackage;
 	public Transform CheesePackage
 	{
 		get
@@ -81,9 +90,6 @@ public class SeagullMovement : MonoBehaviour
 			cheesePackage = value;
 		}
 	}
-
-	[SerializeField] Transform hamPackage; 
-
 	public Transform HamPackage
 	{
 		get
@@ -106,6 +112,7 @@ public class SeagullMovement : MonoBehaviour
 		soundSingleton.SeagullFx(seagullSound);
 
 		// sets the state our bird will get. this is the only place we set the state?
+		// this will be changed as we make it a state machine.
 		int randomState = Random.Range(0, 2);
 		if (randomState == 0)
 		{
@@ -148,6 +155,7 @@ public class SeagullMovement : MonoBehaviour
 		}
 
 		// checks if it should poop.
+		// this will be controlled in our animation and animation events.
 		if (isPoopingTime == true)
 		{
 			poopingTimer += Time.deltaTime;

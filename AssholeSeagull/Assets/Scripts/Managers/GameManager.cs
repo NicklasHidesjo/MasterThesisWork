@@ -13,12 +13,12 @@ public enum GameStatus
 	gameover
 }
 
-public class GameManager : MonoBehaviour
+public static class GameManager
 {
-	[SerializeField] private GameSettings settings = null;
-	private int score = 0;
+	private static GameSettings settings;
+	private static int score = 0;
 
-	public int Score
+	public static int Score
 	{
 		get
 		{
@@ -30,10 +30,15 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public GameSettings Settings
+	public static GameSettings Settings
 	{
 		get
 		{
+			if(settings == null)
+			{
+				settings = (GameSettings)ScriptableObject.CreateInstance("GameSettings");
+			}
+
 			return settings;
 		}
 		set
@@ -41,15 +46,5 @@ public class GameManager : MonoBehaviour
 			Debug.Log(value);
 			settings = value;
 		}
-	}
-	private void Awake()
-	{
-		GameManager[] gameManagers = FindObjectsOfType<GameManager>();
-		if (gameManagers.Length > 1)
-		{
-			Destroy(gameObject);
-		}
-		DontDestroyOnLoad(gameObject);
-
 	}
 }

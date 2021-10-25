@@ -15,31 +15,27 @@ public class EndScreen : MonoBehaviour
     [SerializeField] AudioClip noNewRecordSound;
     [SerializeField] AudioSource noNewRecordPlayer;
 
-    private GameManager gameManager;
-
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
-
         int highscore = 0;
         bool newHighscore = false;
 
-        switch (gameManager.Settings.GameMode)
+        switch (GameManager.Settings.GameMode)
         {
             case GameModes.normal:
                 highscore = PlayerPrefs.GetInt("highscore");
-                if (gameManager.Score > highscore)
+                if (GameManager.Score > highscore)
                 {
-                    highscore = gameManager.Score;
+                    highscore = GameManager.Score;
                     PlayerPrefs.SetInt("highscore", highscore);
                     newHighscore = true;
                 }
                 break;
             case GameModes.peaceful:
                 highscore = PlayerPrefs.GetInt("freeRoamHighscore");
-                if (gameManager.Score > highscore)
+                if (GameManager.Score > highscore)
                 {
-                    highscore = gameManager.Score;
+                    highscore = GameManager.Score;
                     PlayerPrefs.SetInt("freeRoamHighscore", highscore);
                     newHighscore = true;
                 }
@@ -51,12 +47,12 @@ public class EndScreen : MonoBehaviour
                 Debug.Log("Gamemode not done in end screen");
                 break;
             default:
-                Debug.LogError("gamemode not found in switch " + gameManager.Settings.GameMode);
+                Debug.LogError("gamemode not found in switch " + GameManager.Settings.GameMode);
                 break;
         }
 
         highscoreText.text = highscore.ToString();
-        scoreText.text = gameManager.Score.ToString();
+        scoreText.text = GameManager.Score.ToString();
 
         if (newHighscore)
         {

@@ -14,7 +14,7 @@ public class ZRotator : MonoBehaviour
 
     void Start()
 	{
-        if (FindObjectOfType<GameManager>().Settings.TimerOff)
+        if (GameManager.Settings.TimerOff)
         {
 			parent.SetActive(false);
         }
@@ -28,7 +28,7 @@ public class ZRotator : MonoBehaviour
 	private void SetRotationTime()
 	{
 		// set the rotation time using the GameDuration in the GameManager.
-		rotationTime = FindObjectOfType<GameManager>().Settings.GameDuration;
+		rotationTime = GameManager.Settings.GameDuration;
 
 	}
 

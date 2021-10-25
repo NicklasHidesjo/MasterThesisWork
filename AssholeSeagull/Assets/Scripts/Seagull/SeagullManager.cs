@@ -6,21 +6,32 @@ public class SeagullManager : MonoBehaviour
 {
 	// this script will be rewritten and changed, to a great extent
 
-	//Food Packages
-	[SerializeField] Transform breadPackage;
-	[SerializeField] Transform cheesePackage;
-	[SerializeField] Transform hamPackage;
+    // make a object pool to have our seagulls in (so we don't have to destroy and reload them all the time)
 
+    // remove the corutine. Have a separate script for keeping track of when to spawn, use event in that script
+    // that SeagullManager subscribes to.
+
+    //Food Packages
+	// turn this into a list of targetPoints.
+    [SerializeField] Transform breadPackage;
+    [SerializeField] Transform cheesePackage;
+    [SerializeField] Transform hamPackage;
+
+	// why do we have this?
+	// it should be made a reference only in the method that uses it.
 	SeagullMovement seagullMovement;
 
+	// this should be made into a list for all endpoints.
 	[SerializeField] Transform endFlightOne;
 	[SerializeField] Transform endFlightTwo;
 	[SerializeField] Transform endFlightTree;
 
+	// this should be made into a list for all spawnpoints.
 	[SerializeField] Transform seagullSpawnPointsOne;
 	[SerializeField] Transform seagullSpawnPointsTwo;
 	[SerializeField] Transform seagullSpawnPointsTree;
 
+	// do we need this here or can it be inside the method that spawns it?
 	int randomSpawnPoint;
 
 	[SerializeField] SeagullMovement seagullPrefab;
@@ -30,7 +41,6 @@ public class SeagullManager : MonoBehaviour
 
 	[SerializeField] float spawnIntervalls = 5f;
 
-	private GameManager gameManager;
 	private void OnEnable()
 	{
 		// starts a corutine of spawning our seagulls.
@@ -39,9 +49,7 @@ public class SeagullManager : MonoBehaviour
 
 	private void Start()
 	{
-		gameManager = FindObjectOfType<GameManager>();
-		
-		if(gameManager.Settings.SeagullsDontAttack)
+		if(GameManager.Settings.SeagullsDontAttack)
 		{
 			enabled = false;
 			StopAllCoroutines();
@@ -49,19 +57,32 @@ public class SeagullManager : MonoBehaviour
 	}
 
 
+	// once we remove the corutine we can remove this entire method.
 	private void OnDisable()
 	{
 		// stops all corutines to make sure they don't run in the background
 		StopAllCoroutines();
 	}
 
+	// this will be what we subscribe to the event in seagull.
 	public void Despawn(GameObject seagull)
 	{
 		// despawns and destroys the seagull 
+		// change this to not destroy the seagull. 
+		// make it instead work with our object pool.
 		Destroy(seagull);
 		currentNumberOfSeagulls--;
 	}
 
+	// this entire corutine should be removed and made into a script that handles the spawning.
+	// make a method in here that is the spawn method, and have it subscribe to an event that 
+	// is handled in our spawntimer script.
+
+	// the script should be a timer and update normaly, once the timer is reached for spawninterval
+	// that we get from our GameManager Settings we should invoke a event. 
+
+	// this script (SeagullManager) should subscribe to that event with a method
+	// that instantiates a new seagull
 	IEnumerator SpawnSeagull()
 	{
 		while(true)
@@ -106,10 +127,12 @@ public class SeagullManager : MonoBehaviour
 		}
 	}
 
-	void RandomEndPoint()
-	{
-		// gets a random endPoint for the seagull.
-		randomSpawnPoint = Random.Range(0, 3); // rename this to be better named.
+    // this will be removed as we give all endpoints to the Seagull itself and will be 
+    // using a method in SeagullMovement to get a random endpoint
+    void RandomEndPoint()
+    {
+        // gets a random endPoint for the seagull.
+        randomSpawnPoint = Random.Range(0, 3); // rename this to be better named.
 
 		if (randomSpawnPoint == 0)
 		{

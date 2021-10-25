@@ -14,7 +14,6 @@ public class FoodSpoiledHandler : MonoBehaviour
 
     private bool alreadySpoiled = false;
 
-    private GameManager gameManager;
     private FoodItem food;
     private Rigidbody body;
 
@@ -23,9 +22,7 @@ public class FoodSpoiledHandler : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
-
-        if (gameManager.Settings.AlwaysFreshFood)
+        if (GameManager.Settings.AlwaysFreshFood)
         {
             enabled = false;
         }

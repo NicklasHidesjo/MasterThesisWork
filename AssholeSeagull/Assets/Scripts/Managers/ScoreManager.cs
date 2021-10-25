@@ -6,17 +6,14 @@ public class ScoreManager : MonoBehaviour
 {
 	[SerializeField] private int unfinishedPunishment = 10;
 	private Plate plate;
-	private GameManager gameManager;
 
     void Start()
     {
 		plate = FindObjectOfType<Plate>();
-		gameManager = FindObjectOfType<GameManager>();
 	}
 	public void FinishSandwich(bool Finished)
 	{
 		int score = 0;
-		gameManager.Score = 0;
 
 		// go trough every food that is on the plate on the sandwich
 		foreach (var food in plate.SandwichPieces)
@@ -30,7 +27,7 @@ public class ScoreManager : MonoBehaviour
 			score -= unfinishedPunishment;
 		}
 
-		gameManager.Score = score;
+		GameManager.Score = score;
 		// load our EndScene
 		SceneLoader.LoadScene("EndScene");
 	}
