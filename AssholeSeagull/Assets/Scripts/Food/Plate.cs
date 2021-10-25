@@ -119,8 +119,6 @@ public class Plate : MonoBehaviour
                 food.OnPlate = true;
             }
         }
-
-
     }
 
     private void FinishSandwich()
@@ -143,7 +141,7 @@ public class Plate : MonoBehaviour
             sandwichIsFinished = true; // this bool might not be needed.
 
             // make a call to FinishSandwich on the GameManager.
-            FindObjectOfType<GameManager>().FinishSandwich(true);
+            FindObjectOfType<ScoreManager>().FinishSandwich(true);
 		}
     }
 

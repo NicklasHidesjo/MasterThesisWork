@@ -21,24 +21,21 @@ public class FoodSpoiledHandler : MonoBehaviour
     // the timer to check if food is spoiled or should be destroyed.
     private float timer = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
-        food = GetComponent<FoodItem>();
-        body = GetComponent<Rigidbody>();
         gameManager = FindObjectOfType<GameManager>();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // check if we are in FreeRoam
-        if (gameManager.FreeRoam)
+        if (gameManager.Settings.AlwaysFreshFood)
         {
-            // return/exit and don't run the code below
-            return;
+            enabled = false;
         }
 
+        food = GetComponent<FoodItem>();
+        body = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
         // check if any of these bools are true
         if (food.OnSandwich || food.InHand || food.InPackage || food.OnPlate)
         {

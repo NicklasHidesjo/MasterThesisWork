@@ -25,7 +25,7 @@ public class SeagullMovement : MonoBehaviour
 	public int randomPackage;
 
 	public Transform flightEnd;
-	public SeagullManager seagullManager;
+	private SeagullManager seagullManager;
 	FoodTracker foodTracker;
 
 	Pooping pooping;
@@ -96,8 +96,10 @@ public class SeagullMovement : MonoBehaviour
 		}
 	}
 
-	public void Init()
+	public void Init(SeagullManager seagullManager)
 	{
+		this.seagullManager = seagullManager;
+
 		// gets our audioSource.
 		soundSingleton = FindObjectOfType<AudioPlayer>();
 		// plays a seagull clip.

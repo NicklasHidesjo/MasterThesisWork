@@ -6,12 +6,19 @@ public class ZRotator : MonoBehaviour
 {
     [Tooltip("The total rotation that we want our object to make on the Z-axis")]
 	[SerializeField] int goalRotation = 360;
+
+	[SerializeField] GameObject parent;
     
     float timer;
     float rotationTime;
 
     void Start()
 	{
+        if (FindObjectOfType<GameManager>().Settings.TimerOff)
+        {
+			parent.SetActive(false);
+        }
+		
 		// make sure our timer is at 0
 		timer = 0;
 
@@ -21,7 +28,7 @@ public class ZRotator : MonoBehaviour
 	private void SetRotationTime()
 	{
 		// set the rotation time using the GameDuration in the GameManager.
-		rotationTime = FindObjectOfType<GameManager>().GameDuration;
+		rotationTime = FindObjectOfType<GameManager>().Settings.GameDuration;
 
 	}
 

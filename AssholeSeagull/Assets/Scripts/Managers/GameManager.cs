@@ -2,137 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <TODO>
-/// we will be redoing this to a DontDestroyOnLoad or perhaps a Singleton
-/// SO with all game settings 
-/// enum to keep tabs on game status
-/// game duration
-/// enum to keep tabs on game mode
-/// move game timer to its own script
-/// convert scene loader to DontDestroyOnLoad or Singleton
-/// score manager that sets game managers score (so we can remove plate reference)
+/// Use the GameStatus enum to track what state our game is in.
 /// </summary>
+
+public enum GameStatus
+{
+	menu,
+	pause,
+	ingame,
+	gameover
+}
+
 public class GameManager : MonoBehaviour
 {
-	float gameTimer = 0f;
-	[SerializeField] float gameDuration = 60f;
-	public float GameDuration => gameDuration;
+	[SerializeField] private GameSettings settings = null;
+	private int score = 0;
 
-	[SerializeField] string SceneName;
-
-	private int score = 0; 
-	bool isGameOver = false;
-	SceneLoader sceneLoader;
-	Plate plate;
-
-	bool freeRoam;
-	public bool FreeRoam => freeRoam;
-
-	private void Start()
+	public int Score
 	{
-		sceneLoader = FindObjectOfType<SceneLoader>();
-		plate = FindObjectOfType<Plate>();
-
-		// check if we are in FreeRoam
-		if(sceneLoader.GetSceneName() == SceneName)
+		get
 		{
-			freeRoam = true;
-		} // make this not rely on a string 
-	}
-
-	private void Update()
-	{
-		// check if times up 
-		if(isGameOver) // this might not be needed.
-		{
-			// return/ exit and don't run the code below.
-			return;
+			return score;
 		}
-
-		// check if we are in free roam.
-		if(freeRoam)
+		set
 		{
-			// return/ exit and don't run the code below.
-			return;
-		}
-
-		// increase our gameTimer
-		gameTimer += Time.deltaTime;
-
-		// check if gameTimer is larger then gameDuration
-		if(gameTimer > gameDuration)
-		{
-			Debug.Log("Time Over!");
-
-			// set game over.
-			isGameOver = true;
-			
-			// Finish the sandwich
-			FinishSandwich(false);
+			score = value;
 		}
 	}
 
-	public void FinishSandwich(bool Finished)
+	public GameSettings Settings
 	{
-		// go trough every food that is on the plate on the sandwich
-		foreach (var food in plate.SandwichPieces)
+		get
 		{
-			// get the score for each food.
-			score += food.GetComponent<FoodScore>().GetScore();
+			return settings;
 		}
-
-		// check if we are in freeRoam
-		if (freeRoam)
+		set
 		{
-			// set our playerprefs for new highscore and also our currentScore.
-			PlayerPrefs.SetInt("newHighscore", 0);
-			PlayerPrefs.SetInt("currentFreeRoamScore", score);
-
-			// get the highscore
-			int highscore = PlayerPrefs.GetInt("freeRoamHighscore", 0);
-
-			// check if we didnt finish our sandwich
-			if (!Finished)
-			{
-				score -= 1; // make this a changable variable in a score related script.
-				score = (int)Mathf.Clamp(score, 0, Mathf.Infinity); // remove this clamp (as we want to allow for negative scores)
-			}
-
-			// check if our score is higher then our highscore
-			if (score > highscore)
-			{
-				// set the newHighscore flag and also our highscore for freeroam.
-				PlayerPrefs.SetInt("newHighscore", 1);
-				PlayerPrefs.SetInt("freeRoamHighscore", score);
-			}
-
-			// load our FreeRoamEndScene.
-			sceneLoader.LoadScene("FreeRoamEndScene");
+			Debug.Log(value);
+			settings = value;
 		}
-		else
+	}
+	private void Awake()
+	{
+		GameManager[] gameManagers = FindObjectsOfType<GameManager>();
+		if (gameManagers.Length > 1)
 		{
-			// set our playerprefs for new highscore and also our currentScore.
-			PlayerPrefs.SetInt("newHighscore", 0);
-			PlayerPrefs.SetInt("currentScore", score);
-
-			// get our highscore
-			int highscore = PlayerPrefs.GetInt("highscore", 0);
-
-			if (!Finished)
-			{
-				score -= 1; // make this a changable variable in a score related script.
-				score = (int)Mathf.Clamp(score, 0, Mathf.Infinity); // remove this clamp (as we want to allow for negative scores)
-			}
-
-			// check if our score is higher then our highscore
-			if (score > highscore)
-			{
-				// set the newHighscore flag and also our highscore.
-				PlayerPrefs.SetInt("newHighscore", 1);
-				PlayerPrefs.SetInt("highscore", score);
-			}
-
-			// load our EndScene
-			sceneLoader.LoadScene("EndScene");
+			Destroy(gameObject);
 		}
+		DontDestroyOnLoad(gameObject);
+
 	}
 }
