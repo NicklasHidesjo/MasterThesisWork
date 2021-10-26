@@ -60,47 +60,22 @@ public class SeagullMovement : MonoBehaviour
 
 	float poopingTimer;
 	[Header("Transforms")]
-	//Food Packages 
-	// remove serializefield and look into making them get
-	// a list of all packages in the scene.
-	[SerializeField] Transform breadPackage;
-	[SerializeField] Transform cheesePackage;
-	[SerializeField] Transform hamPackage; 
+
+	private List<Transform> foodPackages = new List<Transform>();
 
 	// remove these as we will only have a list that we set in the SeagullManager.
-	public Transform BreadPackage
+	public List<Transform> FoodPackages
 	{
 		get
 		{
-			return breadPackage;
+			return foodPackages;
 		}
 		set
 		{
-			breadPackage = value;
+			foodPackages = value;
 		}
 	}
-	public Transform CheesePackage
-	{
-		get
-		{
-			return cheesePackage;
-		}
-		set
-		{
-			cheesePackage = value;
-		}
-	}
-	public Transform HamPackage
-	{
-		get
-		{
-			return hamPackage;
-		}
-		set
-		{
-			hamPackage = value;
-		}
-	}
+
 
 	public void Init(SeagullManager seagullManager)
 	{
@@ -122,11 +97,11 @@ public class SeagullMovement : MonoBehaviour
 		{
 			currentState = State.PoopingPackage;
 		}
-		if(currentState == State.PoopingPackage)
+		if (currentState == State.PoopingPackage)
 		{
 			FoodTarget();
 		}
-		else if(currentState == State.PoopingFood)
+		else if (currentState == State.PoopingFood)
 		{
 			FoodItemTarget();
 		}
@@ -136,6 +111,18 @@ public class SeagullMovement : MonoBehaviour
 
 		// rotates our bird to look at our targetPosition.
 		transform.LookAt(targetPosition);
+
+
+		isPoopingTime = false;
+		hasPooped = false;
+		flyingAway = false;
+		inDistance = false;
+		isScared = false;
+
+		poopingTimer = 0;
+
+		speed = 10f;
+
 	}
 
 	void Update()
@@ -248,25 +235,10 @@ public class SeagullMovement : MonoBehaviour
 	private void FoodTarget()
 	{
 		// get a random package
-		randomPackage = Random.Range(0, 3); // change this to be dynamic with every package
+		randomPackage = Random.Range(0, foodPackages.Count);
 
-		// sets target based on the randomPackage int
-		if (randomPackage == 0)
-		{
-			targetPosition = new Vector3(breadPackage.position.x, transform.position.y, breadPackage.position.z);
-		}
-		else if (randomPackage == 1)
-		{
-			targetPosition = new Vector3(hamPackage.position.x, transform.position.y, hamPackage.position.z);
-		}
-		else if (randomPackage == 2)
-		{
-			targetPosition = new Vector3(cheesePackage.position.x, transform.position.y, cheesePackage.position.z);
-		}
-		else
-		{
-			Debug.LogError("No food was found!");
-		}
+		Transform targetTransform = foodPackages[randomPackage];
+		targetPosition = new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z);
 	}
 
 	public void Scared()

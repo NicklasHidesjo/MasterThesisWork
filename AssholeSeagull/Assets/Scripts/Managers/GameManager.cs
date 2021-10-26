@@ -38,7 +38,6 @@ public static class GameManager
 			{
 				settings = (GameSettings)ScriptableObject.CreateInstance("GameSettings");
 			}
-
 			return settings;
 		}
 		set

@@ -11,7 +11,7 @@ public class GameSettings : ScriptableObject
     public bool TimerOff = false;
     public bool AlwaysFreshFood = false;
     public bool SeagullsDontAttack = false;
-    public int SeagullAmount = 1;
+    public int SeagullAmount = 5;
     public float SeagullSpawnInterval = 5f;
 }
 
