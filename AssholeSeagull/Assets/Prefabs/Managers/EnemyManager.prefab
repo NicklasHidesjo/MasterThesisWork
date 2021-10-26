@@ -109,17 +109,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea464184fcc4be34d84b97f070c5ab1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breadPackage: {fileID: 0}
-  cheesePackage: {fileID: 0}
-  hamPackage: {fileID: 0}
-  endFlightOne: {fileID: 7147270394983184812}
-  endFlightTwo: {fileID: 7147270395137675790}
-  endFlightTree: {fileID: 7147270394650262993}
-  seagullSpawnPointsOne: {fileID: 1518335570576793592}
-  seagullSpawnPointsTwo: {fileID: 1518335569971970454}
-  seagullSpawnPointsTree: {fileID: 1518335571763256036}
-  seagullPrefab: {fileID: 8964828962561856375, guid: b717ccc36f0f58d45a7abbb5f61916ed, type: 3}
-  spawnIntervalls: 5
+  foodPackages: []
+  endFlightTransforms: []
+  startFlightTransforms: []
+  seagullPrefab: {fileID: 485213392026276167, guid: b717ccc36f0f58d45a7abbb5f61916ed, type: 3}
+  seagullParent: {fileID: 0}
 --- !u!1 &1518335571763256035
 GameObject:
   m_ObjectHideFlags: 0

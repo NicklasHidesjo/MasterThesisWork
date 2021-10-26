@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: 2974699690583459776}
   - component: {fileID: 8964828962561856375}
   - component: {fileID: 3272717194131652221}
+  - component: {fileID: 485213392026276167}
   - component: {fileID: 1986341339}
   - component: {fileID: 4296194220242073953}
   m_Layer: 10
@@ -508,27 +509,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3469906486034026684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6bb2c6704c84ff4b8672ac2f3650b51, type: 3}
+  m_Script: {fileID: 11500000, guid: 7727c7af2b513774eb12488db59c80ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seagullAnimator: {fileID: 2974699690583459776}
-  randomPackage: 0
-  flightEnd: {fileID: 0}
-  seagullManager: {fileID: 0}
-  poopingSound: {fileID: 8300000, guid: 779b566bc017e10478bf471723d82484, type: 3}
-  seagullSound: {fileID: 8300000, guid: 5c8e241b8b7b3d54ab3108164d72fa83, type: 3}
-  scaredSound: {fileID: 8300000, guid: 8b04cd2ff6ee8f74b853bfbc767818a9, type: 3}
-  speed: 10
-  endSpeed: 0
-  acceleration: 6
-  deacceleration: 2.17
-  minSpeed: 1
-  targetPosition: {x: 0, y: 0, z: 0}
-  isPoopingTime: 0
-  inDistance: 0
-  breadPackage: {fileID: 0}
-  cheesePackage: {fileID: 0}
-  hamPackage: {fileID: 0}
 --- !u!114 &3272717194131652221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,6 +526,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poopPrefab: {fileID: 4467274387238071332, guid: 691e3f3ec5c030d4b9ebe76376bd84c1, type: 3}
   spawnPosition: {fileID: 6982129938083659594}
+--- !u!114 &485213392026276167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469906486034026684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44049e3d9eb02444f94cf8da44deaacc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seagullAnimator: {fileID: 2974699690583459776}
+  randomPackage: 0
+  flightEnd: {fileID: 0}
+  poopingSound: {fileID: 8300000, guid: 779b566bc017e10478bf471723d82484, type: 3}
+  seagullSound: {fileID: 8300000, guid: 5c8e241b8b7b3d54ab3108164d72fa83, type: 3}
+  scaredSound: {fileID: 8300000, guid: 8b04cd2ff6ee8f74b853bfbc767818a9, type: 3}
+  speed: 10
+  endSpeed: 5
+  acceleration: 0.5
+  deacceleration: 0.5
+  minSpeed: 1
+  targetPosition: {x: 0, y: 0, z: 0}
+  isPoopingTime: 0
+  inDistance: 0
 --- !u!54 &1986341339
 Rigidbody:
   m_ObjectHideFlags: 0

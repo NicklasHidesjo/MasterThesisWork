@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeagullMovement : MonoBehaviour
+public class SeagullController : MonoBehaviour
 {
 	// this script will be rewriten using animation events'
 	// proper state machines and audio managers
 	// this script might be split into several smaller ones.
 
-	// make each seagull have it's own audiosource to allow for spatial sound.
-
-	// Make an event that seagull manager subscribes to (so that we can remove the seagulls)
+	// make each seagull have its own audiosource to allow for spatial sound.
 
 	// our state machine (will be changed into a finite statemachine instead of enums)
 	State currentState;
@@ -26,12 +24,10 @@ public class SeagullMovement : MonoBehaviour
 	// make all of this private
 	public int randomPackage;
 	public Transform flightEnd;
-	private SeagullManager seagullManager;
 	FoodTracker foodTracker;
 
 	Pooping pooping;
 	
-
 	// this will be in a SeagullSoundManager script 
 	[Header("Sounds")]
 	[SerializeField] AudioClip poopingSound;
@@ -46,7 +42,6 @@ public class SeagullMovement : MonoBehaviour
 	[SerializeField] float acceleration = 0.5f;
 	[SerializeField] float deacceleration = 0.5f;
 	[SerializeField] float minSpeed = 1f;
-
 
 	// make this private 
 	public Vector3 targetPosition;
@@ -77,10 +72,8 @@ public class SeagullMovement : MonoBehaviour
 	}
 
 
-	public void Init(SeagullManager seagullManager)
+	public void Init()
 	{
-		this.seagullManager = seagullManager;
-
 		// gets our audioSource.
 		soundSingleton = FindObjectOfType<AudioPlayer>();
 		// plays a seagull clip.
@@ -112,7 +105,6 @@ public class SeagullMovement : MonoBehaviour
 		// rotates our bird to look at our targetPosition.
 		transform.LookAt(targetPosition);
 
-
 		isPoopingTime = false;
 		hasPooped = false;
 		flyingAway = false;
@@ -122,83 +114,82 @@ public class SeagullMovement : MonoBehaviour
 		poopingTimer = 0;
 
 		speed = 10f;
-
 	}
 
-	void Update()
-	{       
-		// moves our bird.
-		transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+    public void MoveBird()
+    {
+        // moves our bird.
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-		// Checks if we have arrived at target.
-		if (transform.position == targetPosition && !isPoopingTime && !isScared)
-		{
-			// sets our speed.
-			speed = endSpeed; 
-			// sets our animation
-			seagullAnimator.SetBool("Pooping", true);
-			// sets a bool 
-			isPoopingTime = true; // this will probably be removed.
-		}
+        // Checks if we have arrived at target.
+        if (transform.position == targetPosition && !isPoopingTime && !isScared)
+        {
+            // sets our speed.
+            speed = endSpeed;
+            // sets our animation
+            seagullAnimator.SetBool("Pooping", true);
+            // sets a bool 
+            isPoopingTime = true; // this will probably be removed.
+        }
 
-		// checks if it should poop.
-		// this will be controlled in our animation and animation events.
-		if (isPoopingTime == true)
-		{
-			poopingTimer += Time.deltaTime;
+        // checks if it should poop.
+        // this will be controlled in our animation and animation events.
+        if (isPoopingTime == true)
+        {
+            poopingTimer += Time.deltaTime;
 
-			if (poopingTimer > 1f && !hasPooped)
-			{
-				// we get the soundsingleton instead of using the variable we saved (why???)
-				FindObjectOfType<AudioPlayer>().PoopOnFood(poopingSound);
+            if (poopingTimer > 1f && !hasPooped)
+            {
+                // we get the soundsingleton instead of using the variable we saved (why???)
+                FindObjectOfType<AudioPlayer>().PoopOnFood(poopingSound);
 
-				//bird poops.
-				pooping.Poop();
+                //bird poops.
+                pooping.Poop();
 
-				// sets that we have pooped
-				hasPooped = true;
-				// sets a trigger in our animator
-				seagullAnimator.SetTrigger("FlyAway");
-				// sets a bool in our animator
-				seagullAnimator.SetBool("Pooping", false);
-			}
+                // sets that we have pooped
+                hasPooped = true;
+                // sets a trigger in our animator
+                seagullAnimator.SetTrigger("FlyAway");
+                // sets a bool in our animator
+                seagullAnimator.SetBool("Pooping", false);
+            }
 
-			// checks if its time to fly away
-			if (poopingTimer > 2.8f && !flyingAway)
-			{
-				// sets new target point
-				targetPosition = flightEnd.position;
-				// rotates our bird towards that position.
-				transform.LookAt(targetPosition);
+            // checks if its time to fly away
+            if (poopingTimer > 2.8f && !flyingAway)
+            {
+                // sets new target point
+                targetPosition = flightEnd.position;
+                // rotates our bird towards that position.
+                transform.LookAt(targetPosition);
 
-				// sets flying away to true.
-				flyingAway = true;
-			}  
-		}
+                // sets flying away to true.
+                flyingAway = true;
+            }
+        }
 
-		// checks if we are flying away
-		if (flyingAway)
-		{
-			speed += acceleration * Time.deltaTime;
-		}
-		// what is this below and what does it do?? 
-		else if (speed > minSpeed)
-		{
-			speed -= deacceleration * Time.deltaTime;
-		}
-		else if(speed < minSpeed)
-		{
-			speed = minSpeed;
-		}
+        // checks if we are flying away
+        if (flyingAway)
+        {
+            speed += acceleration * Time.deltaTime;
+        }
+        // what is this below and what does it do?? 
+        else if (speed > minSpeed)
+        {
+            speed -= deacceleration * Time.deltaTime;
+        }
+        else if (speed < minSpeed)
+        {
+            speed = minSpeed;
+        }
 
-		// despawn our bird.
-		if (transform.position == targetPosition && flyingAway)
-		{ 
-			seagullManager.Despawn(gameObject);
-		}
-	}
+        // despawn our bird.
+        if (transform.position == targetPosition && flyingAway)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
-	void FoodItemTarget()
+    void FoodItemTarget()
 	{
 		// gets the FoodTracker
 		foodTracker = FindObjectOfType<FoodTracker>();
@@ -231,7 +222,6 @@ public class SeagullMovement : MonoBehaviour
 		targetPosition.y = transform.position.y;
 	}
 
-	
 	private void FoodTarget()
 	{
 		// get a random package

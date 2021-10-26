@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class SeagullManager : MonoBehaviour
 {
-	// this script will be rewritten and changed, to a great extent
-
 	[SerializeField] private List<Transform> foodPackages = new List<Transform>();
 	[SerializeField] private List<Transform> endFlightTransforms = new List<Transform>();
 	[SerializeField] private List<Transform> startFlightTransforms = new List<Transform>();
 
-	[SerializeField] SeagullMovement seagullPrefab;
+	[SerializeField] SeagullController seagullPrefab;
 
 	[SerializeField] private Transform seagullParent;
 
-	private List<SeagullMovement> seagullPool = new List<SeagullMovement>();
+	private List<SeagullController> seagullPool = new List<SeagullController>();
 	
-	private float spawnIntervalls = 5f;
+	private Vector2 spawnInterval;
+
 	private float timer = 0;
 
 	private void Start()
@@ -26,8 +25,9 @@ public class SeagullManager : MonoBehaviour
 			enabled = false;
 			StopAllCoroutines();
 		}
-		spawnIntervalls = GameManager.Settings.SeagullSpawnInterval;
-
+		spawnInterval = GameManager.Settings.SeagullSpawnInterval;
+		timer = Random.Range(spawnInterval.x, spawnInterval.y);
+		Debug.Log(timer);
 		CreateSeagullPool();
 	}
 
@@ -36,7 +36,7 @@ public class SeagullManager : MonoBehaviour
 		int maxNumberOfSeagulls = GameManager.Settings.SeagullAmount;
 		for (int i = 0; i < maxNumberOfSeagulls; i++)
 		{
-			SeagullMovement newSeagull = Instantiate(seagullPrefab, seagullParent);
+			SeagullController newSeagull = Instantiate(seagullPrefab, seagullParent);
 			newSeagull.FoodPackages = foodPackages;
 			seagullPool.Add(newSeagull);
 		}
@@ -47,30 +47,22 @@ public class SeagullManager : MonoBehaviour
 		}
 	}
 
-	// turn update into its own timer script?
     private void Update()
     {
-		timer += Time.deltaTime;
-		if (timer > spawnIntervalls)
+		timer -= Time.deltaTime;
+		if (timer <= 0)
 		{
-			SeagullMovement seagull = GetInactiveSeagull();
+			SeagullController seagull = GetInactiveSeagull();
 			if (seagull != null)
 			{
-				timer = 0;
+				timer = Random.Range(spawnInterval.x, spawnInterval.y);
+				Debug.Log(timer);
 				SpawnSeagull(seagull);
 			}
 		}
 	}
 
-	// this will be what we subscribe to the event in seagull.
-	public void Despawn(GameObject seagull)
-	{
-		seagull.SetActive(false);
-	}
-
-	// this script (SeagullManager) should subscribe to that event with a method
-	// that instantiates a new seagul (will probably not do this)
-	private void SpawnSeagull(SeagullMovement seagull)
+	private void SpawnSeagull(SeagullController seagull)
     {
         // gets a random spawnpoint.
         Transform spawnPoint = GetTransformFromList(startFlightTransforms);
@@ -80,12 +72,10 @@ public class SeagullManager : MonoBehaviour
 		seagull.transform.position = spawnPoint.position;
 
 		seagull.gameObject.SetActive(true);
-
-        // initializes the seagull.
-        seagull.Init(this);
+		seagull.GetComponent<StateMachine>().ChangeState(new PoopOn());
     }
 
-    private SeagullMovement GetInactiveSeagull()
+    private SeagullController GetInactiveSeagull()
     {
         foreach (var seagull in seagullPool)
         {

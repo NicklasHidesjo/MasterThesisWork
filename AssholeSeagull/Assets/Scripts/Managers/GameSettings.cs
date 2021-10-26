@@ -12,7 +12,7 @@ public class GameSettings : ScriptableObject
     public bool AlwaysFreshFood = false;
     public bool SeagullsDontAttack = false;
     public int SeagullAmount = 5;
-    public float SeagullSpawnInterval = 5f;
+    public Vector2 SeagullSpawnInterval = new Vector2(3f,7f);
 }
 
 public enum GameModes

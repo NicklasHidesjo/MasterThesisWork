@@ -18,4 +18,4 @@ MonoBehaviour:
   AlwaysFreshFood: 1
   SeagullsDontAttack: 1
   SeagullAmount: 1
-  SeagullSpawnInterval: 5
+  SeagullSpawnInterval: {x: 3, y: 7}

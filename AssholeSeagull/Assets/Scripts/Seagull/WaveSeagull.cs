@@ -146,7 +146,7 @@ public class WaveSeagull : MonoBehaviour
         foreach (var seagull in seagulls)
         {
             // scare the seagull
-            seagull.GetComponent<SeagullMovement>().Scared();
+            seagull.GetComponent<SeagullController>().Scared();
         }
     }
     private void PlayShooSound()
