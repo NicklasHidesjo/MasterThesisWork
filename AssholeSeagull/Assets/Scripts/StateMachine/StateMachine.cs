@@ -24,6 +24,7 @@ public class StateMachine : MonoBehaviour
             currentState.Exit();
         }
         currentState = newState;
+        Debug.Log(currentState);
         currentState.Enter(seagullController, this);
     }
 }

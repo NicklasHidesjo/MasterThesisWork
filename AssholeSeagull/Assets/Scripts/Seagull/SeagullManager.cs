@@ -38,6 +38,7 @@ public class SeagullManager : MonoBehaviour
 		{
 			SeagullController newSeagull = Instantiate(seagullPrefab, seagullParent);
 			newSeagull.FoodPackages = foodPackages;
+			newSeagull.Init();
 			seagullPool.Add(newSeagull);
 		}
 
@@ -56,7 +57,6 @@ public class SeagullManager : MonoBehaviour
 			if (seagull != null)
 			{
 				timer = Random.Range(spawnInterval.x, spawnInterval.y);
-				Debug.Log(timer);
 				SpawnSeagull(seagull);
 			}
 		}
@@ -72,7 +72,7 @@ public class SeagullManager : MonoBehaviour
 		seagull.transform.position = spawnPoint.position;
 
 		seagull.gameObject.SetActive(true);
-		seagull.GetComponent<StateMachine>().ChangeState(new PoopOn());
+		seagull.GetComponent<StateMachine>().ChangeState(new Idle());
     }
 
     private SeagullController GetInactiveSeagull()

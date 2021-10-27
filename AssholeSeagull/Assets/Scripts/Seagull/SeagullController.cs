@@ -34,6 +34,7 @@ public class SeagullController : MonoBehaviour
 	[SerializeField] AudioClip seagullSound;
 	[SerializeField] AudioClip scaredSound;
 	AudioPlayer soundSingleton;
+	AudioSource audioSource;
 
 	// settings as these will be in a scriptable object (to be able to create different Seagulls with different speeds and such)
 	[Header("Speed settings")]
@@ -71,63 +72,48 @@ public class SeagullController : MonoBehaviour
 		}
 	}
 
-
 	public void Init()
-	{
-		// gets our audioSource.
-		soundSingleton = FindObjectOfType<AudioPlayer>();
-		// plays a seagull clip.
-		soundSingleton.SeagullFx(seagullSound);
+    {
+        // gets our audioSource.
+        audioSource = GetComponent<AudioSource>();
 
-		// sets the state our bird will get. this is the only place we set the state?
-		// this will be changed as we make it a state machine.
-		int randomState = Random.Range(0, 2);
-		if (randomState == 0)
-		{
-			currentState = State.PoopingFood;
-		}
-		else if (randomState == 1)
-		{
-			currentState = State.PoopingPackage;
-		}
-		if (currentState == State.PoopingPackage)
-		{
-			FoodTarget();
-		}
-		else if (currentState == State.PoopingFood)
-		{
-			FoodItemTarget();
-		}
+        // gets our pooping component.
+        pooping = GetComponent<Pooping>();
 
-		// gets our pooping component.
-		pooping = GetComponent<Pooping>();
+        // rotates our bird to look at our targetPosition.
+        //transform.LookAt(targetPosition);
 
-		// rotates our bird to look at our targetPosition.
-		transform.LookAt(targetPosition);
+        ResetBird();
+    }
 
-		isPoopingTime = false;
-		hasPooped = false;
-		flyingAway = false;
-		inDistance = false;
-		isScared = false;
+    public void ResetBird()
+    {
+        isPoopingTime = false;
+        hasPooped = false;
+        flyingAway = false;
+        inDistance = false;
+        isScared = false;
 
-		poopingTimer = 0;
+        poopingTimer = 0;
 
-		speed = 10f;
-	}
+        speed = 10f;
+    }
 
     public void MoveBird()
     {
-        // moves our bird.
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+    }
 
+	public bool ArrivedAtTarget()
+    {
+		return transform.position == targetPosition;
+    }
+
+    private void WaitingToBeRemoved()
+    {
         // Checks if we have arrived at target.
         if (transform.position == targetPosition && !isPoopingTime && !isScared)
         {
-            // sets our speed.
-            speed = endSpeed;
-            // sets our animation
-            seagullAnimator.SetBool("Pooping", true);
             // sets a bool 
             isPoopingTime = true; // this will probably be removed.
         }
@@ -167,21 +153,6 @@ public class SeagullController : MonoBehaviour
             }
         }
 
-        // checks if we are flying away
-        if (flyingAway)
-        {
-            speed += acceleration * Time.deltaTime;
-        }
-        // what is this below and what does it do?? 
-        else if (speed > minSpeed)
-        {
-            speed -= deacceleration * Time.deltaTime;
-        }
-        else if (speed < minSpeed)
-        {
-            speed = minSpeed;
-        }
-
         // despawn our bird.
         if (transform.position == targetPosition && flyingAway)
         {
@@ -189,47 +160,44 @@ public class SeagullController : MonoBehaviour
         }
     }
 
-    void FoodItemTarget()
-	{
-		// gets the FoodTracker
-		foodTracker = FindObjectOfType<FoodTracker>();
-		// gets a FoodItem target 
-		Transform target = foodTracker.GetRandomTarget(); // rename this to TryGetRandomTarget or something similar
+    public void SetAnimation(string animation)
+    {
+		seagullAnimator.ResetTrigger("Poop");
+		seagullAnimator.ResetTrigger("Fly");
+		seagullAnimator.ResetTrigger("FlyAway");
 
-		// check if our target is null.
-		if(target == null)
-		{
-			Debug.Log("Target position is null");
-			// get a package as target instead.
-			FoodTarget();
-			// return/exit and don't do any of the code below
-			return;
-		}
+		seagullAnimator.SetTrigger(animation);
+    }
 
-		// sets our targetPosition
-		targetPosition = target.position;
+    public void Accelerate()
+    {
+        speed += acceleration * Time.deltaTime;
+    }
 
-		// checks if our targetPosition is 0
-		if (targetPosition == Vector3.zero)
-		{
-			// get a package as target instead.
-			FoodTarget();
-			// return/exit and don't do any of the code below
-			return;
-		}
+    public void Deaccelerate()
+    {
+        speed -= deacceleration * Time.deltaTime;
+		speed = Mathf.Clamp(speed, minSpeed, Mathf.Infinity);
+    }
 
-		// sets targetPosition.y to be that of our own position.y (to now make the bird swoop down for shitting)
-		targetPosition.y = transform.position.y;
-	}
+	public void LookAt()
+    {
+		transform.LookAt(targetPosition);
+    }
 
-	private void FoodTarget()
-	{
+    public void SetSpeed()
+    {
+        speed = endSpeed;
+    }
+
+    public void SetTargetPos()
+    {
 		// get a random package
 		randomPackage = Random.Range(0, foodPackages.Count);
 
 		Transform targetTransform = foodPackages[randomPackage];
 		targetPosition = new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z);
-	}
+    }
 
 	public void Scared()
 	{
@@ -264,4 +232,10 @@ public class SeagullController : MonoBehaviour
 			inDistance = true;
 		}
 	}
+
+	public void PlaySpawnSound()
+    {
+		audioSource.clip = seagullSound;
+		audioSource.Play();
+    }
 }
