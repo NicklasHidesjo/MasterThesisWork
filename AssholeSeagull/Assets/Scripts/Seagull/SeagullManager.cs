@@ -37,7 +37,6 @@ public class SeagullManager : MonoBehaviour
 		for (int i = 0; i < maxNumberOfSeagulls; i++)
 		{
 			SeagullController newSeagull = Instantiate(seagullPrefab, seagullParent);
-			newSeagull.FoodPackages = foodPackages;
 			newSeagull.Init();
 			seagullPool.Add(newSeagull);
 		}
@@ -67,9 +66,12 @@ public class SeagullManager : MonoBehaviour
         // gets a random spawnpoint.
         Transform spawnPoint = GetTransformFromList(startFlightTransforms);
         Transform endPoint = GetTransformFromList(endFlightTransforms);
+		Transform foodPackage = GetTransformFromList(foodPackages);
 
-        seagull.flightEnd = endPoint;
+        seagull.FlightEnd = endPoint.position;
+		seagull.FoodPackage = foodPackage.position;
 		seagull.transform.position = spawnPoint.position;
+		seagull.ResetBird();
 
 		seagull.gameObject.SetActive(true);
 		seagull.GetComponent<StateMachine>().ChangeState(new Idle());

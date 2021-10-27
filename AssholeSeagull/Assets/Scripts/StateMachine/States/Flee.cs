@@ -11,6 +11,9 @@ public class Flee : IState
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
+        seagullController.PlaySpawnSound();
+        // Scared seagull animation
+        stateMachine.ChangeState(new FlyToExit()); // Move to execute once we have scared ani
     }
 
     public void Execute()

@@ -11,15 +11,19 @@ public class FlyToPoop : IState
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
-        seagullController.SetTargetPos();
+        seagullController.SetPackagePos();
         seagullController.LookAt();
-        //Add animation call
     }
 
     public void Execute()
     {
         seagullController.MoveBird();
         seagullController.Deaccelerate();
+
+        if(seagullController.IsScared)
+        {
+            stateMachine.ChangeState(new Flee());
+        }
 
         if (seagullController.ArrivedAtTarget())
         {

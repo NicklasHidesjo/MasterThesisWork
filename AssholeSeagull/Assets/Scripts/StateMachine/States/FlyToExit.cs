@@ -11,11 +11,19 @@ public class FlyToExit : IState
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
+        seagullController.SetExitPos();
+        seagullController.LookAt();
     }
 
     public void Execute()
     {
+        seagullController.MoveBird();
+        seagullController.Accelerate();
 
+        if (seagullController.ArrivedAtTarget())
+        {
+            seagullController.Deactivate();
+        }
     }
 
     public void Exit()

@@ -16,7 +16,11 @@ public class PoopState : IState
 
     public void Execute()
     {
-
+        if (seagullController.IsInAnimation("Pooping"))
+        {
+            return;
+        }
+        stateMachine.ChangeState(new FlyToExit());
     }
 
     public void Exit()
