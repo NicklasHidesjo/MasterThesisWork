@@ -11,6 +11,11 @@ public class StealFood : IState
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
+
+        // maybe have noisy irritating stealing food in your face sound.
+
+        seagullController.PickUpFood();
+        stateMachine.ChangeState(new FlyToExit());
     }
 
     public void Execute()

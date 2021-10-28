@@ -5,18 +5,15 @@ using UnityEngine;
 
 public class SeagullController : MonoBehaviour
 {
-	// this script will be rewriten using animation events'
+	// this script will be rewriten using animation events
 	// Make audio manager
 	// this script might be split into several smaller ones.
-
-	private Animator animator;
 	
 	// this will be in a SeagullSoundManager script 
 	[Header("Sounds")]
 	[SerializeField] private AudioClip poopingSound; // move this to pooping script
     [SerializeField] private AudioClip seagullSound;
 	[SerializeField] private AudioClip scaredSound;
-	private AudioSource audioSource;
 
 	// settings as these will be in a scriptable object (to be able to create different Seagulls with different speeds and such)
 	[Header("Speed settings")]
@@ -26,11 +23,19 @@ public class SeagullController : MonoBehaviour
 	[SerializeField] private float deacceleration = 0.5f;
 	[SerializeField] private float minSpeed = 1f;
 
+	private AudioSource audioSource;
+	private Animator animator;
+	private GrabbyFeet grabbyFeet; 
+
 	private Vector3 targetPosition;
 	
 	private bool isScared;
 	private Vector3 flightEnd;
 	private Vector3 foodPackage;
+
+	private FoodItem foodTarget;
+
+	private FoodItem pickedUp;
 		
 	public bool IsScared
     {
@@ -69,18 +74,41 @@ public class SeagullController : MonoBehaviour
 			foodPackage = value; 
 		}
 	}
+	
+	public FoodItem FoodTarget
+	{
+		get
+		{
+			return foodTarget;
+		}
+		set
+		{
+			foodTarget = value;
+		}
+	}
 
 	public void Init()
     {
         // gets our audioSource.
         audioSource = GetComponent<AudioSource>();
 		animator = GetComponent<Animator>();
+		grabbyFeet = GetComponentInChildren<GrabbyFeet>();
     }
 
     public void ResetBird()
     {
 		isScared = false;
         speed = 10f;
+
+		if(pickedUp != null)
+		{
+			foodTarget = null;		
+			Destroy(pickedUp.gameObject);
+			pickedUp = null;
+
+
+			//grabbyFeet.SetFoodRB(null);
+		}
     }
 
     public void MoveBird()
@@ -143,6 +171,11 @@ public class SeagullController : MonoBehaviour
 		targetPosition = packagePos;
 	}
 
+	public void SetFoodPos()
+	{
+		targetPosition = foodTarget.transform.position;
+	}
+
     private void PlayScaredSound()
     {
         audioSource.clip = scaredSound;
@@ -154,4 +187,12 @@ public class SeagullController : MonoBehaviour
 		audioSource.clip = seagullSound;
 		audioSource.Play();
     }
+
+	public void PickUpFood()
+	{
+		FoodTarget.transform.parent = transform;
+		foodTarget.Stolen = true;
+		grabbyFeet.SetFoodRB(foodTarget.GetComponent<Rigidbody>());
+		pickedUp = FoodTarget;
+	}
 }

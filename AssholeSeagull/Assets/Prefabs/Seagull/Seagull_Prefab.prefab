@@ -539,9 +539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44049e3d9eb02444f94cf8da44deaacc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seagullAnimator: {fileID: 2974699690583459776}
-  randomPackage: 0
-  flightEnd: {fileID: 0}
   poopingSound: {fileID: 8300000, guid: 779b566bc017e10478bf471723d82484, type: 3}
   seagullSound: {fileID: 8300000, guid: 5c8e241b8b7b3d54ab3108164d72fa83, type: 3}
   scaredSound: {fileID: 8300000, guid: 8b04cd2ff6ee8f74b853bfbc767818a9, type: 3}
@@ -550,9 +547,6 @@ MonoBehaviour:
   acceleration: 0.5
   deacceleration: 0.5
   minSpeed: 1
-  targetPosition: {x: 0, y: 0, z: 0}
-  isPoopingTime: 0
-  inDistance: 0
 --- !u!54 &1986341339
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -779,6 +773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2082553287946853984}
+  - component: {fileID: 6009425346105081366}
   m_Layer: 0
   m_Name: SeagullLLegDigit12
   m_TagString: Untagged
@@ -800,6 +795,20 @@ Transform:
   m_Father: {fileID: 786611775403611528}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6009425346105081366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4414583702050692021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd14073ca0553d4e9289a8d50ef3b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachForce: 800
+  attachForceDamper: 25
 --- !u!1 &4739549819672288215
 GameObject:
   m_ObjectHideFlags: 0

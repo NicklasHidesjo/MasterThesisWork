@@ -34,7 +34,7 @@ public class FoodSpoiledHandler : MonoBehaviour
     private void Update()
     {
         // check if any of these bools are true
-        if (food.InHand || food.InPackage || food.OnPlate)
+        if (food.InHand || food.InPackage || food.OnPlate || food.Stolen)
         {
             // return/exit and don't run the code below
             return;

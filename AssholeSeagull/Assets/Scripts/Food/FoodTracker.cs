@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FoodTracker : MonoBehaviour
 {
-    private List<Transform> foodTransforms = new List<Transform>();
+    private List<FoodItem> foodToSteal = new List<FoodItem>();
 
 	private void Awake()
 	{
@@ -11,21 +11,21 @@ public class FoodTracker : MonoBehaviour
 	}
 	private void SubscribeToEvents()
 	{
-		FoodItem.AddFood += AddFoodTransform;
-		FoodItem.RemoveFood += RemoveFoodTransform;
+		FoodItem.AddFood += AddFoodItem;
+		FoodItem.RemoveFood += RemoveFoodItem;
 	}
 
-    private void AddFoodTransform(FoodItem food)
+    private void AddFoodItem(FoodItem food)
     {
         // adds a transform to the list.
-        foodTransforms.Add(food.transform);
+        foodToSteal.Add(food);
     }
-    private void RemoveFoodTransform(FoodItem food)
+    private void RemoveFoodItem(FoodItem food)
     {
         // removes a transform from the list.
-        foodTransforms.Remove(food.transform);
+        foodToSteal.Remove(food);
         // clear the list of nulls.
-        foodTransforms.RemoveAll(Transform => transform == null);
+        foodToSteal.RemoveAll(Transform => transform == null);
     }
 
 	private void OnDestroy()
@@ -34,25 +34,26 @@ public class FoodTracker : MonoBehaviour
 	}
 	private void UnsubscribeFromEvents()
 	{
-		FoodItem.AddFood -= AddFoodTransform;
-		FoodItem.RemoveFood -= RemoveFoodTransform;
+		FoodItem.AddFood -= AddFoodItem;
+		FoodItem.RemoveFood -= RemoveFoodItem;
 	}
 	 
-    public Transform GetRandomTarget()
+    public FoodItem GetRandomTarget()
     {
         // check if we don't have any transforms in our list 
-        if (foodTransforms.Count < 1)
+        if (foodToSteal.Count < 1)
 		{
             // return null if we don't have any transforms in our list.
             return null;
 		}
 
         // get a random integer based on the foodTransforms list size.
-        int random = Random.Range(0, foodTransforms.Count);
+        int random = Random.Range(0, foodToSteal.Count);
         // get the transform of the foodTransforms element at position random.
-        Transform foodTransform = foodTransforms[random];
+        FoodItem foodItem = foodToSteal[random];
 
+        RemoveFoodItem(foodItem);
         // return the transform.
-        return foodTransform;
+        return foodItem;
     }
 }

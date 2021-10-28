@@ -11,15 +11,36 @@ public class FlyToStealFood : IState
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
+
+        if (seagullController.FoodTarget == null)
+        {
+            Debug.Log("No food found changing to poop");
+            stateMachine.ChangeState(new FlyToPoop());
+        }
+        else
+        {
+            seagullController.SetFoodPos();
+            seagullController.LookAt();
+        }
     }
 
     public void Execute()
     {
+        seagullController.MoveBird();
+        seagullController.Deaccelerate();
 
+        if (seagullController.IsScared)
+        {
+            stateMachine.ChangeState(new Flee());
+        }
+        if (seagullController.ArrivedAtTarget())
+        {
+            stateMachine.ChangeState(new StealFood());
+        }
     }
 
     public void Exit()
     {
-
+        seagullController.SetSpeed();
     }
 }

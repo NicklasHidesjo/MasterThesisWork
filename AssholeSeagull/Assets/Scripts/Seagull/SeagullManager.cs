@@ -18,6 +18,8 @@ public class SeagullManager : MonoBehaviour
 
 	private float timer = 0;
 
+	private FoodTracker foodTracker;
+
 	private void Start()
 	{
 		if (GameManager.Settings.SeagullsDontAttack)
@@ -25,6 +27,8 @@ public class SeagullManager : MonoBehaviour
 			enabled = false;
 			StopAllCoroutines();
 		}
+		foodTracker = FindObjectOfType<FoodTracker>();
+
 		spawnInterval = GameManager.Settings.SeagullSpawnInterval;
 		timer = Random.Range(spawnInterval.x, spawnInterval.y);
 		Debug.Log(timer);
@@ -68,6 +72,7 @@ public class SeagullManager : MonoBehaviour
         Transform endPoint = GetTransformFromList(endFlightTransforms);
 		Transform foodPackage = GetTransformFromList(foodPackages);
 
+		seagull.FoodTarget = foodTracker.GetRandomTarget();
         seagull.FlightEnd = endPoint.position;
 		seagull.FoodPackage = foodPackage.position;
 		seagull.transform.position = spawnPoint.position;

@@ -14,7 +14,7 @@ public class Idle : IState
         int random = Random.Range(0, 2);
 
         //Remove this, only for testing
-        random = 0;
+        random = 1;
 
         if (random == 0)
         {

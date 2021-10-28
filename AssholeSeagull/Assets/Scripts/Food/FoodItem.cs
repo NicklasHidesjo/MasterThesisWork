@@ -43,6 +43,7 @@ public class FoodItem : MonoBehaviour
     private bool inPackage = false;
     private bool inHand = false;
     private bool moving = false;
+    private bool stolen = false;
 
     private bool buttered = false;
 
@@ -132,7 +133,17 @@ public class FoodItem : MonoBehaviour
             moving = value;
         }
     }
-
+    public bool Stolen
+	{
+        get
+		{
+            return stolen;
+		}
+        set
+		{
+            stolen = value;
+        }
+	}
     public bool Buttered
     {
         get
@@ -205,7 +216,7 @@ public class FoodItem : MonoBehaviour
 
     private void CallFoodTrackingEvents() // name this better.
     {
-        if (inHand || onPlate || poopOnFood || isSpoiled || inPackage)
+        if (inHand || onPlate || poopOnFood || isSpoiled || inPackage || stolen)
         {
             RemoveFood?.Invoke(this);
         }
