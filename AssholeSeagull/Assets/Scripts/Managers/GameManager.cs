@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <TODO>
-/// Use the GameStatus enum to track what state our game is in.
+/// make scripts get & set currentGameStatus
 /// </summary>
 
 public enum GameStatus
 {
+	none,
 	menu,
 	pause,
 	ingame,
@@ -15,7 +16,8 @@ public enum GameStatus
 
 public static class GameManager
 {
-	private static GameSettings settings;
+	private static GameStatus currentGameStatus = GameStatus.none;
+    private static GameSettings settings = (GameSettings)ScriptableObject.CreateInstance("GameSettings");
 	private static int score = 0;
 
 	public static int Score
@@ -34,10 +36,6 @@ public static class GameManager
 	{
 		get
 		{
-			if(settings == null)
-			{
-				settings = (GameSettings)ScriptableObject.CreateInstance("GameSettings");
-			}
 			return settings;
 		}
 		set
@@ -46,4 +44,39 @@ public static class GameManager
 			settings = value;
 		}
 	}
+
+	public static GameStatus CurrentGameStatus
+    {
+		get 
+		{
+            if (currentGameStatus == GameStatus.none)
+            {
+                SetCurrentGameStatus();
+            }
+            return currentGameStatus;
+		}
+		set
+        {
+			currentGameStatus = value;
+        }
+    }
+
+    private static void SetCurrentGameStatus()
+    {
+        switch (SceneLoader.GetSceneName())
+        {
+            case "MainMenu":
+                currentGameStatus = GameStatus.menu;
+                break;
+            case "GameScene":
+                currentGameStatus = GameStatus.ingame;
+                break;
+            case "EndScene":
+                currentGameStatus = GameStatus.gameover;
+                break;
+            default:
+                Debug.LogError("Scene " + SceneLoader.GetSceneName() + " not found");
+                break;
+        }
+    }
 }
