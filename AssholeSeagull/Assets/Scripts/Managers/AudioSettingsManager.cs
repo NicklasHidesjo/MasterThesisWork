@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using Valve.VR.Extras;
 
-public class AudioManager : MonoBehaviour
+public class AudioSettingsManager : MonoBehaviour
 {
     // look into the possibility to make the sliders be slidable using the pointers 
     // not only button presses. (also look into making it possible to just 

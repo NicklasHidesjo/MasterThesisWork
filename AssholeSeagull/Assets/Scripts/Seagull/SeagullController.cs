@@ -13,18 +13,18 @@ public class SeagullController : MonoBehaviour
 	
 	// this will be in a SeagullSoundManager script 
 	[Header("Sounds")]
-	[SerializeField] AudioClip poopingSound; // move this to pooping script
-    [SerializeField] AudioClip seagullSound;
-	[SerializeField] AudioClip scaredSound;
-	AudioSource audioSource;
+	[SerializeField] private AudioClip poopingSound; // move this to pooping script
+    [SerializeField] private AudioClip seagullSound;
+	[SerializeField] private AudioClip scaredSound;
+	private AudioSource audioSource;
 
 	// settings as these will be in a scriptable object (to be able to create different Seagulls with different speeds and such)
 	[Header("Speed settings")]
-	[SerializeField] float speed = 10f;
-	[SerializeField] float endSpeed = 5f;
-	[SerializeField] float acceleration = 0.5f;
-	[SerializeField] float deacceleration = 0.5f;
-	[SerializeField] float minSpeed = 1f;
+	[SerializeField] private float speed = 10f;
+	[SerializeField] private float endSpeed = 5f;
+	[SerializeField] private float acceleration = 0.5f;
+	[SerializeField] private float deacceleration = 0.5f;
+	[SerializeField] private float minSpeed = 1f;
 
 	private Vector3 targetPosition;
 	
@@ -111,7 +111,7 @@ public class SeagullController : MonoBehaviour
 		animator.SetTrigger(animation);
     }
 
-    public void Accelerate()
+	public void Accelerate()
     {
         speed += acceleration * Time.deltaTime;
     }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Flee : IState
 {
-    SeagullController seagullController;
-    StateMachine stateMachine;
+    private SeagullController seagullController;
+    private StateMachine stateMachine;
 
     public void Enter(SeagullController seagullController, StateMachine stateMachine)
     {

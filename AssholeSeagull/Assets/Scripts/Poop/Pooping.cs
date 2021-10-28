@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pooping : MonoBehaviour
 {
+    // move this into Seagull controller
     [SerializeField] private GameObject poopPrefab;
     [SerializeField] private Transform spawnPosition;
 

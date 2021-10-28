@@ -2,43 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioPlayer: MonoBehaviour
+public class AudioPlayer : MonoBehaviour
 {
-/*    [SerializeField] AudioSource audioSource;
-    
-	
-	AudioSource audioSource;
-	private void Awake()
+	[SerializeField] private AudioSource seagullAudio;
+	[SerializeField] private AudioSource poopAudio;
+
+	public void SeagullFx(AudioClip clip)
 	{
-		audioSource = GetComponent<AudioSource>();
+		seagullAudio.clip = clip;
+		seagullAudio.Play();
 	}
 
-	public static void PlaySound(AudioSource source, AudioClip clip)
+	public void Seagull(AudioClip clip)
 	{
-		source.clip = clip;
-		source.Play();
+		seagullAudio.clip = clip;
+		seagullAudio.Play();
 	}
-*/
 
-
-	    [SerializeField] AudioSource seagullAudio;
-	    [SerializeField] AudioSource poopAudio;
-
-		public void SeagullFx(AudioClip clip)
-		{
-			seagullAudio.clip = clip;
-			seagullAudio.Play();
-		}
-
-		public void Seagull(AudioClip clip)
-		{
-			seagullAudio.clip = clip;
-			seagullAudio.Play();
-		}
-
-		public void PoopOnFood(AudioClip clip)
-		{
-			poopAudio.clip = clip;
-			poopAudio.Play();
-		}
+	public void PoopOnFood(AudioClip clip)
+	{
+		poopAudio.clip = clip;
+		poopAudio.Play();
+	}
 }

@@ -20,7 +20,7 @@ public class FoodSpoiledHandler : MonoBehaviour
     // the timer to check if food is spoiled or should be destroyed.
     private float timer = 0;
 
-    void Start()
+    private void Start()
     {
         if (GameManager.Settings.AlwaysFreshFood)
         {
@@ -31,10 +31,10 @@ public class FoodSpoiledHandler : MonoBehaviour
         body = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void Update()
     {
         // check if any of these bools are true
-        if (food.OnSandwich || food.InHand || food.InPackage || food.OnPlate)
+        if (food.InHand || food.InPackage || food.OnPlate)
         {
             // return/exit and don't run the code below
             return;
@@ -73,7 +73,7 @@ public class FoodSpoiledHandler : MonoBehaviour
         timer += Time.deltaTime;
     }
 
-    public bool IsMoving()
+    private bool IsMoving()
     {
         // return true if our rigidbody's(body) velocity is larger then our velocityThreshold.
         return body.velocity.sqrMagnitude > velocityThreshold;

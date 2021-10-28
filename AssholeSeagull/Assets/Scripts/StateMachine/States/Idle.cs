@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Idle : IState
 {
+    private SeagullController seagullController;
+    private StateMachine stateMachine;
+
     public void Enter(SeagullController seagullController, StateMachine stateMachine)
     {
         seagullController.PlaySpawnSound();

@@ -11,8 +11,6 @@ public delegate void RemoveFood(FoodItem food);
 // make scriptable object to save settings over the multiple scripts that
 // are and shared between all food items.
 
-
-
 public class FoodItem : MonoBehaviour
 {
     // events for foodtracker
@@ -21,8 +19,9 @@ public class FoodItem : MonoBehaviour
 
     // the material for it being spoiled
     [Header("Food Ruined Settings")] // create a FoodPoopHandler
-    [SerializeField] private Material spoiledMaterial;
     [SerializeField] private GameObject goneBadParticles; // change to a particle system that we turn on/off emission on instead?
+    
+    [SerializeField] private Material spoiledMaterial;
     [SerializeField] private AudioClip poopOnFoodSound; // remove this and have it in a audio player script.
     // the material for having poop on it.
     [SerializeField] private Material poopedMaterial;
@@ -40,7 +39,6 @@ public class FoodItem : MonoBehaviour
     private bool poopOnFood = false;
 
     private bool onPlate = false;
-    private bool onSandwich = false;
 
     private bool inPackage = false;
     private bool inHand = false;
@@ -96,13 +94,6 @@ public class FoodItem : MonoBehaviour
         {
             onPlate = value;
             CallFoodTrackingEvents();
-        }
-    }
-    public bool OnSandwich // might be able to remove this
-    {
-        get
-        {
-            return onSandwich;
         }
     }
 

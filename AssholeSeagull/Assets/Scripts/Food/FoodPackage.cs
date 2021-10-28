@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class FoodPackage : MonoBehaviour
 {
+    // make sure that we can't add a sallad to the ham package for instance.
+
+
     [Header("Food Settings")]
     // the item that we will spawn as food
     [SerializeField] private FoodItem foodItem;

@@ -9,13 +9,13 @@ public class EndScreen : MonoBehaviour
     /// new high score handler, add that it manages s/fx, for both high score and no new high score
     /// </summary>
 
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI highscoreText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highscoreText;
 
-    [SerializeField] AudioClip noNewRecordSound;
-    [SerializeField] AudioSource noNewRecordPlayer;
+    [SerializeField] private AudioClip noNewRecordSound;
+    [SerializeField] private AudioSource noNewRecordPlayer;
 
-    void Start()
+    private void Start()
     {
         int highscore = 0;
         bool newHighscore = false;
