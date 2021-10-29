@@ -7,7 +7,12 @@ public class Idle : IState
     private SeagullController seagullController;
     private StateMachine stateMachine;
 
-    public void Enter(SeagullController seagullController, StateMachine stateMachine)
+    public Idle (SeagullController seagullController, StateMachine stateMachine)
+    {
+        this.seagullController = seagullController;
+        this.stateMachine = stateMachine;
+    }
+    public void Enter()
     {
         seagullController.PlaySpawnSound();
         
@@ -18,11 +23,11 @@ public class Idle : IState
 
         if (random == 0)
         {
-            stateMachine.ChangeState(new FlyToPoop());
+            stateMachine.ChangeState(States.FlyToPoop);
         }
         else
         {
-            stateMachine.ChangeState(new FlyToStealFood());
+            stateMachine.ChangeState(States.FlyToStealFood);
         }
     }
 

@@ -21,18 +21,8 @@ public class Plate : MonoBehaviour
         } 
     }
 
-    private bool sandwichIsFinished;
-
-    private void Update()
+    private void FixedUpdate()
     {
-
-        // check if we have finished the sandwich
-        if (sandwichIsFinished)
-        {
-            // return/exit and don't run any of the code below
-            return;
-        }
-
         // check if we have food on the plate.
         if (!FirstFoodOnPlate())
         {
@@ -123,6 +113,7 @@ public class Plate : MonoBehaviour
 
     private void FinishSandwich()
     {
+        bool finishedSandwich = false;
         // using a foreach loop go through each FoodItem in our sandwichPieces list
 		foreach (var food in sandwichPieces)
 		{
@@ -137,12 +128,17 @@ public class Plate : MonoBehaviour
                 continue;
 			}
 
-            // change the bool that it's finished to true
-            sandwichIsFinished = true; // this bool might not be needed.
-
-            // make a call to FinishSandwich on the GameManager.
-            FindObjectOfType<ScoreManager>().FinishSandwich(true);
+            finishedSandwich = true;
 		}
+
+        if(finishedSandwich)
+        {
+            foreach (var food in sandwichPieces)
+            {
+                food.GetComponent<FoodLayerTracker>().SetFoodAboveAndBelow();
+            }
+            FindObjectOfType<ScoreManager>().FinishSandwich(true);
+        }
     }
 
 	private void OnDrawGizmos()

@@ -19,14 +19,14 @@ public class FoodLayerTracker : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+/*    void FixedUpdate()
     {
         // Check what food is below or above 
-        RaycastFoodLayer(); // change name to something better
-    }
+        SetFoodAboveAndBelow(); // change name to something better
+    }*/
 
     //look into making this a script of it's own and refactor everything in here.
-    private void RaycastFoodLayer()
+    public void SetFoodAboveAndBelow()
     {
         // create a null RaycastHit object.
         RaycastHit hit;

@@ -216,7 +216,7 @@ public class FoodItem : MonoBehaviour
 
     private void CallFoodTrackingEvents() // name this better.
     {
-        if (inHand || onPlate || poopOnFood || isSpoiled || inPackage || stolen)
+        if (inHand /*|| onPlate*/ || poopOnFood || isSpoiled || inPackage || stolen)
         {
             RemoveFood?.Invoke(this);
         }
@@ -226,7 +226,7 @@ public class FoodItem : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // check if we are picked up or not
         InHand = interactable.attachedToHand;

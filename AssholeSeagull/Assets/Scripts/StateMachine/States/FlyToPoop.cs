@@ -7,10 +7,14 @@ public class FlyToPoop : IState
     private SeagullController seagullController;
     private StateMachine stateMachine;
 
-    public void Enter(SeagullController seagullController, StateMachine stateMachine)
+    public FlyToPoop (SeagullController seagullController, StateMachine stateMachine)
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
+    }
+
+    public void Enter()
+    {
         seagullController.SetPackagePos();
         seagullController.LookAt();
     }
@@ -22,12 +26,12 @@ public class FlyToPoop : IState
 
         if(seagullController.IsScared)
         {
-            stateMachine.ChangeState(new Flee());
+            stateMachine.ChangeState(States.Flee);
         }
 
         if (seagullController.ArrivedAtTarget())
         {
-            stateMachine.ChangeState(new PoopState());
+            stateMachine.ChangeState(States.PoopState);
         }
     }
 

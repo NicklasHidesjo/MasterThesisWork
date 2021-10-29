@@ -31,7 +31,7 @@ public class FoodSpoiledHandler : MonoBehaviour
         body = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // check if any of these bools are true
         if (food.InHand || food.InPackage || food.OnPlate || food.Stolen)
@@ -70,7 +70,7 @@ public class FoodSpoiledHandler : MonoBehaviour
 		}
 
         // increase our timer
-        timer += Time.deltaTime;
+        timer += Time.fixedDeltaTime;
     }
 
     private bool IsMoving()

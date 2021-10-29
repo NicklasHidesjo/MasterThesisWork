@@ -7,10 +7,14 @@ public class FlyToExit : IState
     private SeagullController seagullController;
     private StateMachine stateMachine;
 
-    public void Enter(SeagullController seagullController, StateMachine stateMachine)
+    public FlyToExit (SeagullController seagullController, StateMachine stateMachine)
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
+    }
+
+    public void Enter()
+    {
         seagullController.SetExitPos();
         seagullController.LookAt();
     }

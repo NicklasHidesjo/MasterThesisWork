@@ -79,7 +79,7 @@ public class SeagullManager : MonoBehaviour
 		seagull.ResetBird();
 
 		seagull.gameObject.SetActive(true);
-		seagull.GetComponent<StateMachine>().ChangeState(new Idle());
+		seagull.GetComponent<StateMachine>().ChangeState(States.Idle);
     }
 
     private SeagullController GetInactiveSeagull()

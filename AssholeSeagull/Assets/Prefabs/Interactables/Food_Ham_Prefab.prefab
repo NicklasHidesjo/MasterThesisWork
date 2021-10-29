@@ -119,7 +119,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 2
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!114 &1078648721496904104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98b5bf510f9bc04f810d896a94b95c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spoiledMaterial: {fileID: 2100000, guid: a0366538d2d73fd40ac03a80c2ba0eed, type: 2}
   goneBadParticles: {fileID: 6782043186125764545}
+  spoiledMaterial: {fileID: 2100000, guid: a0366538d2d73fd40ac03a80c2ba0eed, type: 2}
   poopOnFoodSound: {fileID: 8300000, guid: 22c735ff877fadc4bbae400bfdbc48bd, type: 3}
   poopedMaterial: {fileID: 2100000, guid: 062a4f31df72d0e47b59e3e4c77b291a, type: 2}
   foodType: 2

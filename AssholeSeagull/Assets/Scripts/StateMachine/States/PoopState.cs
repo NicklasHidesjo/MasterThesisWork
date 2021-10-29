@@ -7,10 +7,14 @@ public class PoopState : IState
     private SeagullController seagullController;
     private StateMachine stateMachine;
 
-    public void Enter(SeagullController seagullController, StateMachine stateMachine)
+    public PoopState(SeagullController seagullController, StateMachine stateMachine)
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
+    }
+
+    public void Enter()
+    {
         seagullController.SetAnimation("Poop");
     }
 
@@ -20,7 +24,7 @@ public class PoopState : IState
         {
             return;
         }
-        stateMachine.ChangeState(new FlyToExit());
+        stateMachine.ChangeState(States.FlyToExit);
     }
 
     public void Exit()
