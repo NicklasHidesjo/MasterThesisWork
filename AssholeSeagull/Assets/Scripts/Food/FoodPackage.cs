@@ -97,7 +97,7 @@ public class FoodPackage : MonoBehaviour
 		}
 	}
 	
-    public void AddFoodToContainer(FoodItem food)
+    private void AddFoodToContainer(FoodItem food)
 	{
         // let the food being added know that it's in the package
         food.InPackage = true;
@@ -119,6 +119,8 @@ public class FoodPackage : MonoBehaviour
 	{
         // set that the FoodItem(food) is not in the package.
         food.InPackage = false;
+
+        food.KinematicToggle(false);
 
         // remove the FoodItem(food) from the list of food in the package.
         foodInPackage.Remove(food);

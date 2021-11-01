@@ -48,6 +48,7 @@ public class FoodItem : MonoBehaviour
     private bool buttered = false;
 
     private Interactable interactable;
+    private Rigidbody rb;
 
     // properties for each bool (look into making them into less or easier ones)
     public bool IsSpoiled
@@ -230,6 +231,12 @@ public class FoodItem : MonoBehaviour
     {
         // check if we are picked up or not
         InHand = interactable.attachedToHand;
+
+        if(inHand && rb.isKinematic)
+        {
+            KinematicToggle(false);
+            InPackage = false;
+        }
     }
 
     private void ChangeMaterial(Material material)
@@ -245,5 +252,12 @@ public class FoodItem : MonoBehaviour
     {
         gameObject.name = name;
         PoopOnFood = poopOnFood;
+        rb = GetComponent<Rigidbody>();
+        KinematicToggle(true);
+    }
+
+    public void KinematicToggle(bool isKinematic)
+    {
+        rb.isKinematic = isKinematic;
     }
 }
