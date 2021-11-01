@@ -19,11 +19,14 @@ public class FoodSpawner : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
+		#if UNITY_EDITOR
 		TryRemovingFoodFromContainer(other);
+		#endif
 	}
 
 	private void TryRemovingFoodFromContainer(Collider other)
 	{
+
 		// check so that we have the correct tag.
 		if (other.CompareTag("Food"))
 		{
@@ -37,5 +40,6 @@ public class FoodSpawner : MonoBehaviour
 				package.RemoveFoodFromContainer(food);
 			}
 		}
+
 	}
 }

@@ -12,8 +12,6 @@ public class FoodSpoiledHandler : MonoBehaviour
     [Tooltip("The threshold for when the object is considered moving")]
     [SerializeField] private float velocityThreshold = 0.1f;
 
-    private bool alreadySpoiled = false;
-
     private FoodItem food;
     private Rigidbody body;
 
@@ -61,13 +59,6 @@ public class FoodSpoiledHandler : MonoBehaviour
 
         // set isSpoiled based on if our timer is larger then our spoilTime
         food.IsSpoiled = timer > spoilTime;
-
-        // this code doesn't do anything as i forgot what i was writing the code for
-        // (will remain until i remove or remember)
-        if(food.IsSpoiled != alreadySpoiled)
-		{
-            alreadySpoiled = true;
-		}
 
         // increase our timer
         timer += Time.fixedDeltaTime;

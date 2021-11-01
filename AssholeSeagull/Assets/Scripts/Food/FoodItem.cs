@@ -59,7 +59,13 @@ public class FoodItem : MonoBehaviour
         }
         set
         {
+            if(isSpoiled == value)
+			{
+                return;
+			}
+            
             isSpoiled = value;
+
             if (value)
             {
                 ChangeMaterial(spoiledMaterial);
@@ -75,6 +81,10 @@ public class FoodItem : MonoBehaviour
         }
         set
         {
+            if (poopOnFood == value)
+			{
+                return;
+			}
             poopOnFood = value;
 
             if (value)
@@ -94,6 +104,10 @@ public class FoodItem : MonoBehaviour
         }
         set
         {
+            if(onPlate == value)
+			{
+                return;
+			}
             onPlate = value;
             CallFoodTrackingEvents();
         }
@@ -107,6 +121,10 @@ public class FoodItem : MonoBehaviour
         }
         set
         {
+            if(inPackage = value)
+			{
+                return;
+			}
             inPackage = value;
             CallFoodTrackingEvents();
         }
@@ -119,6 +137,10 @@ public class FoodItem : MonoBehaviour
         }
         set
         {
+            if(inHand == value)
+			{
+                return;
+			}
             inHand = value;
             CallFoodTrackingEvents();
         }

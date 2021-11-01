@@ -12,20 +12,11 @@ public class FoodLayerTracker : MonoBehaviour
 
     FoodItem food;
 
-    // Start is called before the first frame update
     void Start()
     {
         food = GetComponent<FoodItem>();
     }
 
-    // Update is called once per frame
-/*    void FixedUpdate()
-    {
-        // Check what food is below or above 
-        SetFoodAboveAndBelow(); // change name to something better
-    }*/
-
-    //look into making this a script of it's own and refactor everything in here.
     public void SetFoodAboveAndBelow()
     {
         // create a null RaycastHit object.
