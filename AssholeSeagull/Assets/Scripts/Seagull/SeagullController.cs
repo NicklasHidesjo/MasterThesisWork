@@ -173,7 +173,9 @@ public class SeagullController : MonoBehaviour
 
 	public void SetFoodPos()
 	{
-		targetPosition = foodTarget.transform.position;
+		Vector3 position = foodTarget.transform.position;
+		//position.y += transform.localScale.y / 2;
+		targetPosition = position;
 	}
 
     private void PlayScaredSound()
@@ -190,9 +192,10 @@ public class SeagullController : MonoBehaviour
 
 	public void PickUpFood()
 	{
-		FoodTarget.transform.parent = transform;
+		foodTarget.transform.parent = transform;
 		foodTarget.Stolen = true;
-		grabbyFeet.SetFoodRB(foodTarget.GetComponent<Rigidbody>());
+		foodTarget.GetComponent<Rigidbody>().isKinematic = true;
+		//grabbyFeet.SetFoodRB(foodTarget.GetComponent<Rigidbody>());
 		pickedUp = FoodTarget;
 	}
 }

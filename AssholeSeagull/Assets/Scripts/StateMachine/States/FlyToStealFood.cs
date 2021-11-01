@@ -37,7 +37,7 @@ public class FlyToStealFood : IState
         }
         if (seagullController.ArrivedAtTarget())
         {
-            stateMachine.ChangeState(States.FlyToStealFood);
+            stateMachine.ChangeState(States.StealFood);
         }
     }
 
