@@ -239,7 +239,7 @@ public class FoodItem : MonoBehaviour
 
     private void CallFoodTrackingEvents() // name this better.
     {
-        if (inHand /*|| onPlate*/ || poopOnFood || isSpoiled || inPackage || stolen)
+        if (inHand || poopOnFood || isSpoiled || inPackage || stolen)
         {
             RemoveFood?.Invoke(this);
         }

@@ -17,12 +17,12 @@ public class FoodSpawner : MonoBehaviour
 		package = GetComponentInParent<FoodPackage>();
 	}
 
+		#if UNITY_EDITOR
 	private void OnTriggerExit(Collider other)
 	{
-		#if UNITY_EDITOR
 		TryRemovingFoodFromContainer(other);
-		#endif
 	}
+		#endif
 
 	private void TryRemovingFoodFromContainer(Collider other)
 	{
