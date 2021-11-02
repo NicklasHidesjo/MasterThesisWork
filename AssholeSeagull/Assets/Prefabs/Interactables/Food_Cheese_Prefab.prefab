@@ -200,10 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goneBadParticles: {fileID: 1270917953064430335}
-  spoiledMaterial: {fileID: 2100000, guid: a0366538d2d73fd40ac03a80c2ba0eed, type: 2}
-  poopOnFoodSound: {fileID: 8300000, guid: 22c735ff877fadc4bbae400bfdbc48bd, type: 3}
-  poopedMaterial: {fileID: 2100000, guid: 062a4f31df72d0e47b59e3e4c77b291a, type: 2}
-  foodType: 3
+  foodSettings: {fileID: 11400000, guid: 61337fe7eae945942b3a119d59d5f458, type: 2}
 --- !u!114 &9047931499704660599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,9 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd98295476fa4645b6cad4a8a93ebe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spoilTime: 5
-  selfDestructTime: 30
-  velocityThreshold: 0.01
 --- !u!114 &5846183770827474148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,13 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb44e46c49f0d9a459d5e52d193510c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseScore: 100
-  varietyBonus: 75
-  worstIngredientPunishment: 50
-  spoiledPunishment: 100
-  poopPunishment: 150
-  worstAbove: 0
-  worstBelow: 0
 --- !u!114 &8594226518267688152
 MonoBehaviour:
   m_ObjectHideFlags: 0

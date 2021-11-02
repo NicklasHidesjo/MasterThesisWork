@@ -20,14 +20,7 @@ public class FoodItem : MonoBehaviour
     // the material for it being spoiled
     [Header("Food Ruined Settings")] // create a FoodPoopHandler
     [SerializeField] private GameObject goneBadParticles; // change to a particle system that we turn on/off emission on instead?
-    
-    [SerializeField] private Material spoiledMaterial;
-    [SerializeField] private AudioClip poopOnFoodSound; // remove this and have it in a audio player script.
-    // the material for having poop on it.
-    [SerializeField] private Material poopedMaterial;
-
-    [Header("FoodType Settings")]
-    [SerializeField] private FoodTypes foodType;
+    [SerializeField] private FoodSettings foodSettings;
 
     private FoodTypes foodAbove;
     private FoodTypes foodAboveAbove;
@@ -50,6 +43,14 @@ public class FoodItem : MonoBehaviour
     private Interactable interactable;
     private Rigidbody rb;
 
+    public FoodSettings FoodSettings
+    {
+        get
+        {
+            return foodSettings;
+        }
+    }
+
     // properties for each bool (look into making them into less or easier ones)
     public bool IsSpoiled
     {
@@ -68,7 +69,7 @@ public class FoodItem : MonoBehaviour
 
             if (value)
             {
-                ChangeMaterial(spoiledMaterial);
+                ChangeMaterial(foodSettings.spoiledMaterial);
             }
             CallFoodTrackingEvents();
         }
@@ -89,8 +90,7 @@ public class FoodItem : MonoBehaviour
 
             if (value)
             {
-                ChangeMaterial(poopedMaterial);
-                FindObjectOfType<AudioPlayer>().PoopOnFood(poopOnFoodSound);
+                ChangeMaterial(foodSettings.poopedMaterial);
             }
             CallFoodTrackingEvents();
         }
@@ -184,7 +184,7 @@ public class FoodItem : MonoBehaviour
     {
         get
         {
-            return foodType;
+            return foodSettings.foodType;
         }
     }
     public FoodTypes FoodAbove
