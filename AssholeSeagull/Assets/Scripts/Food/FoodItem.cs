@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-
 public delegate void AddFood(FoodItem food);
 public delegate void RemoveFood(FoodItem food);
+public delegate void ResetFood(FoodItem food);
 
 // make scriptable object to save settings over the multiple scripts that
 // are and shared between all food items.
@@ -16,6 +16,7 @@ public class FoodItem : MonoBehaviour
     // events for foodtracker
     public static event AddFood AddFood;
     public static event RemoveFood RemoveFood;
+    public static event ResetFood Reset;
 
     // the material for it being spoiled
     [Header("Food Ruined Settings")] // create a FoodPoopHandler
@@ -42,7 +43,7 @@ public class FoodItem : MonoBehaviour
 
     private Interactable interactable;
     private Rigidbody rb;
-
+    private FoodSpoiledHandler foodSpoiled;
     public FoodSettings FoodSettings
     {
         get
@@ -60,11 +61,11 @@ public class FoodItem : MonoBehaviour
         }
         set
         {
-            if(isSpoiled == value)
-			{
+            if (isSpoiled == value)
+            {
                 return;
-			}
-            
+            }
+
             isSpoiled = value;
 
             if (value)
@@ -83,14 +84,15 @@ public class FoodItem : MonoBehaviour
         set
         {
             if (poopOnFood == value)
-			{
+            {
                 return;
-			}
+            }
             poopOnFood = value;
 
             if (value)
             {
                 ChangeMaterial(foodSettings.poopedMaterial);
+                foodSpoiled.Spoiled = true;
             }
             CallFoodTrackingEvents();
         }
@@ -104,10 +106,10 @@ public class FoodItem : MonoBehaviour
         }
         set
         {
-            if(onPlate == value)
-			{
+            if (onPlate == value)
+            {
                 return;
-			}
+            }
             onPlate = value;
             CallFoodTrackingEvents();
         }
@@ -121,10 +123,10 @@ public class FoodItem : MonoBehaviour
         }
         set
         {
-            if(inPackage = value)
-			{
+            if (inPackage = value)
+            {
                 return;
-			}
+            }
             inPackage = value;
             CallFoodTrackingEvents();
         }
@@ -137,10 +139,10 @@ public class FoodItem : MonoBehaviour
         }
         set
         {
-            if(inHand == value)
-			{
+            if (inHand == value)
+            {
                 return;
-			}
+            }
             inHand = value;
             CallFoodTrackingEvents();
         }
@@ -157,16 +159,16 @@ public class FoodItem : MonoBehaviour
         }
     }
     public bool Stolen
-	{
+    {
         get
-		{
+        {
             return stolen;
-		}
+        }
         set
-		{
+        {
             stolen = value;
         }
-	}
+    }
     public bool Buttered
     {
         get
@@ -254,7 +256,7 @@ public class FoodItem : MonoBehaviour
         // check if we are picked up or not
         InHand = interactable.attachedToHand;
 
-        if(inHand && rb.isKinematic)
+        if (inHand && rb.isKinematic)
         {
             KinematicToggle(false);
             InPackage = false;
@@ -270,12 +272,34 @@ public class FoodItem : MonoBehaviour
         goneBadParticles.SetActive(true);
     }
 
-    public void Init(string name, bool poopOnFood)
+    public void Init(string name)
     {
         gameObject.name = name;
-        PoopOnFood = poopOnFood;
         rb = GetComponent<Rigidbody>();
+        foodSpoiled = GetComponent<FoodSpoiledHandler>();
+    }
+
+    public void ResetFood()
+    {
         KinematicToggle(true);
+
+        foodAbove = FoodTypes.None;
+        foodAboveAbove = FoodTypes.None;
+        foodBelow = FoodTypes.None;
+        foodBelowBelow = FoodTypes.None;
+
+        isSpoiled = false;
+        poopOnFood = false;
+
+        onPlate = false;
+
+        inPackage = false;
+        inHand = false;
+        moving = false;
+        stolen = false;
+        buttered = false;
+
+        Reset?.Invoke(this);
     }
 
     public void KinematicToggle(bool isKinematic)

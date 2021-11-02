@@ -13,6 +13,19 @@ public class FoodSpoiledHandler : MonoBehaviour
 
 	private bool spoiled;
 
+	public bool Spoiled
+    {
+        get
+        {
+			return spoiled;
+        }
+        set
+        {
+			spoiled = value;
+			timer = 0;
+        }
+    }
+
 	private void Start()
 	{
 		if (GameManager.Settings.AlwaysFreshFood)

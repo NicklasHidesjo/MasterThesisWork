@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class FoodPackage : MonoBehaviour
 {
-	// make sure that we can't add a sallad to the ham package for instance.
-
-
+	/// <todo>
+	/// object pool for food items
+	/// </summary>
 	[Header("Food Settings")]
 	// the item that we will spawn as food
 	[SerializeField] private FoodItem foodItem;
@@ -16,12 +16,14 @@ public class FoodPackage : MonoBehaviour
 	[SerializeField] private string foodName;
 	// the position that we want to spawn the food on.
 	[SerializeField] private Transform spawnPosition;
+	[SerializeField] private int foodPoolSize = 10;
 
 	[Header("Poop")]
 	// the poop that is on the object
 	[SerializeField] private GameObject poop;
 	[SerializeField] AudioClip poopOnFoodSound;
 
+	private List<FoodItem> foodItemPool = new List<FoodItem>();
 	// a list of all the food in the container
 	private List<FoodItem> foodInPackage = new List<FoodItem>();
 
@@ -38,7 +40,7 @@ public class FoodPackage : MonoBehaviour
 		}
 		set
 		{
-			// set wether shitInPackage should be true or false.
+			// set whether shitInPackage should be true or false.
 			shitInPackage = value;
 			// toggles the display of shit on package on/off
 			poop.SetActive(value);
@@ -61,19 +63,53 @@ public class FoodPackage : MonoBehaviour
 		// make sure that we spawn a food item in the begining (no empty packages)
 		SpawnFoodItem();
 		SetShitInPackage();
+
+		FoodItem tmp;
+        for (int i = 0; i < foodPoolSize; i++)
+        {
+			tmp = Instantiate(foodItem);
+			tmp.gameObject.SetActive(false);
+			tmp.Init(foodName);
+			foodItemPool.Add(tmp);
+        }
 	}
 
 	private void SpawnFoodItem()
-	{
-		// create a new FoodItem and save it as a local variable.
-		FoodItem newFoodItem = Instantiate(foodItem, spawnPosition.position, foodItem.transform.rotation);
+    {
+		FoodItem newFoodItem = GetFoodFromPool();
 
-		newFoodItem.Init(foodName, shitInPackage);
+        if (newFoodItem == null)
+        {
+			newFoodItem = Instantiate(foodItem);
+			newFoodItem.Init(foodName);
+			foodItemPool.Add(newFoodItem);
+        }
 
-		// add the newly created item to our foodInPackage list.
-		AddFoodToContainer(newFoodItem);
-	}
-	private void SetShitInPackage()
+		newFoodItem.transform.position = spawnPosition.position;
+		newFoodItem.transform.rotation = foodItem.transform.rotation;
+
+		newFoodItem.ResetFood();
+
+		newFoodItem.PoopOnFood = shitInPackage;
+
+        // add the newly created item to our foodInPackage list.
+        AddFoodToContainer(newFoodItem);
+    }
+
+    private FoodItem GetFoodFromPool()
+    {
+        foreach (var item in foodItemPool)
+        {
+            if (item.gameObject.activeSelf)
+            {
+                continue;
+            }
+			return item;
+        }
+		return null;
+    }
+
+    private void SetShitInPackage()
 	{
 		// reduce the number of food with poop on it, in the package (as we have spawned one)
 		poopedFoods--;
