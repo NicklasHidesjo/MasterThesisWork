@@ -133,6 +133,8 @@ public class FoodPackage : MonoBehaviour
 		}
 	}
 	
+	// this will be removed probably (as we won't be able to add things to package anymore.
+	// will be changed at the least.
 	private void AddFoodToContainer(FoodItem food)
 	{
 		// let the food being added know that it's in the package

@@ -10,11 +10,6 @@ public class Poop : MonoBehaviour
         {
             collision.gameObject.GetComponentInParent<FoodPackage>().ShitInPackage = true;
         }
-/*        else if (collision.gameObject.CompareTag("Food"))
-        {
-            collision.gameObject.GetComponent<FoodItem>().PoopOnFood = true;
-        }*/
-
         Destroy(gameObject);
     }
 }

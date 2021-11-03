@@ -299,6 +299,8 @@ public class FoodItem : MonoBehaviour
         stolen = false;
         buttered = false;
 
+        // make sure we remove us from the tracking list of food.
+
         Reset?.Invoke(this);
     }
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FoodLayerTracker : MonoBehaviour
 {
-    [Header("")]
     // the distance that a ray gets cast to see what is above and below it.
     [SerializeField] private float rayDistance;
 
