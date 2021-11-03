@@ -5,7 +5,6 @@ using UnityEngine;
 public class StereoPosition : MonoBehaviour
 {
 	[SerializeField] BackgroundMusicPlayer bgPlayer;
-
 	void Start()
 	{
 		BackgroundMusicPlayer player = FindObjectOfType<BackgroundMusicPlayer>();
@@ -16,6 +15,7 @@ public class StereoPosition : MonoBehaviour
 		}
 
 		player.transform.position = transform.position;
+		player.transform.rotation = transform.rotation;
 	}
 
 	void Update()
