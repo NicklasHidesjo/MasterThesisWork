@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class KnifeVelocity : MonoBehaviour
 {
-    private float velocity;
-    public float Velocity
-    {
-        get 
+	private float velocity;
+	public float Velocity
+	{
+		get 
 		{ 
 			return velocity; 
 		}
-    }
+	}
 
-    private Vector3 previousPos;
+	private Vector3 previousPos;
 
-    private void Start()
+	private void Start()
 	{
 		InitiatePreviousPos();
 	}
@@ -27,7 +27,7 @@ public class KnifeVelocity : MonoBehaviour
 		SetPreviousPos(currentPos);
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		SetBladeVelocity();
 	}

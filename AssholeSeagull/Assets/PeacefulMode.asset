@@ -15,7 +15,7 @@ MonoBehaviour:
   GameMode: 2
   GameDuration: 60
   TimerOff: 1
-  AlwaysFreshFood: 1
+  AlwaysFreshFood: 0
   SeagullsDontAttack: 1
   SeagullAmount: 1
   SeagullSpawnInterval: {x: 3, y: 7}

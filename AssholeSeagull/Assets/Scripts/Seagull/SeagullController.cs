@@ -11,7 +11,7 @@ public class SeagullController : MonoBehaviour
 	
 	// this will be in a SeagullSoundManager script 
 	[Header("Sounds")]
-	[SerializeField] private AudioClip poopingSound; // move this to pooping script
+	[SerializeField] private AudioClip poopingSound;
     [SerializeField] private AudioClip seagullSound;
 	[SerializeField] private AudioClip scaredSound;
 
@@ -95,17 +95,17 @@ public class SeagullController : MonoBehaviour
 		grabbyFeet = GetComponentInChildren<GrabbyFeet>();
     }
 
-    public void ResetBird()
+    private void ResetBird()
     {
 		isScared = false;
         speed = 10f;
 
 		if(pickedUp != null)
 		{
-			foodTarget = null;		
-			Destroy(pickedUp.gameObject);
-			pickedUp = null;
+			foodTarget = null;
 
+			pickedUp.DeactivateFood();
+			pickedUp = null;
 
 			//grabbyFeet.SetFoodRB(null);
 		}
@@ -128,6 +128,7 @@ public class SeagullController : MonoBehaviour
 
     public void Deactivate()
     {
+		ResetBird();
         gameObject.SetActive(false);
     }
 
@@ -141,12 +142,12 @@ public class SeagullController : MonoBehaviour
 
 	public void Accelerate()
     {
-        speed += acceleration * Time.deltaTime;
+        speed += acceleration * Time.fixedDeltaTime;
     }
 
     public void Deaccelerate()
     {
-        speed -= deacceleration * Time.deltaTime;
+        speed -= deacceleration * Time.fixedDeltaTime;
 		speed = Mathf.Clamp(speed, minSpeed, Mathf.Infinity);
     }
 

@@ -760,6 +760,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tomato_Package_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 1612563424241714729, guid: 1a7c909772e16ee42b35519e5d77dd4a, type: 3}
+      propertyPath: foodPoolSize
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8764685836967152976, guid: 1a7c909772e16ee42b35519e5d77dd4a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -895,14 +899,6 @@ PrefabInstance:
     - target: {fileID: 402768, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.139
-      objectReference: {fileID: 0}
-    - target: {fileID: 429506, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 429506, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 447954, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_RootOrder
@@ -5070,6 +5066,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cheese_Package_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 4532691177100937945, guid: 24ad4b0460c7bc64e9176b3f39567548, type: 3}
+      propertyPath: foodPoolSize
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24ad4b0460c7bc64e9176b3f39567548, type: 3}
 --- !u!1001 &1440771705
@@ -7168,6 +7168,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2130449152}
     m_Modifications:
+    - target: {fileID: 937725396493250931, guid: 5396055d14d567f42b3e0cb7d4d060af, type: 3}
+      propertyPath: foodPoolSize
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7685560494329656661, guid: 5396055d14d567f42b3e0cb7d4d060af, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7238,6 +7242,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2130449152}
     m_Modifications:
+    - target: {fileID: 209885762938620276, guid: 45a5d645c6f0724418a5fb239daa3304, type: 3}
+      propertyPath: foodPoolSize
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 449612829098779334, guid: 45a5d645c6f0724418a5fb239daa3304, type: 3}
       propertyPath: m_Name
       value: Salad_Package_Prefab
@@ -7382,6 +7390,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2130449152}
     m_Modifications:
+    - target: {fileID: 7458946257328173859, guid: 5f2cb840a7365ba48b73b4fd588d563a, type: 3}
+      propertyPath: foodPoolSize
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7458946258255764021, guid: 5f2cb840a7365ba48b73b4fd588d563a, type: 3}
       propertyPath: m_Name
       value: Ham_Package_Prefab

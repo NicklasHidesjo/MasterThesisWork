@@ -76,7 +76,6 @@ public class SeagullManager : MonoBehaviour
         seagull.FlightEnd = endPoint.position;
 		seagull.FoodPackage = foodPackage.position;
 		seagull.transform.position = spawnPoint.position;
-		seagull.ResetBird();
 
 		seagull.gameObject.SetActive(true);
 		seagull.GetComponent<StateMachine>().ChangeState(States.Idle);

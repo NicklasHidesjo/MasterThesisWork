@@ -14,13 +14,24 @@ public class Butter : MonoBehaviour
 	[SerializeField] private GameObject[] butterObjects;
 
 	private KnifeVelocity knife;
+	private bool buttered;
 
-	private void Update()
+	private void OnEnable()
 	{
+		FoodItem.Reset += Reset;
+	}
+
+	private void FixedUpdate()
+	{
+		if(!buttered)
+		{
+			return;
+		}
 		if (knife == null) 
 		{ 
 			return; 
 		}
+		
 
 		// increase the amount that is buttered.
 		butteredPercentage += knife.Velocity;
@@ -55,18 +66,54 @@ public class Butter : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		// do i need this null check? (seeing as i check for null in update)
-		if(other.gameObject.GetComponent<ButteredBladeController>())
+		if (other.CompareTag("KnifeBlade"))
 		{
+			// Get the blade that is colliding.
+			ButteredBladeController blade = other.GetComponent<ButteredBladeController>();
+
+			// make sure its not null
+			if (blade == null)
+			{ return; }
+
+			// check if we have butter on the blade
+			if (blade.ButterOnBlade)
+			{
+				// remove the butter on the blade,
+				// to ensure you need to get new butter for next sandwich
+				blade.ButterOnBlade = false;
+
+				// activate the butter on the sandwich
+				ActivateButter();
+			}
+
 			knife = other.GetComponentInChildren<KnifeVelocity>();
 		}
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		if(other.gameObject.GetComponent<ButteredBladeController>())
+		if(other.CompareTag("KnifeBlade"))
 		{
 			knife = null;
 		}
+	}
+
+	private void ActivateButter()
+	{
+		// get the FoodItem component to toogle Buttered to true.
+		GetComponentInParent<FoodItem>().Buttered = true;
+		buttered = true;
+	}
+
+	private void Reset(FoodItem food)
+	{
+		buttered = false;
+		butteredPercentage = 0;
+		DeactivateAll();
+	}
+
+	private void OnDisable()
+	{
+		FoodItem.Reset -= Reset;
 	}
 }

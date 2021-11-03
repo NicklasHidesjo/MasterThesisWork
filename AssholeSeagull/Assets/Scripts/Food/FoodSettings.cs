@@ -10,6 +10,7 @@ public class FoodSettings : ScriptableObject
     public FoodTypes worstBelow;
 
     [Header("Materials")]
+    public Material normalMaterial;
     public Material spoiledMaterial;
     public Material poopedMaterial;
 
@@ -17,8 +18,8 @@ public class FoodSettings : ScriptableObject
     [Header("Spoil settings")]
     [Tooltip("The time before the FoodItem spoils")]
     public float spoilTime;
-    [Tooltip("The time before the object will be destroyed needs to be more then spoilTime (they use the same timer)")]
-    public float selfDestructTime;
+    [Tooltip("The time before the object will be deactivated after getting spoiled")]
+    public float DeactivateTime;
     [Tooltip("The threshold for when the object is considered moving & won't spoil")]
     public float velocityThreshold = 0.1f;
 

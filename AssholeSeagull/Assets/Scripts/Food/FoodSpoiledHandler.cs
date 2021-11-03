@@ -26,6 +26,12 @@ public class FoodSpoiledHandler : MonoBehaviour
         }
     }
 
+
+	private void OnEnable()
+	{
+		FoodItem.Reset += Reset;
+	}
+
 	private void Start()
 	{
 		if (GameManager.Settings.AlwaysFreshFood)
@@ -63,21 +69,19 @@ public class FoodSpoiledHandler : MonoBehaviour
 		
 		if (spoiled)
         {
-            DestroyFood();
+            DeactivateFood();
         }
         else if(timer > foodSettings.spoilTime)
         {
             SpoilFood();
         }
     }
-    private void DestroyFood()
+    private void DeactivateFood()
     {
         // check if our timer is larger then our selfDestructTime and that we are also not on the plate
-        if (timer > foodSettings.selfDestructTime)
+        if (timer > foodSettings.DeactivateTime)
         {
-            // destroy the foodItem
-            // (this will be changed to deactivate as we will have a object pool on foodPackage)
-            Destroy(gameObject);
+			food.DeactivateFood();
         }
     }
 
@@ -99,5 +103,18 @@ public class FoodSpoiledHandler : MonoBehaviour
 	{
 		// return true if our rigidbody's(body) velocity is larger then our velocityThreshold.
 		return body.velocity.sqrMagnitude > foodSettings.velocityThreshold;
+	}
+
+	private void Reset(FoodItem food)
+	{
+		if(this.food == food)
+		{
+			Spoiled = false;
+		}
+	}
+
+	private void OnDisable()
+	{
+		FoodItem.Reset -= Reset;
 	}
 }

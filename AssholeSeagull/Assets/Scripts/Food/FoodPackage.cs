@@ -85,11 +85,13 @@ public class FoodPackage : MonoBehaviour
 			foodItemPool.Add(newFoodItem);
         }
 
+		
 		newFoodItem.transform.position = spawnPosition.position;
 		newFoodItem.transform.rotation = foodItem.transform.rotation;
 
-		newFoodItem.ResetFood();
-
+		newFoodItem.KinematicToggle(true);
+		newFoodItem.gameObject.SetActive(true);
+		
 		newFoodItem.PoopOnFood = shitInPackage;
 
         // add the newly created item to our foodInPackage list.
