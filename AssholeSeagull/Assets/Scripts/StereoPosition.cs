@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class StereoPosition : MonoBehaviour
 {
+	[SerializeField] BackgroundMusicPlayer bgPlayer;
+
 	void Start()
 	{
-		FindObjectOfType<BackgroundMusicPlayer>().transform.position = transform.position;
+		BackgroundMusicPlayer player = FindObjectOfType<BackgroundMusicPlayer>();
+
+		if(player == null)
+		{
+			player = Instantiate(bgPlayer);
+		}
+
+		player.transform.position = transform.position;
 	}
 
 	void Update()
