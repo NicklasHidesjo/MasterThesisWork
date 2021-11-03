@@ -24,6 +24,7 @@ public class FlyToPoop : IState
         seagullController.MoveBird();
         seagullController.Deaccelerate();
 
+        // change to events?
         if(seagullController.IsScared)
         {
             stateMachine.ChangeState(States.Flee);

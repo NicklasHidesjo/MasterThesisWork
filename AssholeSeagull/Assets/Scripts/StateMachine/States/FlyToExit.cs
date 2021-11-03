@@ -24,6 +24,7 @@ public class FlyToExit : IState
         seagullController.MoveBird();
         seagullController.Accelerate();
 
+        // change to event?
         if (seagullController.ArrivedAtTarget())
         {
             seagullController.Deactivate();

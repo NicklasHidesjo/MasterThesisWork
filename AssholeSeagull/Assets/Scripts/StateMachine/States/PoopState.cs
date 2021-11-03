@@ -20,6 +20,7 @@ public class PoopState : IState
 
     public void Execute()
     {
+        // have event instead?
         if (seagullController.IsInAnimation("Pooping"))
         {
             return;

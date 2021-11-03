@@ -15,7 +15,6 @@ public class StealFood : IState
 
     public void Enter()
     {
-
         // maybe have noisy irritating stealing food in your face sound.
 
         seagullController.PickUpFood();

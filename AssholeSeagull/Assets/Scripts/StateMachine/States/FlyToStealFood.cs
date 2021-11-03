@@ -31,6 +31,8 @@ public class FlyToStealFood : IState
         seagullController.MoveBird();
         seagullController.Deaccelerate();
 
+
+        // make this to events?
         if (seagullController.IsScared)
         {
             stateMachine.ChangeState(States.Flee);
