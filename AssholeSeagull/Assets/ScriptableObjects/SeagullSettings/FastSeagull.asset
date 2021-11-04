@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9bd4db464ac7c4bb20ee2d0fddb315, type: 3}
   m_Name: FastSeagull
   m_EditorClassIdentifier: 
-  speed: 10
-  endSpeed: 5
-  acceleration: 0.5
-  deacceleration: 0.5
+  speed: 15
+  endSpeed: 15
+  acceleration: 5
+  deacceleration: 0
   minSpeed: 1

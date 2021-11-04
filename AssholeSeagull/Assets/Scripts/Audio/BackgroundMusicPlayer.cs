@@ -5,6 +5,8 @@ using UnityEngine;
 public class BackgroundMusicPlayer : MonoBehaviour
 {
     [SerializeField] private AudioClip[] tracks;
+    [SerializeField] private int shuffleAmount = 10;
+
     private AudioSource audioSource;
 
     private int trackIndex = 0;
@@ -12,8 +14,24 @@ public class BackgroundMusicPlayer : MonoBehaviour
     private void Awake()
 	{
 		CheckForOtherPlayers();
+        ShuffleTracks();
+        // swap places between the two tracks
 	}
-	private void CheckForOtherPlayers()
+
+    private void ShuffleTracks()
+    {
+        for (int i = 0; i < shuffleAmount; i++)
+        {
+            int index = Random.Range(0, tracks.Length);
+            int newIndex = Random.Range(0, tracks.Length);
+
+            AudioClip tmp = tracks[newIndex];
+            tracks[newIndex] = tracks[index];
+            tracks[index] = tmp;
+        }
+    }
+
+    private void CheckForOtherPlayers()
 	{
 		// gets all the BackgroundMusicPlayers in the current scene.
 		BackgroundMusicPlayer[] backgroundMusicPlayers = FindObjectsOfType<BackgroundMusicPlayer>();
@@ -58,9 +76,7 @@ public class BackgroundMusicPlayer : MonoBehaviour
     {
         // plays the next track in our list of tracks
         PlayNextTrack();
-
         IncreaseAudioIndex();
-
     }
 
     private void PlayNextTrack()

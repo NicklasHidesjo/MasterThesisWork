@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "Seagull settings")]
+[CreateAssetMenu (menuName = "ScriptableObjects/Seagull Settings")]
 public class SeagullSettings : ScriptableObject
 {
     public float speed = 10f;

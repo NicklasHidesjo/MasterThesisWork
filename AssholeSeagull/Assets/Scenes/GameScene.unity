@@ -4081,6 +4081,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 217293504}
     - target: {fileID: 1518335571043901340, guid: 96a155e26252f754689853dcd00e210e, type: 3}
+      propertyPath: seagullSettings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518335571043901340, guid: 96a155e26252f754689853dcd00e210e, type: 3}
+      propertyPath: seagullSettings.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: af414a909a68eb1429f0b316e62327d3, type: 2}
+    - target: {fileID: 1518335571043901340, guid: 96a155e26252f754689853dcd00e210e, type: 3}
+      propertyPath: seagullSettings.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 86a70b5dcf4affa46af4cc40186cf725, type: 2}
+    - target: {fileID: 1518335571043901340, guid: 96a155e26252f754689853dcd00e210e, type: 3}
       propertyPath: endFlightTransforms.Array.size
       value: 3
       objectReference: {fileID: 0}

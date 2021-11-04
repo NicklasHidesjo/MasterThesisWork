@@ -9,3 +9,20 @@ public enum States
     FlyToExit,
     Flee
 }
+
+public enum GameModes
+{
+    normal,
+    sandbox,
+    peaceful,
+    chaos
+}
+
+public enum GameStatus
+{
+    none,
+    menu,
+    pause,
+    ingame,
+    gameover
+}

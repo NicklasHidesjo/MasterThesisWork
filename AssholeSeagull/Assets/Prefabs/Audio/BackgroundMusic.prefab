@@ -155,7 +155,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c1687ea185a4320438b2e80ea5fd7b0c, type: 3}
   - {fileID: 8300000, guid: bc6ff2ef2a1eb764885acd2194a187c5, type: 3}
   - {fileID: 8300000, guid: 54ee46b341a0b0847a84a1ef28ccf9d1, type: 3}
-  - {fileID: 0}
+  shuffleAmount: 20
 --- !u!65 &8160548920826077256
 BoxCollider:
   m_ObjectHideFlags: 0

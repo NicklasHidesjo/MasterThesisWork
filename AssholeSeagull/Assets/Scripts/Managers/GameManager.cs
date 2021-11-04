@@ -5,15 +5,6 @@ using UnityEngine;
 /// make scripts get & set currentGameStatus
 /// </summary>
 
-public enum GameStatus
-{
-	none,
-	menu,
-	pause,
-	ingame,
-	gameover
-}
-
 public static class GameManager
 {
 	private static GameStatus currentGameStatus = GameStatus.none;
