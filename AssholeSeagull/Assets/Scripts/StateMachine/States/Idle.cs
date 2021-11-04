@@ -6,15 +6,17 @@ public class Idle : IState
 {
     private SeagullController seagullController;
     private StateMachine stateMachine;
+    private SeagullAudio seagullAudio;
 
     public Idle (SeagullController seagullController, StateMachine stateMachine)
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
+        seagullAudio = seagullController.SeagullAudio;
     }
     public void Enter()
     {
-        seagullController.PlaySpawnSound();
+        seagullAudio.PlaySpawnSound();
         
         int random = Random.Range(0, 2);
 

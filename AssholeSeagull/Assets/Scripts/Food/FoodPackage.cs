@@ -21,11 +21,12 @@ public class FoodPackage : MonoBehaviour
 	[Header("Poop")]
 	// the poop that is on the object
 	[SerializeField] private GameObject poop;
-	[SerializeField] AudioClip poopOnFoodSound;
 
 	private List<FoodItem> foodItemPool = new List<FoodItem>();
 	// a list of all the food in the container
 	private List<FoodItem> foodInPackage = new List<FoodItem>();
+
+	private AudioSource audioSource;
 
 	// the amount of food items that will be spoiled when spawning 
 	private int poopedFoods = 0;
@@ -53,28 +54,35 @@ public class FoodPackage : MonoBehaviour
 				// smear poop on any food that is spawned lying in the package.
 				SmearPoopInPackage();
 
-				FindObjectOfType<AudioPlayer>().SeagullFx(poopOnFoodSound);
+				audioSource.Play();
 			}
 		}
 	}
 	
 	private void Start()
-	{
-		// make sure that we spawn a food item in the begining (no empty packages)
-		SpawnFoodItem();
-		SetShitInPackage();
+    {
+        // make sure that we spawn a food item in the begining (no empty packages)
+        SpawnFoodItem();
+        SetShitInPackage();
 
-		FoodItem tmp;
+        CreateItemPool();
+
+		audioSource = GetComponent<AudioSource>();
+    }
+
+    private void CreateItemPool()
+    {
+        FoodItem tmp;
         for (int i = 0; i < foodPoolSize; i++)
         {
-			tmp = Instantiate(foodItem);
-			tmp.gameObject.SetActive(false);
-			tmp.Init(foodName);
-			foodItemPool.Add(tmp);
+            tmp = Instantiate(foodItem);
+            tmp.gameObject.SetActive(false);
+            tmp.Init(foodName);
+            foodItemPool.Add(tmp);
         }
-	}
+    }
 
-	private void SpawnFoodItem()
+    private void SpawnFoodItem()
     {
 		FoodItem newFoodItem = GetFoodFromPool();
 
@@ -111,7 +119,7 @@ public class FoodPackage : MonoBehaviour
 		return null;
     }
 
-    private void SetShitInPackage()
+    private void SetShitInPackage() //rename
 	{
 		// reduce the number of food with poop on it, in the package (as we have spawned one)
 		poopedFoods--;
@@ -127,7 +135,7 @@ public class FoodPackage : MonoBehaviour
 
 	private void SmearPoopInPackage()
 	{
-		// go trough all the fooditems that lies in the package.
+		// go through all the fooditems that lie in the package.
 		foreach (var food in foodInPackage)
 		{
 			// let the food know that it has poop on it and should behave as such

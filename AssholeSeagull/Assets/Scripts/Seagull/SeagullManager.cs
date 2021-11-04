@@ -7,6 +7,7 @@ public class SeagullManager : MonoBehaviour
 	[SerializeField] private List<Transform> foodPackages = new List<Transform>();
 	[SerializeField] private List<Transform> endFlightTransforms = new List<Transform>();
 	[SerializeField] private List<Transform> startFlightTransforms = new List<Transform>();
+	[SerializeField] private List<SeagullSettings> seagullSettings = new List<SeagullSettings>();
 
 	[SerializeField] SeagullController seagullPrefab;
 
@@ -71,6 +72,10 @@ public class SeagullManager : MonoBehaviour
         Transform spawnPoint = GetTransformFromList(startFlightTransforms);
         Transform endPoint = GetTransformFromList(endFlightTransforms);
 		Transform foodPackage = GetTransformFromList(foodPackages);
+
+		int random = Random.Range(0, seagullSettings.Count);
+		SeagullSettings seagullSetting = seagullSettings[random];
+		seagull.SeagullSettings = seagullSetting;
 
 		seagull.FoodTarget = foodTracker.GetRandomTarget();
         seagull.FlightEnd = endPoint.position;

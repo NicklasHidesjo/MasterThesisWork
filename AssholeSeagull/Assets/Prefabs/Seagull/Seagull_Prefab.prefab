@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: 2974699690583459776}
   - component: {fileID: 8964828962561856375}
   - component: {fileID: 3272717194131652221}
+  - component: {fileID: 3198040061081702889}
   - component: {fileID: 485213392026276167}
   - component: {fileID: 1986341339}
   - component: {fileID: 4296194220242073953}
@@ -527,6 +528,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poopPrefab: {fileID: 4467274387238071332, guid: 691e3f3ec5c030d4b9ebe76376bd84c1, type: 3}
   spawnPosition: {fileID: 6982129938083659594}
+--- !u!114 &3198040061081702889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469906486034026684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ab273a06e6cb74ea4a76bd7f0219ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnSound: {fileID: 8300000, guid: 5c8e241b8b7b3d54ab3108164d72fa83, type: 3}
+  poopingSound: {fileID: 8300000, guid: 779b566bc017e10478bf471723d82484, type: 3}
+  scaredSound: {fileID: 8300000, guid: 8b04cd2ff6ee8f74b853bfbc767818a9, type: 3}
 --- !u!114 &485213392026276167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,9 +555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44049e3d9eb02444f94cf8da44deaacc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poopingSound: {fileID: 8300000, guid: 779b566bc017e10478bf471723d82484, type: 3}
-  seagullSound: {fileID: 8300000, guid: 5c8e241b8b7b3d54ab3108164d72fa83, type: 3}
-  scaredSound: {fileID: 8300000, guid: 8b04cd2ff6ee8f74b853bfbc767818a9, type: 3}
   speed: 10
   endSpeed: 5
   acceleration: 0.5
@@ -585,7 +598,7 @@ AudioSource:
   m_GameObject: {fileID: 3469906486034026684}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4444729236107594400, guid: 6158b3ebae3249a4f9ba2902817bd751, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -597,9 +610,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 100
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -632,7 +645,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

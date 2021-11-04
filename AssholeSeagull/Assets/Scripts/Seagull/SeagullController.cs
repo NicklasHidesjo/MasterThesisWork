@@ -6,26 +6,12 @@ using UnityEngine;
 public class SeagullController : MonoBehaviour
 {
 	// this script will be rewriten using animation events
-	// Make audio manager
 	// this script might be split into several smaller ones.
-	
-	// this will be in a SeagullSoundManager script 
-	[Header("Sounds")]
-	[SerializeField] private AudioClip poopingSound;
-    [SerializeField] private AudioClip seagullSound;
-	[SerializeField] private AudioClip scaredSound;
 
-	// settings as these will be in a scriptable object (to be able to create different Seagulls with different speeds and such)
-	[Header("Speed settings")]
-	[SerializeField] private float speed = 10f;
-	[SerializeField] private float endSpeed = 5f;
-	[SerializeField] private float acceleration = 0.5f;
-	[SerializeField] private float deacceleration = 0.5f;
-	[SerializeField] private float minSpeed = 1f;
-
-	private AudioSource audioSource;
 	private Animator animator;
-	private GrabbyFeet grabbyFeet; 
+	private GrabbyFeet grabbyFeet;
+	private SeagullAudio seagullAudio;
+	private SeagullSettings seagullSettings;
 
 	private Vector3 targetPosition;
 	
@@ -36,7 +22,32 @@ public class SeagullController : MonoBehaviour
 	private FoodItem foodTarget;
 
 	private FoodItem pickedUp;
+
+	public SeagullSettings SeagullSettings
+    {
+		get
+        {
+			return seagullSettings;
+        }
+
+		set
+        {
+			seagullSettings = value;
+        }
+    }
 		
+	public SeagullAudio SeagullAudio
+    {
+        get
+        {
+            if (seagullAudio == null)
+            {
+				seagullAudio = GetComponent<SeagullAudio>();
+            }
+			return seagullAudio;
+        }
+    }
+
 	public bool IsScared
     {
 		get 
@@ -47,7 +58,7 @@ public class SeagullController : MonoBehaviour
 		{ 
 			if(value)
             {
-				PlayScaredSound();
+				seagullAudio.PlayScaredSound();
 			}
 			isScared = value; 
 		}
@@ -89,16 +100,15 @@ public class SeagullController : MonoBehaviour
 
 	public void Init()
     {
-        // gets our audioSource.
-        audioSource = GetComponent<AudioSource>();
 		animator = GetComponent<Animator>();
 		grabbyFeet = GetComponentInChildren<GrabbyFeet>();
+		seagullAudio = GetComponent<SeagullAudio>();
     }
 
     private void ResetBird()
     {
 		isScared = false;
-        speed = 10f;
+        seagullSettings.speed = 10f;
 
 		if(pickedUp != null)
 		{
@@ -113,7 +123,7 @@ public class SeagullController : MonoBehaviour
 
     public void MoveBird()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, seagullSettings.speed * Time.deltaTime);
     }
 
 	public bool ArrivedAtTarget()
@@ -142,13 +152,13 @@ public class SeagullController : MonoBehaviour
 
 	public void Accelerate()
     {
-        speed += acceleration * Time.fixedDeltaTime;
+        seagullSettings.speed += seagullSettings.acceleration * Time.fixedDeltaTime;
     }
 
     public void Deaccelerate()
     {
-        speed -= deacceleration * Time.fixedDeltaTime;
-		speed = Mathf.Clamp(speed, minSpeed, Mathf.Infinity);
+        seagullSettings.speed -= seagullSettings.deacceleration * Time.fixedDeltaTime;
+		seagullSettings.speed = Mathf.Clamp(seagullSettings.speed, seagullSettings.minSpeed, Mathf.Infinity);
     }
 
 	public void LookAt()
@@ -158,7 +168,7 @@ public class SeagullController : MonoBehaviour
 
     public void SetSpeed()
     {
-        speed = endSpeed;
+		seagullSettings.speed = seagullSettings.endSpeed;
     }
 
 	public void SetExitPos()
@@ -178,18 +188,6 @@ public class SeagullController : MonoBehaviour
 		//position.y += transform.localScale.y / 2;
 		targetPosition = position;
 	}
-
-    private void PlayScaredSound()
-    {
-        audioSource.clip = scaredSound;
-        audioSource.Play();
-    }
-
-    public void PlaySpawnSound()
-    {
-		audioSource.clip = seagullSound;
-		audioSource.Play();
-    }
 
 	public void PickUpFood()
 	{
