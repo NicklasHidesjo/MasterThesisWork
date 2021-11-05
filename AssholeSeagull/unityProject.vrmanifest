@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.assholeseagull.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\mk\\OneDrive\\Documents\\GitHub\\AssholeSeagull\\AssholeSeagull\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\nickl\\Desktop\\School\\MasterThesisWork\\AssholeSeagull\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "AssholeSeagull [Testing]"
