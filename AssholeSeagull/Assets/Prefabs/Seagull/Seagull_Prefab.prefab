@@ -555,11 +555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44049e3d9eb02444f94cf8da44deaacc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  endSpeed: 5
-  acceleration: 0.5
-  deacceleration: 0.5
-  minSpeed: 1
 --- !u!54 &1986341339
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -587,8 +582,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.32, z: 0}
+  m_Size: {x: 0.30205536, y: 0.25756785, z: 0.33983696}
+  m_Center: {x: -0.024690479, y: 0.22181661, z: 0.024199873}
 --- !u!82 &5809345912200773337
 AudioSource:
   m_ObjectHideFlags: 0

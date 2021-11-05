@@ -7,6 +7,13 @@ public class FlyToPoop : IState
     private SeagullController seagullController;
     private StateMachine stateMachine;
 
+    Transform transform;
+    Vector3 target;
+
+    float minSpeed;
+    float speed;
+    float deacceleration;
+
     public FlyToPoop (SeagullController seagullController, StateMachine stateMachine)
     {
         this.seagullController = seagullController;
@@ -15,29 +22,56 @@ public class FlyToPoop : IState
 
     public void Enter()
     {
-        seagullController.SetPackagePos();
-        seagullController.LookAt();
+        SeagullController.Scared += Scared;
+
+        transform = seagullController.transform;
+
+        minSpeed = seagullController.SeagullSettings.minSpeed;
+        speed = seagullController.SeagullSettings.speed;
+        deacceleration = seagullController.SeagullSettings.deacceleration;
+
+        Vector3 foodPackage = seagullController.FoodPackage;
+        Vector3 packagePos = new Vector3(foodPackage.x, transform.position.y, foodPackage.z);
+        target = packagePos;
+
+        transform.LookAt(target);
     }
 
     public void Execute()
     {
-        seagullController.MoveBird();
-        seagullController.Deaccelerate();
+        MoveBird();
+        Deaccelerate();
 
-        // change to events?
-        if(seagullController.IsScared)
-        {
-            stateMachine.ChangeState(States.Flee);
-        }
-
-        if (seagullController.ArrivedAtTarget())
+        if (ArrivedAtTarget())
         {
             stateMachine.ChangeState(States.PoopState);
         }
     }
 
+    public void MoveBird()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.fixedDeltaTime);
+    }
+
+    public void Deaccelerate()
+    {
+        speed -= deacceleration * Time.fixedDeltaTime;
+        speed = Mathf.Clamp(speed, minSpeed, Mathf.Infinity);
+    }
+
+    public bool ArrivedAtTarget()
+    {
+        return transform.position == target;
+    }
+
+    private void Scared()
+    {
+        stateMachine.ChangeState(States.Flee);
+    }
+
+
     public void Exit()
     {
-        seagullController.SetSpeed();
+        SeagullController.Scared -= Scared;
     }
 }

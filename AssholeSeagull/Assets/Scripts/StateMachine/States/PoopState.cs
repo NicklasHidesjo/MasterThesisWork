@@ -7,21 +7,27 @@ public class PoopState : IState
     private SeagullController seagullController;
     private StateMachine stateMachine;
 
+    private Animator animator;
+
     public PoopState(SeagullController seagullController, StateMachine stateMachine)
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
+        animator = seagullController.GetComponent<Animator>();
     }
 
     public void Enter()
     {
-        seagullController.SetAnimation("Poop");
+        animator.ResetTrigger("Poop");
+        animator.ResetTrigger("FlyAway");
+
+        animator.SetTrigger("Poop");
     }
 
     public void Execute()
     {
         // have event instead?
-        if (seagullController.IsInAnimation("Pooping"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Pooping"))
         {
             return;
         }

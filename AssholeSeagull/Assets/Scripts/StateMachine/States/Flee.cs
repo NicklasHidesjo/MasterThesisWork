@@ -12,12 +12,12 @@ public class Flee : IState
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
-        seagullAudio = seagullController.SeagullAudio;
+        seagullAudio = seagullController.GetComponent<SeagullAudio>();
     }
 
     public void Enter()
     {
-        seagullAudio.PlaySpawnSound();
+        seagullAudio.PlayScaredSound();
         // Scared seagull animation
         stateMachine.ChangeState(States.FlyToExit); // Move to execute once we have scared ani
     }

@@ -7,6 +7,7 @@ public class StealFood : IState
     private SeagullController seagullController;
     private StateMachine stateMachine;
 
+
     public StealFood(SeagullController seagullController, StateMachine stateMachine)
     {
         this.seagullController = seagullController;
@@ -17,7 +18,13 @@ public class StealFood : IState
     {
         // maybe have noisy irritating stealing food in your face sound.
 
-        seagullController.PickUpFood();
+         FoodItem foodTarget = seagullController.FoodTarget;
+
+        foodTarget.transform.parent = seagullController.transform;
+        foodTarget.Stolen = true;
+        foodTarget.GetComponent<Rigidbody>().isKinematic = true;
+        //grabbyFeet.SetFoodRB(foodTarget.GetComponent<Rigidbody>());
+
         stateMachine.ChangeState(States.FlyToExit);
     }
 

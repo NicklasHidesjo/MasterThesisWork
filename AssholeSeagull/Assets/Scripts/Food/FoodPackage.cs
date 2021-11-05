@@ -12,6 +12,7 @@ public class FoodPackage : MonoBehaviour
 	[Header("Food Settings")]
 	// the item that we will spawn as food
 	[SerializeField] private FoodItem foodItem;
+	[SerializeField] private Transform foodParent;
 	// the name that that item will get
 	[SerializeField] private string foodName;
 	// the position that we want to spawn the food on.
@@ -75,7 +76,7 @@ public class FoodPackage : MonoBehaviour
         FoodItem tmp;
         for (int i = 0; i < foodPoolSize; i++)
         {
-            tmp = Instantiate(foodItem);
+            tmp = Instantiate(foodItem,foodParent);
             tmp.gameObject.SetActive(false);
             tmp.Init(foodName);
             foodItemPool.Add(tmp);

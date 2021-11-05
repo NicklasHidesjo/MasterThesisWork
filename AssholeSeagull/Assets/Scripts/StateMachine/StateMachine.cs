@@ -30,7 +30,7 @@ public class StateMachine : MonoBehaviour
         flee = new Flee(seagullController, this);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         currentState.Execute();
     }

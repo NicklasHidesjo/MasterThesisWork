@@ -38,9 +38,12 @@ public class FoodItem : MonoBehaviour
 
 	private bool buttered = false;
 
+	private Transform parent;
+
 	private Interactable interactable;
 	private Rigidbody rb;
 	private FoodSpoiledHandler foodSpoiled;
+
 	public FoodSettings FoodSettings
 	{
 		get
@@ -230,6 +233,14 @@ public class FoodItem : MonoBehaviour
 			foodBelowBelow = value;
 		}
 	}
+	
+	public void Init(string name)
+	{
+		gameObject.name = name;
+		rb = GetComponent<Rigidbody>();
+		foodSpoiled = GetComponent<FoodSpoiledHandler>();
+		parent = transform.parent;
+	}
 
 	private void Start()
 	{
@@ -269,13 +280,6 @@ public class FoodItem : MonoBehaviour
 		goneBadParticles.SetActive(true);
 	}
 
-	public void Init(string name)
-	{
-		gameObject.name = name;
-		rb = GetComponent<Rigidbody>();
-		foodSpoiled = GetComponent<FoodSpoiledHandler>();
-	}
-
 	public void DeactivateFood()
 	{
 		KinematicToggle(true);
@@ -302,7 +306,7 @@ public class FoodItem : MonoBehaviour
 		// make sure we remove us from the tracking list of food.
 		RemoveFood?.Invoke(this);
 
-		transform.parent = null;
+		transform.parent = parent;
 
 		Reset?.Invoke(this);
 

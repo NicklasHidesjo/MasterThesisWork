@@ -12,7 +12,7 @@ public class Idle : IState
     {
         this.seagullController = seagullController;
         this.stateMachine = stateMachine;
-        seagullAudio = seagullController.SeagullAudio;
+        seagullAudio = seagullController.GetComponent<SeagullAudio>();
     }
     public void Enter()
     {

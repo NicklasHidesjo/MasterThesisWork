@@ -42,7 +42,6 @@ public class SeagullManager : MonoBehaviour
 		for (int i = 0; i < maxNumberOfSeagulls; i++)
 		{
 			SeagullController newSeagull = Instantiate(seagullPrefab, seagullParent);
-			newSeagull.Init();
 			seagullPool.Add(newSeagull);
 		}
 
