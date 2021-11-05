@@ -12,7 +12,9 @@ public class FoodItem : MonoBehaviour
 {
 	// events for foodtracker
 	public static event AddFood AddFood;
+	public static event AddFood AddFoodToPlate;
 	public static event RemoveFood RemoveFood;
+	public static event RemoveFood RemoveFoodFromPlate;
 	public static event ResetFood Reset;
 
 	// the material for it being spoiled
@@ -33,7 +35,6 @@ public class FoodItem : MonoBehaviour
 
 	private bool inPackage = false;
 	private bool inHand = false;
-	private bool moving = false;
 	private bool stolen = false;
 
 	private bool buttered = false;
@@ -111,7 +112,21 @@ public class FoodItem : MonoBehaviour
 				return;
 			}
 			onPlate = value;
+
+			CallPlateEvents(value);
 			CallFoodTrackingEvents();
+		}
+	}
+
+	private void CallPlateEvents(bool value)
+	{
+		if (value)
+		{
+			AddFoodToPlate?.Invoke(this);
+		}
+		else
+		{
+			RemoveFoodFromPlate?.Invoke(this);
 		}
 	}
 
@@ -145,17 +160,6 @@ public class FoodItem : MonoBehaviour
 			}
 			inHand = value;
 			CallFoodTrackingEvents();
-		}
-	}
-	public bool Moving
-	{
-		get
-		{
-			return moving;
-		}
-		set
-		{
-			moving = value;
 		}
 	}
 	public bool Stolen
@@ -299,7 +303,6 @@ public class FoodItem : MonoBehaviour
 
 		inPackage = false;
 		inHand = false;
-		moving = false;
 		stolen = false;
 		buttered = false;
 

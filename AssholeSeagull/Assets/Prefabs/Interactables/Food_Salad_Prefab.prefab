@@ -238,10 +238,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 974c316973d6d6546b198a649c6a5827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayDistance: 0.2
+  rayDistance: 0.02
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
+  onPlateLayer:
+    serializedVersion: 2
+    m_Bits: 16448
 --- !u!1001 &8136147092299242519
 PrefabInstance:
   m_ObjectHideFlags: 0

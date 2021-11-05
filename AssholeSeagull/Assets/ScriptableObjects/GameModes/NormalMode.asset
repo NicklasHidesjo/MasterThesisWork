@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameMode: 0
   GameDuration: 60
-  TimerOff: 0
+  TimerOff: 1
   AlwaysFreshFood: 0
-  SeagullsDontAttack: 0
+  SeagullsDontAttack: 1
   SeagullAmount: 1
-  SeagullSpawnInterval: 5
+  SeagullSpawnInterval: {x: 3, y: 7}

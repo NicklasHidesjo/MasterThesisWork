@@ -54,15 +54,9 @@ public class FoodSpoiledHandler : MonoBehaviour
 		}
 
 		// check if we are moving
-		if (IsMoving())
+		if (!body.IsSleeping())
 		{
-			food.Moving = true;
-			// return/exit and don't run the code below
 			return;
-		}
-		else
-		{
-			food.Moving = false;
 		}
 
 		IncreaseTimer();
@@ -97,12 +91,6 @@ public class FoodSpoiledHandler : MonoBehaviour
 	{
 		// increase our timer
 		timer += Time.fixedDeltaTime;
-	}
-
-	private bool IsMoving()
-	{
-		// return true if our rigidbody's(body) velocity is larger then our velocityThreshold.
-		return body.velocity.sqrMagnitude > foodSettings.velocityThreshold;
 	}
 
 	private void Reset(FoodItem food)

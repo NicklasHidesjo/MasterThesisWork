@@ -20,8 +20,6 @@ public class FoodSettings : ScriptableObject
     public float spoilTime;
     [Tooltip("The time before the object will be deactivated after getting spoiled")]
     public float DeactivateTime;
-    [Tooltip("The threshold for when the object is considered moving & won't spoil")]
-    public float velocityThreshold = 0.1f;
 
     [Header("Score settings")]
     public int baseScore;

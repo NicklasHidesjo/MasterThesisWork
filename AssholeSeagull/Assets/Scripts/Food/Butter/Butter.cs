@@ -107,9 +107,12 @@ public class Butter : MonoBehaviour
 
 	private void Reset(FoodItem food)
 	{
-		buttered = false;
-		butteredPercentage = 0;
-		DeactivateAll();
+		if(food == this)
+		{
+			buttered = false;
+			butteredPercentage = 0;
+			DeactivateAll();
+		}
 	}
 
 	private void OnDisable()

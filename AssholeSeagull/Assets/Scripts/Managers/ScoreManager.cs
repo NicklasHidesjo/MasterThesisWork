@@ -19,6 +19,7 @@ public class ScoreManager : MonoBehaviour
 		foreach (var food in plate.SandwichPieces)
 		{
 			// get the score for each food.
+			food.GetComponent<FoodLayerTracker>().SetFoodAboveAndBelow();
 			score += food.GetComponent<FoodScore>().GetScore();
 		}
 
