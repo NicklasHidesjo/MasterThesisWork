@@ -8,7 +8,7 @@ public class FoodDeactivator : MonoBehaviour
 	{
 		if(other.CompareTag("Food"))
 		{
-			other.GetComponent<FoodItem>().DeactivateFood();
+			other.GetComponentInParent<FoodItem>().DeactivateFood();
 		}
 	}
 }
