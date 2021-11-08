@@ -2990,7 +2990,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3002,7 +3002,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805014760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.005, y: 0.127, z: -0.064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1365473729}
@@ -4956,9 +4956,10 @@ MonoBehaviour:
   foodItem: {fileID: 6039123885260523408, guid: 18f71a434eedf5646b63261425eb2752, type: 3}
   foodParent: {fileID: 1704344255}
   foodName: Cheese
-  spawnPosition: {fileID: 0}
+  spawnPosition: {fileID: 805014761}
   foodPoolSize: 10
-  poop: {fileID: 0}
+  automaticSpawning: 1
+  poop: {fileID: 1485897244}
 --- !u!4 &1365473729
 Transform:
   m_ObjectHideFlags: 0
@@ -5719,12 +5720,12 @@ GameObject:
   - component: {fileID: 1485897247}
   - component: {fileID: 1485897246}
   m_Layer: 0
-  m_Name: Ham_Poop_Prefab (1)
+  m_Name: Poop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1485897245
 Transform:
   m_ObjectHideFlags: 0
@@ -5733,7 +5734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485897244}
   m_LocalRotation: {x: -0.18530633, y: -0.68239397, z: -0.68239397, w: 0.18530633}
-  m_LocalPosition: {x: 0.95719343, y: 0.042581916, z: 0.0025165677}
+  m_LocalPosition: {x: 0, y: 0.108, z: 0}
   m_LocalScale: {x: 0.003276634, y: 0.003276635, z: 0.05062808}
   m_Children:
   - {fileID: 323006284}
