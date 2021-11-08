@@ -11,6 +11,7 @@ TagManager:
   - Plate
   - FxTemporaire
   - FoodPackage
+  - CheeseSlicer
   layers:
   - Default
   - TransparentFX

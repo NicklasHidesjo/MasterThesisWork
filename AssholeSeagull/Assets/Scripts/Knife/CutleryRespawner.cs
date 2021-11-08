@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnifeRespawner : MonoBehaviour
+public class CutleryRespawner : MonoBehaviour
 {
     // This is the transform that we want our knife to measure its out of bounds radius.
     [SerializeField] Transform centerTransform;
 
     // this is the reach that we deem the player to have
-    [SerializeField] float playerReach = 10f;
+    [SerializeField] float playerReach = 1.5f;
 
     // this is the position of our center (comes form centerTransform)
     Vector3 centerPoint;
@@ -22,7 +22,6 @@ public class KnifeRespawner : MonoBehaviour
 
     Rigidbody body;
 
-    // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody>();
@@ -42,19 +41,19 @@ public class KnifeRespawner : MonoBehaviour
 
     void Update()
     {
-        // check if our discance between our center point (centerPoint) and current position (transform.position) 
+        // check if our distance between our center point (centerPoint) and current position (transform.position) 
         // is greater than our reach (playerReach)
         if(Vector3.Distance(centerPoint, transform.position) > playerReach)
 		{
             // Respawn the knife.
-			RespawnKnife();
+			RespawnCutlery();
 		}
 	}
 
-	private void RespawnKnife()
+	private void RespawnCutlery()
 	{
 		// set our rigidbody's velocity to zero 
-		// this makes sure that when the knife respawn it won't move
+		// this makes sure that when the tool respawns it won't move
 		body.velocity = Vector3.zero;
 
 		// set our rotation to that of the spawn rotation we have
