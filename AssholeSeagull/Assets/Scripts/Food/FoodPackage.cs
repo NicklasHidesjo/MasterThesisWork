@@ -18,6 +18,7 @@ public class FoodPackage : MonoBehaviour
 	// the position that we want to spawn the food on.
 	[SerializeField] private Transform spawnPosition;
 	[SerializeField] private int foodPoolSize = 10;
+	[SerializeField] private bool automaticSpawning = true;
 
 	[Header("Poop")]
 	// the poop that is on the object
@@ -61,39 +62,40 @@ public class FoodPackage : MonoBehaviour
 	}
 	
 	private void Start()
-    {
-        // make sure that we spawn a food item in the begining (no empty packages)
-        SpawnFoodItem();
-        SetShitInPackage();
+	{
+		CreateItemPool();
+		SetShitInPackage();
 
-        CreateItemPool();
+		if (automaticSpawning)
+		{
+			 SpawnFoodItem();
+		}
 
 		audioSource = GetComponent<AudioSource>();
-    }
+	}
 
-    private void CreateItemPool()
-    {
-        FoodItem tmp;
-        for (int i = 0; i < foodPoolSize; i++)
-        {
-            tmp = Instantiate(foodItem,foodParent);
-            tmp.gameObject.SetActive(false);
-            tmp.Init(foodName);
-            foodItemPool.Add(tmp);
-        }
-    }
+	private void CreateItemPool()
+	{
+		FoodItem tmp;
+		for (int i = 0; i < foodPoolSize; i++)
+		{
+			tmp = Instantiate(foodItem,foodParent);
+			tmp.gameObject.SetActive(false);
+			tmp.Init(foodName);
+			foodItemPool.Add(tmp);
+		}
+	}
 
-    private void SpawnFoodItem()
-    {
+	private void SpawnFoodItem()
+	{
 		FoodItem newFoodItem = GetFoodFromPool();
 
-        if (newFoodItem == null)
-        {
-			newFoodItem = Instantiate(foodItem);
+		if (newFoodItem == null)
+		{
+			newFoodItem = Instantiate(foodItem, foodParent);
 			newFoodItem.Init(foodName);
 			foodItemPool.Add(newFoodItem);
-        }
-
+		}
 		
 		newFoodItem.transform.position = spawnPosition.position;
 		newFoodItem.transform.rotation = foodItem.transform.rotation * transform.rotation;
@@ -103,24 +105,24 @@ public class FoodPackage : MonoBehaviour
 		
 		newFoodItem.PoopOnFood = shitInPackage;
 
-        // add the newly created item to our foodInPackage list.
-        AddFoodToContainer(newFoodItem);
-    }
+		// add the newly created item to our foodInPackage list.
+		AddFoodToContainer(newFoodItem);
+	}
 
-    private FoodItem GetFoodFromPool()
-    {
-        foreach (var item in foodItemPool)
-        {
-            if (item.gameObject.activeSelf)
-            {
-                continue;
-            }
+	private FoodItem GetFoodFromPool()
+	{
+		foreach (var item in foodItemPool)
+		{
+			if (item.gameObject.activeSelf)
+			{
+				continue;
+			}
 			return item;
-        }
+		}
 		return null;
-    }
+	}
 
-    private void SetShitInPackage() //rename
+	private void SetShitInPackage() //rename
 	{
 		// reduce the number of food with poop on it, in the package (as we have spawned one)
 		poopedFoods--;
@@ -164,6 +166,13 @@ public class FoodPackage : MonoBehaviour
 		// add the FoodItem(food) to our list of food in the package.
 		foodInPackage.Add(food);
 	}
+
+	public void ManuallySpawnFood()
+    {
+		SpawnFoodItem();
+		SetShitInPackage();
+	}
+
 	public void RemoveFoodFromContainer(FoodItem food)
 	{
 		// set that the FoodItem(food) is not in the package.
@@ -183,7 +192,7 @@ public class FoodPackage : MonoBehaviour
 		foodInPackage.RemoveAll(food => food == null);
 
 		// check if the count in our package is lower than 1 (meaning the list is empty)
-		if(foodInPackage.Count < 1) // make the one into a [serializeField] so that we can change it ourselves.
+		if(foodInPackage.Count < 1 && automaticSpawning) // make the one into a [serializeField] so that we can change it ourselves.
 		{
 			// spawn a new FoodItem as the list is empty and we need atleast one.
 			SpawnFoodItem();

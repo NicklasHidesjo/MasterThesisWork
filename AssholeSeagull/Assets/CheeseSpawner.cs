@@ -20,7 +20,7 @@ public class CheeseSpawner : MonoBehaviour
         }
         else if (finished && startedSlicing) 
         {
-            //spawn cheeze here!
+            foodPackage.ManuallySpawnFood();
             Debug.Log("Spawning cheese");
         }
     }
