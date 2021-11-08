@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6949967428795703072
+--- !u!1 &674288025507689997
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,54 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7726186987519427994}
-  - component: {fileID: 6671860420406954559}
-  - component: {fileID: 8895668084749680373}
-  - component: {fileID: 5109015547628294961}
-  - component: {fileID: 4959535905199570612}
-  - component: {fileID: 3713031942207446203}
-  - component: {fileID: 4596260404197308870}
-  - component: {fileID: 3832869185125561017}
-  - component: {fileID: -5484796284800143945}
-  - component: {fileID: 805895612982077718}
-  - component: {fileID: -3972678206421758922}
+  - component: {fileID: 3939939166397689463}
+  - component: {fileID: 7037325550910605377}
+  - component: {fileID: 2809854615752129929}
+  - component: {fileID: 4527007295206411680}
   m_Layer: 6
-  m_Name: Food_Tomato_Prefab
+  m_Name: TomatoModel
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7726186987519427994
+--- !u!4 &3939939166397689463
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6949967428795703072}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_GameObject: {fileID: 674288025507689997}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2551576592686032919}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6671860420406954559
+  m_Children: []
+  m_Father: {fileID: 7726186987519427994}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!33 &7037325550910605377
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6949967428795703072}
+  m_GameObject: {fileID: 674288025507689997}
   m_Mesh: {fileID: -1340541719380434750, guid: ae975d0a6f1697542b751cc6778fbac8, type: 3}
---- !u!23 &8895668084749680373
+--- !u!23 &2809854615752129929
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6949967428795703072}
+  m_GameObject: {fileID: 674288025507689997}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -90,13 +82,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5109015547628294961
+--- !u!64 &4527007295206411680
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6949967428795703072}
+  m_GameObject: {fileID: 674288025507689997}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -104,6 +96,45 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1340541719380434750, guid: ae975d0a6f1697542b751cc6778fbac8, type: 3}
+--- !u!1 &6949967428795703072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7726186987519427994}
+  - component: {fileID: 4959535905199570612}
+  - component: {fileID: 3713031942207446203}
+  - component: {fileID: 4596260404197308870}
+  - component: {fileID: 3832869185125561017}
+  - component: {fileID: -5484796284800143945}
+  - component: {fileID: 805895612982077718}
+  - component: {fileID: -3972678206421758922}
+  m_Layer: 6
+  m_Name: Food_Tomato_Prefab
+  m_TagString: Food
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7726186987519427994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6949967428795703072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2551576592686032919}
+  - {fileID: 3939939166397689463}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4959535905199570612
 Rigidbody:
   m_ObjectHideFlags: 0

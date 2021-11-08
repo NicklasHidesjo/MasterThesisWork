@@ -17,7 +17,16 @@ public class Idle : IState
     public void Enter()
     {
         seagullAudio.PlaySpawnSound();
-        
+
+
+        if (seagullController.FoodTarget == null)
+        {
+            Debug.Log("No food found changing to poop");
+            stateMachine.ChangeState(States.FlyToPoop);
+            return;
+        }
+
+
         int random = Random.Range(0, 2);
 
         //Remove this, only for testing

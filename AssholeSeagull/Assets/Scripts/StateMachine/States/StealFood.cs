@@ -18,7 +18,7 @@ public class StealFood : IState
     {
         // maybe have noisy irritating stealing food in your face sound.
 
-         FoodItem foodTarget = seagullController.FoodTarget;
+        FoodItem foodTarget = seagullController.FoodTarget;
 
         foodTarget.transform.parent = seagullController.transform;
         foodTarget.Stolen = true;

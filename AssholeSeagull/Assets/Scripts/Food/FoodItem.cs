@@ -278,7 +278,7 @@ public class FoodItem : MonoBehaviour
 	private void ChangeMaterial(Material material)
 	{
 		// get the renderer on our object and change its material.
-		gameObject.GetComponent<Renderer>().material = material;
+		gameObject.GetComponentInChildren<Renderer>().material = material;
 
 		// turn on the spoiled object so show particles.
 		goneBadParticles.SetActive(true);

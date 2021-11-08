@@ -48,18 +48,18 @@ public class FlyToPoop : IState
         }
     }
 
-    public void MoveBird()
+    private void MoveBird()
     {
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.fixedDeltaTime);
     }
 
-    public void Deaccelerate()
+    private void Deaccelerate()
     {
         speed -= deacceleration * Time.fixedDeltaTime;
         speed = Mathf.Clamp(speed, minSpeed, Mathf.Infinity);
     }
 
-    public bool ArrivedAtTarget()
+    private bool ArrivedAtTarget()
     {
         return transform.position == target;
     }

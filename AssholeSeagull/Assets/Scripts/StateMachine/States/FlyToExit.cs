@@ -25,7 +25,7 @@ public class FlyToExit : IState
         transform = seagullController.transform;
 
         speed = 0;
-        acceleration = seagullController.SeagullSettings.acceleration;
+        acceleration = seagullController.SeagullSettings.acceleration * 2;
 
         target = seagullController.FlightEnd;
 
@@ -43,12 +43,12 @@ public class FlyToExit : IState
 		}
 	}
 
-	public void MoveBird()
+	private void MoveBird()
     {
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.fixedDeltaTime);
     }
 
-    public void Accelerate()
+    private void Accelerate()
     {
         speed += acceleration * Time.fixedDeltaTime;
     }
@@ -65,7 +65,7 @@ public class FlyToExit : IState
 		transform.gameObject.SetActive(false);
 	}
 
-    public bool ArrivedAtTarget()
+    private bool ArrivedAtTarget()
     {
         return transform.position == target;
     }

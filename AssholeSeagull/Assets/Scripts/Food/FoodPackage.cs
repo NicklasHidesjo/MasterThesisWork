@@ -96,7 +96,7 @@ public class FoodPackage : MonoBehaviour
 
 		
 		newFoodItem.transform.position = spawnPosition.position;
-		newFoodItem.transform.rotation = foodItem.transform.rotation;
+		newFoodItem.transform.rotation = foodItem.transform.rotation * transform.rotation;
 
 		newFoodItem.KinematicToggle(true);
 		newFoodItem.gameObject.SetActive(true);

@@ -26,12 +26,11 @@ public class FoodSpawner : MonoBehaviour
 
 	private void TryRemovingFoodFromContainer(Collider other)
 	{
-
 		// check so that we have the correct tag.
 		if (other.CompareTag("Food"))
 		{
 			// Get the FoodItem component of the object that exited our collider.
-			FoodItem food = other.GetComponent<FoodItem>();
+			FoodItem food = other.GetComponentInParent<FoodItem>();
 
 			// check if the FoodItem(food) is not null 
 			if (food != null) // make this into a if null return?

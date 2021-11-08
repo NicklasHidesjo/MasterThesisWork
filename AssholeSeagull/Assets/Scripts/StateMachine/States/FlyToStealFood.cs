@@ -33,23 +33,13 @@ public class FlyToStealFood : IState
     {
         SeagullController.Scared += Scared;
 
-        if (seagullController.FoodTarget == null)
-        {
-            Debug.Log("No food found changing to poop");
-            stateMachine.ChangeState(States.FlyToPoop);
-        }
-        else
-        {
+        minSpeed = seagullController.SeagullSettings.minSpeed;
+        speed = seagullController.SeagullSettings.speed;
+        deacceleration = seagullController.SeagullSettings.deacceleration;
 
-            minSpeed = seagullController.SeagullSettings.minSpeed;
-            speed = seagullController.SeagullSettings.speed;
-            deacceleration = seagullController.SeagullSettings.deacceleration;
+        target = seagullController.FoodTarget.transform;
 
-            target = seagullController.FoodTarget.transform;
-
-            transform.LookAt(target);
-        }
-
+        transform.LookAt(target);
     }
 
     public void Execute()
@@ -63,18 +53,18 @@ public class FlyToStealFood : IState
         }
     }
 
-    public void MoveBird()
+    private void MoveBird()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position + offset, speed * Time.fixedDeltaTime);
     }
 
-    public void Deaccelerate()
+    private void Deaccelerate()
     {
         speed -= deacceleration * Time.fixedDeltaTime;
         speed = Mathf.Clamp(speed, minSpeed, Mathf.Infinity);
     }
 
-    public bool ArrivedAtTarget()
+    private bool ArrivedAtTarget()
     {
         return transform.position == target.position + offset;
     }
