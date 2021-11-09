@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,5 +27,10 @@ public class LeafSpawnPoint : MonoBehaviour
             leaf.transform.rotation = transform.rotation;
             leaf.gameObject.SetActive(true);
         }
+    }
+
+    public bool HasChild()
+    {
+        return GetComponentInChildren<FoodItem>() != null;
     }
 }

@@ -7,6 +7,7 @@ using Valve.VR.InteractionSystem;
 public delegate void AddFood(FoodItem food);
 public delegate void RemoveFood(FoodItem food);
 public delegate void ResetFood(FoodItem food);
+public delegate void RemoveFromPackage();
 
 public class FoodItem : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class FoodItem : MonoBehaviour
 	public static event RemoveFood RemoveFood;
 	public static event RemoveFood RemoveFoodFromPlate;
 	public static event ResetFood Reset;
+	public static event RemoveFromPackage RemoveFromLettuceHead;
 
 	// the material for it being spoiled
 	[Header("Food Ruined Settings")] // create a FoodPoopHandler
@@ -144,6 +146,12 @@ public class FoodItem : MonoBehaviour
 			}
 			inPackage = value;
 			CallFoodTrackingEvents();
+
+            if (!value && foodSettings.foodType == FoodTypes.Lettuce)
+            {
+				transform.parent = parent;
+				RemoveFromLettuceHead?.Invoke();
+            }
 		}
 	}
 	public bool InHand
