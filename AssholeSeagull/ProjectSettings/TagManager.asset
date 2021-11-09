@@ -12,6 +12,7 @@ TagManager:
   - FxTemporaire
   - FoodPackage
   - CheeseSlicer
+  - Head
   layers:
   - Default
   - TransparentFX

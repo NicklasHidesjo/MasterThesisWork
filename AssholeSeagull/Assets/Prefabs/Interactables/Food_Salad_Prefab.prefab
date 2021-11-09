@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goneBadParticles: {fileID: 4396710599278109059}
   foodSettings: {fileID: 11400000, guid: 75acaf60d238ebb4793dc0856236d036, type: 2}
+  foodRenderer: {fileID: 8349562321045435371}
 --- !u!114 &2938594584755937366
 MonoBehaviour:
   m_ObjectHideFlags: 0

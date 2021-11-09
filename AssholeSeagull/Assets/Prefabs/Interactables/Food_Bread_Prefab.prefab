@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &688129369
 Transform:
   m_ObjectHideFlags: 0
@@ -25,8 +25,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 688129368}
-  m_LocalRotation: {x: -0.5963678, y: 0.3799283, z: -0.3799283, w: 0.5963678}
-  m_LocalPosition: {x: 0.0201, y: 0.0094, z: -0}
+  m_LocalRotation: {x: -0.21643952, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: 0.0001, y: 0.0071716006, z: 0.0005185767}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6858840621125141071}
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 4191897578898075347}
   m_Father: {fileID: 2086274304604157680}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
 --- !u!114 &688129373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48365627869781914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -0.0004}
+  m_LocalPosition: {x: 0, y: -0, z: 0.0114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 277759454641284293}
@@ -286,7 +286,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194433984181500021}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0.0163}
+  m_LocalPosition: {x: 0, y: -0, z: 0.0288}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 688129369}
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 8178626319474782517}
   - component: {fileID: 1090416950764193368}
   - component: {fileID: 625748707447088132}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Food_Bread_Prefab
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -494,6 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goneBadParticles: {fileID: 6183704776147421921}
   foodSettings: {fileID: 11400000, guid: 9e2b27e851172b84eb0b115d0c880344, type: 2}
+  foodRenderer: {fileID: 7990644798188117360}
 --- !u!114 &8178626319474782517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &277759454641284293
 Transform:
   m_ObjectHideFlags: 0
@@ -562,8 +563,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3676524338968520626}
-  m_LocalRotation: {x: -0.37992823, y: -0.59636784, z: 0.59636784, w: 0.37992823}
-  m_LocalPosition: {x: -0.0253, y: -0.0118, z: -0}
+  m_LocalRotation: {x: 0, y: 0.97629607, z: -0.2164396, w: 0}
+  m_LocalPosition: {x: 0.0002, y: -0.0118, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5288818101895110816}
@@ -631,7 +632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6271629280719618419}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0.0163}
+  m_LocalPosition: {x: 0, y: -0, z: 0.0273}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 277759454641284293}
@@ -727,7 +728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6737114047762705158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0.007}
+  m_LocalPosition: {x: 0, y: -0, z: 0.0205}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 688129369}
@@ -823,7 +824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8106783686383938794}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -0.0004}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0126}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 688129369}
@@ -919,7 +920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8516207732515352777}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0.007}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0189}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 277759454641284293}

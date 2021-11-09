@@ -23,6 +23,7 @@ public class FoodItem : MonoBehaviour
 	[Header("Food Ruined Settings")] // create a FoodPoopHandler
 	[SerializeField] private GameObject goneBadParticles; // change to a particle system that we turn on/off emission on instead?
 	[SerializeField] private FoodSettings foodSettings;
+	[SerializeField] private Renderer foodRenderer;
 
 	private FoodTypes foodAbove;
 	private FoodTypes foodAboveAbove;
@@ -286,7 +287,7 @@ public class FoodItem : MonoBehaviour
 	private void ChangeMaterial(Material material)
 	{
 		// get the renderer on our object and change its material.
-		gameObject.GetComponentInChildren<Renderer>().material = material;
+		foodRenderer.material = material;
 
 		// turn on the spoiled object so show particles.
 		goneBadParticles.SetActive(true);
