@@ -24,13 +24,13 @@ public class LettuceSpawner : MonoBehaviour
 		CreateHeadPool();
 	}
 
-    private void OnEnable()
-    {
-		FoodItem.RemoveFromLettuceHead += CheckIfEmpty;
-    }
-    private void Start()
+	private void OnEnable()
 	{
-		SpawnLettuceHead();
+		FoodItem.RemoveFromLettuceHead += CheckIfEmpty;
+	}
+	private void Start()
+	{
+		HandleSpawningHead();
 	}
 
 	private void CreateLeafPool()
@@ -49,14 +49,14 @@ public class LettuceSpawner : MonoBehaviour
 	{
 		LeafSpawnPoint[] leafSpawnPoints = activeHead.GetComponentsInChildren<LeafSpawnPoint>();
 
-        foreach (var item in leafSpawnPoints)
-        {
-            if (item.HasChild())
-            {
+		foreach (var item in leafSpawnPoints)
+		{
+			if (item.HasChild())
+			{
 				return;
-            }
-        }
-		SpawnLettuceHead();
+			}
+		}
+		HandleSpawningHead();
 	}
 
 	private void CreateHeadPool()
@@ -70,57 +70,66 @@ public class LettuceSpawner : MonoBehaviour
 		}
 	}
 
-	private void SpawnLettuceHead()
+	private void HandleSpawningHead()
 	{
-		foreach (var item in headPool)
+		LettuceHead newHead = null;
+		foreach (var head in headPool)
 		{
-			if (item.gameObject.activeSelf)
+			if (head.gameObject.activeSelf)
 			{
 				continue;
 			}
-			item.transform.position = spawnPoint.position;
-			item.transform.rotation = spawnPoint.rotation;
-			item.gameObject.SetActive(true);
-			activeHead = item;
-			return;
+			newHead = head;
 		}
 
-		LettuceHead tmp;
-		tmp = Instantiate(lettuceHead);
-		tmp.transform.position = spawnPoint.position;
-		tmp.transform.rotation = spawnPoint.rotation;
-		tmp.gameObject.SetActive(true);
-		activeHead = tmp;
-		headPool.Add(tmp);
+		if (newHead == null)
+		{
+			newHead = Instantiate(lettuceHead);
+			headPool.Add(newHead);
+		}
+
+		SpawnLettuceHead(newHead);
+	}
+
+	private void SpawnLettuceHead(LettuceHead newHead)
+	{
+		newHead.transform.position = spawnPoint.position;
+		newHead.transform.rotation = spawnPoint.rotation;
+		newHead.gameObject.SetActive(true);
+		activeHead = newHead;
 	}
 
 	public FoodItem GetLettuceLeaf()
 	{
-		FoodItem tmp;
-		foreach (var item in leafPool)
+		FoodItem food = null;
+		foreach (var leaf in leafPool)
 		{
-			if (item.gameObject.activeSelf)
+			if (leaf.gameObject.activeSelf)
 			{
 				continue;
 			}
-			return item;
+			food = leaf;
 		}
-		tmp = Instantiate(lettuceLeaf);
-		tmp.Init("lettuce");
-		leafPool.Add(tmp);
-		return tmp;
+
+		if (food == null)
+		{
+			food = Instantiate(lettuceLeaf);
+			food.Init("lettuce");
+			leafPool.Add(food);
+		}
+		return food;
 	}
 
 	public void SpawnNewHead(LettuceHead head)
 	{
-		if(activeHead == head)
+		if (activeHead == head)
 		{
-			SpawnLettuceHead();
+			HandleSpawningHead();
 		}
 	}
 
-    private void OnDisable()
-    {
+	private void OnDisable()
+	{
 		FoodItem.RemoveFromLettuceHead -= CheckIfEmpty;
-    }
+	}
 }
