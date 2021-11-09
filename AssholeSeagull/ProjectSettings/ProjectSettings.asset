@@ -350,7 +350,8 @@ PlayerSettings:
   enableCrashReportAPI: 0
   cameraUsageDescription: 
   locationUsageDescription: 
-  microphoneUsageDescription: 
+  microphoneUsageDescription: This game uses voice recognition for a better and more
+    stable experience, please allow microphone
   bluetoothUsageDescription: 
   switchNMETAOverride: 
   switchNetLibKey: 

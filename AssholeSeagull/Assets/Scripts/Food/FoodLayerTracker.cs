@@ -35,7 +35,7 @@ public class FoodLayerTracker : MonoBehaviour
 
 		if (Physics.Linecast(transform.position, transform.position + down, out hit, onPlateLayer))
 		{
-			FoodItem foodHit = hit.collider.gameObject.GetComponent<FoodItem>();
+			FoodItem foodHit = hit.collider.gameObject.GetComponentInParent<FoodItem>();
 
 			if (foodHit != null)
 			{
@@ -56,13 +56,10 @@ public class FoodLayerTracker : MonoBehaviour
 				food.OnPlate = false;
 				return;
 			}
-
-			if (Physics.Linecast(transform.position, transform.position + down, out hit, onPlateLayer))
+			
+			if (hit.transform.GetComponentInParent<Plate>() != null)
 			{
-				if (hit.transform.GetComponentInParent<Plate>())
-				{
-					food.OnPlate = true;
-				}
+				food.OnPlate = true;
 			}
 		}
 		else

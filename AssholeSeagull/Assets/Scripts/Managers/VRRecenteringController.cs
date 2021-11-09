@@ -8,7 +8,7 @@ public class VRRecenteringController : MonoBehaviour
     /// <summary>
     /// Todo 
     /// fix so that it won't call in fixed update
-    /// have a button to be pressed for recentering manually
+    /// voice recognition?
     /// </summary>
 
     private SteamVR_Behaviour_Pose pose;
