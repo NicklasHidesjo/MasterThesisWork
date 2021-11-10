@@ -9,15 +9,23 @@ public class Tomato : MonoBehaviour
     private int amountCut;
     private bool startedSlicing;
     private FoodPackage foodPackage;
+    private Rigidbody rb;
+    private TomatoSpawner tomatoSpawner;
 
+    void Awake()
+    {
+        //foodPackage = GetComponent<FoodPackage>();
+        rb = GetComponent<Rigidbody>();
+        tomatoSpawner = FindObjectOfType<TomatoSpawner>();
+    }
     private void OnEnable()
     {
         amountCut = 0;
     }
 
-    void Start()
+    public void KinematicToggle(bool isKinematic)
     {
-        //foodPackage = GetComponent<FoodPackage>();
+        rb.isKinematic = isKinematic;
     }
 
     public void SlicingTomato(bool finished)
@@ -34,9 +42,15 @@ public class Tomato : MonoBehaviour
 
             if (amountCut >= amountOfSlices)
             {
-                gameObject.SetActive(false);
+                DeactivateTomato();
             }
         }
+    }
+
+    public void DeactivateTomato()
+    {
+        tomatoSpawner.SpawnNewTomato(this);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerExit(Collider other)
@@ -46,5 +60,4 @@ public class Tomato : MonoBehaviour
             startedSlicing = false;
         }
     }
-
 }

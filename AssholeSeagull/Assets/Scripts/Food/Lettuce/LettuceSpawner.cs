@@ -80,6 +80,7 @@ public class LettuceSpawner : MonoBehaviour
 				continue;
 			}
 			newHead = head;
+			break;
 		}
 
 		if (newHead == null)
@@ -109,6 +110,7 @@ public class LettuceSpawner : MonoBehaviour
 				continue;
 			}
 			food = leaf;
+			break;
 		}
 
 		if (food == null)
