@@ -25,6 +25,17 @@ public class VoiceRecognition : MonoBehaviour
 		InitializeSpeechRecognition();
 	}
 
+	private void GenerateKeyWords()
+	{
+		actions.Add("Pause", Pause);
+		actions.Add("Stop", Pause);
+		actions.Add("Resume", Resume);
+		actions.Add("Play", Resume);
+
+		actions.Add("Recenter", Recenter);
+		actions.Add("Restart", Restart);
+	}
+
 	private void InitializeSpeechRecognition()
 	{
 		keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray(),ConfidenceLevel.Low);
@@ -58,16 +69,5 @@ public class VoiceRecognition : MonoBehaviour
 	private void Recenter()
 	{
 
-	}
-
-	private void GenerateKeyWords()
-	{
-		actions.Add("Pause", Pause);
-		actions.Add("Stop", Pause);
-		actions.Add("Resume", Resume);
-		actions.Add("Play", Resume);
-
-		actions.Add("Recenter", Recenter);
-		actions.Add("Restart", Restart);
 	}
 }
