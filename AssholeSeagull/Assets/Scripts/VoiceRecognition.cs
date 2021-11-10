@@ -12,10 +12,7 @@ public class VoiceRecognition : MonoBehaviour
 	/// recenter, etc.
 	/// </summary>
 
-
-
 	private KeywordRecognizer keywordRecognizer;
-	private PhraseRecognizer phraseRecognizer;
 
 	private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
