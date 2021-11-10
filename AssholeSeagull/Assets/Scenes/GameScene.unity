@@ -2039,6 +2039,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 186.51
       objectReference: {fileID: 0}
+    - target: {fileID: 8916402400118032881, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8916402400118032882, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
@@ -2227,6 +2231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 496272021}
   - component: {fileID: 496272022}
+  - component: {fileID: 496272023}
   m_Layer: 11
   m_Name: BottomTrigger
   m_TagString: Untagged
@@ -2261,6 +2266,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.27, y: 0.025, z: 0.26}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &496272023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496272020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a7cc37083fb58419e780023c1c69ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topCutZone: 0
 --- !u!1 &499268444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2467,7 +2485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2844712789627164793, guid: 47237ea44f539c0438a22b3219cec681, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3184506290312086211, guid: 47237ea44f539c0438a22b3219cec681, type: 3}
       propertyPath: m_RootOrder
@@ -3484,6 +3502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 895922073}
   - component: {fileID: 895922074}
+  - component: {fileID: 895922075}
   m_Layer: 11
   m_Name: TopTrigger
   m_TagString: Untagged
@@ -3518,6 +3537,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.27, y: 0.025, z: 0.26}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &895922075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895922072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a7cc37083fb58419e780023c1c69ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topCutZone: 1
 --- !u!1001 &967190290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3934,6 +3966,7 @@ GameObject:
   - component: {fileID: 1142760421}
   - component: {fileID: 1142760420}
   - component: {fileID: 1142760424}
+  - component: {fileID: 1142760425}
   m_Layer: 11
   m_Name: Tomato
   m_TagString: Untagged
@@ -4055,6 +4088,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.3, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1142760425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142760419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9573bf6ae2fbecb41953aaed24a96b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfSlices: 5
 --- !u!1001 &1204108454
 PrefabInstance:
   m_ObjectHideFlags: 0
