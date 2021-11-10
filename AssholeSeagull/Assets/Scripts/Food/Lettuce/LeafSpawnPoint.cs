@@ -21,6 +21,7 @@ public class LeafSpawnPoint : MonoBehaviour
         else
         {
             FoodItem leaf = lettuceSpawner.GetLettuceLeaf();
+            leaf.DeactivateFood();
             leaf.KinematicToggle(true);
             leaf.transform.parent = transform;
             leaf.transform.position = transform.position;
@@ -33,4 +34,13 @@ public class LeafSpawnPoint : MonoBehaviour
     {
         return GetComponentInChildren<FoodItem>() != null;
     }
+
+    public void SmearShitOnLeaf()
+	{
+        FoodItem leaf = GetComponentInChildren<FoodItem>();
+        if (leaf != null)
+		{
+            leaf.PoopOnFood = true;
+		}
+	}
 }

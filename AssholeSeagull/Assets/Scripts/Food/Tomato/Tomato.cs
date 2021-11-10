@@ -6,22 +6,48 @@ using Valve.VR.InteractionSystem;
 
 public class Tomato : MonoBehaviour
 {
+    /// <TODO>
+    /// Fix so that we drop it from the hand if we are attached to a hand
+    /// </summary>
+    [SerializeField] GameObject poop;
+
     [SerializeField] private int amountOfSlices = 5;
 	[SerializeField] private float maxDistance = 0.5f;
     [SerializeField] float Spawnoffset;
 
     private int amountCut;
     private bool startedSlicing;
+    private Vector3 spawnPos;
+
     private Rigidbody rb;
     private TomatoSpawner tomatoSpawner;
     private Interactable interactable;
 
-    private Vector3 spawnPos;
-
+    private AudioSource audioSource;
     private GameObject blade;
+
+    private bool shitOn;
+    public bool ShitOn
+	{
+		get
+		{
+            return shitOn;
+		}
+		set
+		{
+            shitOn = value;
+
+            if(value)
+			{
+                poop.SetActive(true);
+                audioSource.Play();
+			}
+		}
+	}
     
 	void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         interactable = GetComponent<Interactable>();
         tomatoSpawner = FindObjectOfType<TomatoSpawner>();
@@ -46,10 +72,16 @@ public class Tomato : MonoBehaviour
 
 	private void OnEnable()
     {
+        poop.SetActive(false);
+        shitOn = false;
+
+        rb.velocity = Vector3.zero;
+        KinematicToggle(true);
+
         amountCut = 0;
     }
 
-    public void KinematicToggle(bool isKinematic)
+    private void KinematicToggle(bool isKinematic)
     {
         rb.isKinematic = isKinematic;
     }
@@ -93,6 +125,7 @@ public class Tomato : MonoBehaviour
         tomatoSlice.transform.position = spawnPos;
         tomatoSlice.KinematicToggle(false);
         tomatoSlice.gameObject.SetActive(true);
+        tomatoSlice.PoopOnFood = shitOn;
 
         // get the direction that the knife is in from the center point 
         // spawn a tomatoSlice with an offset in that direction
@@ -102,6 +135,11 @@ public class Tomato : MonoBehaviour
 
 	public void DeactivateTomato()
     {
+        if(interactable.attachedToHand)
+		{
+            interactable.attachedToHand.DetachObject(gameObject);
+		}
+
         tomatoSpawner.SpawnNewTomato(this);
         gameObject.SetActive(false);
     }

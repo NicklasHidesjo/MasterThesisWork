@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SeagullManager : MonoBehaviour
 {
-	[SerializeField] private List<Transform> foodPackages = new List<Transform>();
+	[SerializeField] private List<Transform> poopTargets = new List<Transform>();
 	[SerializeField] private List<Transform> endFlightTransforms = new List<Transform>();
 	[SerializeField] private List<Transform> startFlightTransforms = new List<Transform>();
 	[SerializeField] private List<SeagullSettings> seagullSettings = new List<SeagullSettings>();
@@ -29,6 +29,7 @@ public class SeagullManager : MonoBehaviour
 			StopAllCoroutines();
 		}
 		foodTracker = FindObjectOfType<FoodTracker>();
+		GetAllPoopTargets();
 
 		spawnInterval = GameManager.Settings.SeagullSpawnInterval;
 		timer = Random.Range(spawnInterval.x, spawnInterval.y);
@@ -66,10 +67,11 @@ public class SeagullManager : MonoBehaviour
 
 	private void SpawnSeagull(SeagullController seagull)
     {
+		GetAllPoopTargets();
         // gets a random spawnpoint.
         Transform spawnPoint = GetTransformFromList(startFlightTransforms);
         Transform endPoint = GetTransformFromList(endFlightTransforms);
-		Transform foodPackage = GetTransformFromList(foodPackages);
+		Transform foodPackage = GetTransformFromList(poopTargets);
 
 		int random = Random.Range(0, seagullSettings.Count);
 		SeagullSettings seagullSetting = seagullSettings[random];
@@ -83,6 +85,28 @@ public class SeagullManager : MonoBehaviour
 		seagull.gameObject.SetActive(true);
 		seagull.GetComponent<StateMachine>().ChangeState(States.Idle);
     }
+
+	private void GetAllPoopTargets()
+	{
+		poopTargets.Clear();
+
+		Tomato[] tomatoes = FindObjectsOfType<Tomato>();
+		LettuceHead[] lettuceHeads = FindObjectsOfType<LettuceHead>();
+		FoodPackage[] foodPackages = FindObjectsOfType<FoodPackage>();
+
+		foreach (var tomato in tomatoes)
+		{
+			poopTargets.Add(tomato.transform);
+		}
+		foreach (var lettuce in lettuceHeads)
+		{
+			poopTargets.Add(lettuce.transform);
+		}
+		foreach (var foodPackage in foodPackages)
+		{
+			poopTargets.Add(foodPackage.transform);
+		}
+	}
 
     private SeagullController GetInactiveSeagull()
     {

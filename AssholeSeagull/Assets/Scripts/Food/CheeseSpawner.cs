@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CheeseSpawner : MonoBehaviour
 {
-    [SerializeField] private bool startedSlicing;
+
+    private bool startedSlicing;
     private FoodPackage foodPackage;
 
     void Start()

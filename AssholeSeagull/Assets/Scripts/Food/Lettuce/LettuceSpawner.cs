@@ -12,7 +12,6 @@ public class LettuceSpawner : MonoBehaviour
 	[SerializeField] private LettuceHead lettuceHead;
 	[SerializeField] private int headPoolSize = 2;
 
-	[SerializeField] private Transform spawnPoint;
 	[SerializeField] private Transform foodParent;
 
 	private List<FoodItem> leafPool = new List<FoodItem>();
@@ -74,7 +73,7 @@ public class LettuceSpawner : MonoBehaviour
 		LettuceHead tmp;
 		for (int i = 0; i < headPoolSize; i++)
 		{
-			tmp = Instantiate(lettuceHead);
+			tmp = Instantiate(lettuceHead, foodParent);
 			tmp.gameObject.SetActive(false);
 			headPool.Add(tmp);
 		}
@@ -104,8 +103,8 @@ public class LettuceSpawner : MonoBehaviour
 
 	private void SpawnLettuceHead(LettuceHead newHead)
 	{
-		newHead.transform.position = spawnPoint.position;
-		newHead.transform.rotation = spawnPoint.rotation;
+		newHead.transform.position = transform.position;
+		newHead.transform.rotation = transform.rotation;
 		newHead.gameObject.SetActive(true);
 		activeHead = newHead;
 	}

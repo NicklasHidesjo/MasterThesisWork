@@ -14,6 +14,7 @@ TagManager:
   - CheeseSlicer
   - Head
   - TomatoSpawner
+  - Tomato
   layers:
   - Default
   - TransparentFX

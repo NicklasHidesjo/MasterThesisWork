@@ -89,7 +89,6 @@ public class TomatoSpawner : MonoBehaviour
 		activeTomato = tomato;
 		tomato.transform.position = transform.position;
 		tomato.transform.rotation = transform.rotation;
-		tomato.KinematicToggle(true);
 		tomato.gameObject.SetActive(true);
 	}
 

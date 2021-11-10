@@ -22,20 +22,25 @@ public class PoopState : IState
         animator.ResetTrigger("FlyAway");
 
         animator.SetTrigger("Poop");
+
+        Pooping.Pooped += DonePooping;
     }
 
     public void Execute()
     {
-        // have event instead?
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Pooping"))
-        {
-            return;
-        }
-        stateMachine.ChangeState(States.FlyToExit);
+
     }
+
+    private void DonePooping(SeagullController seagull)
+	{
+        if(seagull == seagullController)
+		{
+            stateMachine.ChangeState(States.FlyToExit);
+        }
+	}
 
     public void Exit()
     {
-
+        Pooping.Pooped -= DonePooping;
     }
 }

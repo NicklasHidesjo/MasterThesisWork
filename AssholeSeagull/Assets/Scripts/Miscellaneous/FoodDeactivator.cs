@@ -14,5 +14,9 @@ public class FoodDeactivator : MonoBehaviour
 		{
 			other.GetComponent<LettuceHead>().Deactivate();
 		}
+		if(other.CompareTag("Tomato"))
+		{
+			other.GetComponent<Tomato>().DeactivateTomato();
+		}
 	}
 }

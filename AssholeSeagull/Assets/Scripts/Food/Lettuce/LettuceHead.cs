@@ -6,13 +6,31 @@ using Valve.VR.InteractionSystem;
 
 public class LettuceHead : MonoBehaviour
 {
+	[SerializeField] GameObject poop;
+	
 	private Interactable interactable;
 	private Rigidbody rb;
 	private LettuceSpawner lettuceSpawner;
 
+	private AudioSource audioSource;
+
+	public void GotShitOn()
+	{
+		audioSource.Play();
+
+		poop.SetActive(true);
+
+		LeafSpawnPoint[] leafSpawnPoints = GetComponentsInChildren<LeafSpawnPoint>();
+		foreach (var leaf in leafSpawnPoints)
+		{
+			leaf.SmearShitOnLeaf();
+		}
+	}
+
 
 	private void Start()
 	{
+		audioSource = GetComponent<AudioSource>();
 		interactable = GetComponent<Interactable>();
 		lettuceSpawner = FindObjectOfType<LettuceSpawner>();
 		rb = GetComponent<Rigidbody>();
@@ -28,6 +46,7 @@ public class LettuceHead : MonoBehaviour
 
 	public void Deactivate()
 	{
+		poop.SetActive(false);
 		lettuceSpawner.SpawnNewHead(this);
 		rb.isKinematic = true;
 		gameObject.SetActive(false);

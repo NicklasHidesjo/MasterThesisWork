@@ -3,12 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
-
 public class FoodPackage : MonoBehaviour
 {
-	/// <todo>
-	/// object pool for food items
-	/// </summary>
 	[Header("Food Settings")]
 	// the item that we will spawn as food
 	[SerializeField] private FoodItem foodItem;
@@ -55,7 +51,6 @@ public class FoodPackage : MonoBehaviour
 				poopedFoods ++;
 				// smear poop on any food that is spawned lying in the package.
 				SmearPoopInPackage();
-
 				audioSource.Play();
 			}
 		}
@@ -68,7 +63,7 @@ public class FoodPackage : MonoBehaviour
 
 		if (automaticSpawning)
 		{
-			 SpawnFoodItem();
+			AutomaticallySpawnFoodItem();
 		}
 
 		audioSource = GetComponent<AudioSource>();
@@ -86,7 +81,8 @@ public class FoodPackage : MonoBehaviour
 		}
 	}
 
-	private void SpawnFoodItem()
+	// refactor theese two into one better method.
+	private void AutomaticallySpawnFoodItem()
 	{
 		FoodItem newFoodItem = GetFoodFromPool();
 
@@ -107,6 +103,25 @@ public class FoodPackage : MonoBehaviour
 
 		// add the newly created item to our foodInPackage list.
 		AddFoodToContainer(newFoodItem);
+	}
+	private void ManuallySpawnFoodItem()
+	{
+		FoodItem newFoodItem = GetFoodFromPool();
+
+		if (newFoodItem == null)
+		{
+			newFoodItem = Instantiate(foodItem, foodParent);
+			newFoodItem.Init(foodName);
+			foodItemPool.Add(newFoodItem);
+		}
+
+		newFoodItem.transform.position = spawnPosition.position;
+		newFoodItem.transform.rotation = foodItem.transform.rotation * transform.rotation;
+
+		newFoodItem.KinematicToggle(false);
+		newFoodItem.gameObject.SetActive(true);
+
+		newFoodItem.PoopOnFood = shitInPackage;
 	}
 
 	private FoodItem GetFoodFromPool()
@@ -169,7 +184,7 @@ public class FoodPackage : MonoBehaviour
 
 	public void ManuallySpawnFood()
     {
-		SpawnFoodItem();
+		ManuallySpawnFoodItem();
 		SetShitInPackage();
 	}
 
@@ -195,7 +210,7 @@ public class FoodPackage : MonoBehaviour
 		if(foodInPackage.Count < 1 && automaticSpawning) // make the one into a [serializeField] so that we can change it ourselves.
 		{
 			// spawn a new FoodItem as the list is empty and we need atleast one.
-			SpawnFoodItem();
+			AutomaticallySpawnFoodItem();
 			SetShitInPackage();
 		}
 	}
