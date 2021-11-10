@@ -68,8 +68,6 @@ public class StateMachine : MonoBehaviour
             default: Debug.LogError(state + " not in switch");
                 break;
         }
-
-        Debug.Log(currentState);
         currentState.Enter();
     }
 }

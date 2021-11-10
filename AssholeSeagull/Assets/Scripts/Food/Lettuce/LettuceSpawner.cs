@@ -7,6 +7,8 @@ public class LettuceSpawner : MonoBehaviour
 	[SerializeField] private FoodItem lettuceLeaf;
 	[SerializeField] private int leafPoolSize = 3;
 
+	[SerializeField] private float maxDistance = 1f;
+
 	[SerializeField] private LettuceHead lettuceHead;
 	[SerializeField] private int headPoolSize = 2;
 
@@ -31,6 +33,14 @@ public class LettuceSpawner : MonoBehaviour
 	private void Start()
 	{
 		HandleSpawningHead();
+	}
+
+	private void FixedUpdate()
+	{
+		if (Vector3.Distance(activeHead.transform.position, transform.position) >= maxDistance)
+		{
+			HandleSpawningHead();
+		}
 	}
 
 	private void CreateLeafPool()

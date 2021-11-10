@@ -277,7 +277,7 @@ public class FoodItem : MonoBehaviour
 		// check if we are picked up or not
 		InHand = interactable.attachedToHand;
 
-		if (inHand && rb.isKinematic)
+		if (rb.isKinematic && inHand)
 		{
 			KinematicToggle(false);
 			InPackage = false;

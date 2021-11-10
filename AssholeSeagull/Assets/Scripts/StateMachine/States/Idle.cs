@@ -21,7 +21,6 @@ public class Idle : IState
 
         if (seagullController.FoodTarget == null)
         {
-            Debug.Log("No food found changing to poop");
             stateMachine.ChangeState(States.FlyToPoop);
             return;
         }

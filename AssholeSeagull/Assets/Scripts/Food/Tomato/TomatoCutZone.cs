@@ -15,15 +15,16 @@ public class TomatoCutZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(gameObject.name + " got triggered");
         if (other.CompareTag("KnifeBlade"))
         {
             if (topCutZone)
             {
-                tomato.SlicingTomato(false);
+                tomato.SlicingTomato(false, other.gameObject);
             }
             else
             {
-                tomato.SlicingTomato(true);
+                tomato.SlicingTomato(true, other.gameObject);
             }
         }
     }

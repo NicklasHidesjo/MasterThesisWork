@@ -13,6 +13,7 @@ TagManager:
   - FoodPackage
   - CheeseSlicer
   - Head
+  - TomatoSpawner
   layers:
   - Default
   - TransparentFX
@@ -30,9 +31,9 @@ TagManager:
   - FoodSpawner
   - Plate
   - Tomato
-  - 
-  - 
-  - 
+  - LettuceHead
+  - LettuceSpawner
+  - TomatoSpawner
   - 
   - 
   - 

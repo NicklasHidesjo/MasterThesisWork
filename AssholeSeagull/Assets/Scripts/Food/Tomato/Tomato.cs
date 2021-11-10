@@ -1,24 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class Tomato : MonoBehaviour
 {
     [SerializeField] private int amountOfSlices = 5;
+	[SerializeField] private float maxDistance = 0.5f;
+    [SerializeField] float Spawnoffset;
 
     private int amountCut;
     private bool startedSlicing;
-    private FoodPackage foodPackage;
     private Rigidbody rb;
     private TomatoSpawner tomatoSpawner;
+    private Interactable interactable;
 
-    void Awake()
+    private Vector3 spawnPos;
+
+    private GameObject blade;
+    
+	void Awake()
     {
-        //foodPackage = GetComponent<FoodPackage>();
         rb = GetComponent<Rigidbody>();
+        interactable = GetComponent<Interactable>();
         tomatoSpawner = FindObjectOfType<TomatoSpawner>();
+        Spawnoffset = transform.localScale.x / 2;
     }
-    private void OnEnable()
+
+	private void FixedUpdate()
+	{
+        if(startedSlicing && blade != null)
+		{
+            if (Vector3.Distance(blade.transform.position, transform.position) >= maxDistance)
+			{
+                startedSlicing = false;
+			}
+		}
+
+		if(rb.isKinematic && interactable.attachedToHand)
+		{
+            KinematicToggle(false);
+        }
+	}
+
+	private void OnEnable()
     {
         amountCut = 0;
     }
@@ -28,16 +54,19 @@ public class Tomato : MonoBehaviour
         rb.isKinematic = isKinematic;
     }
 
-    public void SlicingTomato(bool finished)
+    public void SlicingTomato(bool finished, GameObject blade)
     {
-        if (!finished)
-        {
-            startedSlicing = true;
+        this.blade = blade;
+
+        if (!startedSlicing && !finished)
+		{
+			startedSlicing = true;
+            SetSpawnPosition(blade);
         }
-        else if (finished && startedSlicing)
+		else if (finished && startedSlicing)
         {
-            //foodPackage.ManuallySpawnFood();
             Debug.Log("Spawning tomato slice");
+            SpawnTomatoSlice();
             amountCut++;
 
             if (amountCut >= amountOfSlices)
@@ -47,17 +76,33 @@ public class Tomato : MonoBehaviour
         }
     }
 
-    public void DeactivateTomato()
+	private void SetSpawnPosition(GameObject blade)
+	{
+        // fix so that it spawns related to where the knife cuts.
+        spawnPos = transform.position;
+    }
+
+	private void SpawnTomatoSlice()
+	{
+        Debug.Log("Spawning tomato slice");
+
+        FoodItem tomatoSlice = tomatoSpawner.GetTomatoSlice();
+
+        Debug.Log(tomatoSlice);
+
+        tomatoSlice.transform.position = spawnPos;
+        tomatoSlice.KinematicToggle(false);
+        tomatoSlice.gameObject.SetActive(true);
+
+        // get the direction that the knife is in from the center point 
+        // spawn a tomatoSlice with an offset in that direction
+        // rotate the slice appropriately
+        startedSlicing = false;
+    }
+
+	public void DeactivateTomato()
     {
         tomatoSpawner.SpawnNewTomato(this);
         gameObject.SetActive(false);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("KnifeBlade"))
-        {
-            startedSlicing = false;
-        }
     }
 }

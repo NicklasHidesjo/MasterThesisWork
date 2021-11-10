@@ -958,12 +958,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 121078, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 402768, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1904,6 +1912,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4246637908026311023, guid: 3fbd6ddac9549e64baa1ff56b695c10c, type: 3}
+      propertyPath: highlightOnHover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246637908026311023, guid: 3fbd6ddac9549e64baa1ff56b695c10c, type: 3}
+      propertyPath: handFollowTransform
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fbd6ddac9549e64baa1ff56b695c10c, type: 3}
 --- !u!1 &415265464 stripped
@@ -1979,6 +1995,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1723918044}
     m_Modifications:
+    - target: {fileID: 1429073407991495952, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
+      propertyPath: m_TagString
+      value: KnifeBlade
+      objectReference: {fileID: 0}
     - target: {fileID: 8916402399794109877, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
       propertyPath: m_Name
       value: ButterKnife_Handle
@@ -3673,7 +3693,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1064085144}
   - component: {fileID: 1064085143}
-  m_Layer: 0
+  - component: {fileID: 1064085145}
+  m_Layer: 18
   m_Name: TomatoSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3694,8 +3715,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tomato: {fileID: 7403409613845633679, guid: 23c04d955c9591a4ca6459b513c92b68, type: 3}
   tomatoPoolSize: 5
-  spawnPoint: {fileID: 1271840520}
+  maxDistance: 1
+  tomatoSlice: {fileID: 3832869185125561017, guid: 567ccd320a0993543a1048f3fcf070da, type: 3}
+  tomatoSlicePoolSize: 10
   tomatoParent: {fileID: 1704344255}
+  activeTomato: {fileID: 0}
 --- !u!4 &1064085144
 Transform:
   m_ObjectHideFlags: 0
@@ -3704,13 +3728,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064085142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.286, y: 0.159, z: 0.504}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1271840520}
+  - {fileID: 1142760423}
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1064085145
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064085142}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1088427655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4041,7 +4078,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1241383874}
   - component: {fileID: 1241383873}
-  m_Layer: 0
+  - component: {fileID: 1241383875}
+  m_Layer: 17
   m_Name: LettuceSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4062,6 +4100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lettuceLeaf: {fileID: 6624620264217268238, guid: 1d5a1b6b99fa2c84fa8ba168bffb3fe9, type: 3}
   leafPoolSize: 3
+  maxDistance: 1
   lettuceHead: {fileID: 3598575637077634255, guid: a41c296144f89024298cdab8411f70be, type: 3}
   headPoolSize: 2
   spawnPoint: {fileID: 722129474}
@@ -4082,6 +4121,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1241383875
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241383872}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1241646635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4447,37 +4499,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6af2ed72155b77f42a6179179adaa3a8, type: 3}
---- !u!1 &1271840519
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1271840520}
-  m_Layer: 0
-  m_Name: SpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1271840520
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1271840519}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.281, y: 0.087, z: 0.521}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1142760423}
-  m_Father: {fileID: 1064085144}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1288685515 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8916402399794109877, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
@@ -8273,7 +8294,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1271840520}
+    m_TransformParent: {fileID: 1064085144}
     m_Modifications:
     - target: {fileID: 7403409613845633665, guid: 23c04d955c9591a4ca6459b513c92b68, type: 3}
       propertyPath: m_RootOrder

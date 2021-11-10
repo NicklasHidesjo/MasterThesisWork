@@ -32,7 +32,6 @@ public class SeagullManager : MonoBehaviour
 
 		spawnInterval = GameManager.Settings.SeagullSpawnInterval;
 		timer = Random.Range(spawnInterval.x, spawnInterval.y);
-		Debug.Log(timer);
 		CreateSeagullPool();
 	}
 
