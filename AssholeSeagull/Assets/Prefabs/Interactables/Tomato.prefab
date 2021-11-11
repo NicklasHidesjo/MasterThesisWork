@@ -314,9 +314,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poop: {fileID: 6710228886122289837}
+  model: {fileID: 4738986255721403309}
   amountOfSlices: 5
   maxDistance: 0.5
-  Spawnoffset: 0
+  Spawnoffset: 0.2
 --- !u!82 &5463167746851296157
 AudioSource:
   m_ObjectHideFlags: 0
@@ -605,6 +606,10 @@ PrefabInstance:
     - target: {fileID: 2844712789627164793, guid: 47237ea44f539c0438a22b3219cec681, type: 3}
       propertyPath: m_Layer
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844712789627164793, guid: 47237ea44f539c0438a22b3219cec681, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3184506290312086211, guid: 47237ea44f539c0438a22b3219cec681, type: 3}
       propertyPath: m_RootOrder

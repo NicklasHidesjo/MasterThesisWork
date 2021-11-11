@@ -6,9 +6,6 @@ using Valve.VR.InteractionSystem;
 
 public class Tomato : MonoBehaviour
 {
-    /// <TODO>
-    /// Fix so that we drop it from the hand if we are attached to a hand
-    /// </summary>
     [SerializeField] GameObject poop;
 
     [SerializeField] private int amountOfSlices = 5;
@@ -18,6 +15,7 @@ public class Tomato : MonoBehaviour
     private int amountCut;
     private bool startedSlicing;
     private Vector3 spawnPos;
+    private Quaternion spawnRotation;
 
     private Rigidbody rb;
     private TomatoSpawner tomatoSpawner;
@@ -50,23 +48,27 @@ public class Tomato : MonoBehaviour
     
 	void Awake()
     {
+        
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
+
         interactable = GetComponent<Interactable>();
         complexThrowable = GetComponent<ComplexThrowable>();
+
         tomatoSpawner = FindObjectOfType<TomatoSpawner>();
-        Spawnoffset = transform.localScale.x / 2;
+    }
+	private void OnEnable()
+    {
+        poop.SetActive(false);
+        shitOn = false;
+        rb.velocity = Vector3.zero;
+        KinematicToggle(true);
+        shouldDeactivate = false;
+        amountCut = 0;
     }
 
 	private void FixedUpdate()
 	{
-        if(shouldDeactivate && interactable.attachedToHand == null)
-        {
-            complexThrowable.enabled = false;
-            interactable.enabled = false;
-            Invoke("DeactivateTomato" , 1f);
-		}
-
         if(startedSlicing && blade != null)
 		{
             if (Vector3.Distance(blade.transform.position, transform.position) >= maxDistance)
@@ -81,20 +83,6 @@ public class Tomato : MonoBehaviour
         }
 	}
 
-	private void OnEnable()
-    {
-        poop.SetActive(false);
-        shitOn = false;
-
-        complexThrowable.enabled = true;
-        interactable.enabled = true;
-        shouldDeactivate = false;
-
-        rb.velocity = Vector3.zero;
-        KinematicToggle(true);
-
-        amountCut = 0;
-    }
 
     private void KinematicToggle(bool isKinematic)
     {
@@ -130,8 +118,16 @@ public class Tomato : MonoBehaviour
 
 	private void SetSpawnPosition(GameObject blade)
 	{
-        // fix so that it spawns related to where the knife cuts.
-        spawnPos = transform.position;
+        Vector2 bladePos = new Vector2(blade.transform.position.x, blade.transform.position.z);
+        Vector2 tomatoPos = new Vector2(transform.position.x, transform.position.z);
+
+        Vector2 rawDirection = (bladePos - tomatoPos).normalized;
+
+        Vector3 direction = new Vector3(rawDirection.x, transform.position.y, rawDirection.y);
+
+        spawnRotation = Quaternion.LookRotation(direction);
+
+        spawnPos = transform.position + (direction * Spawnoffset);
     }
 
 	private void SpawnTomatoSlice()
@@ -141,6 +137,7 @@ public class Tomato : MonoBehaviour
         FoodItem tomatoSlice = tomatoSpawner.GetTomatoSlice();
 
         tomatoSlice.transform.position = spawnPos;
+        tomatoSlice.transform.rotation = spawnRotation;
         tomatoSlice.KinematicToggle(false);
         tomatoSlice.gameObject.SetActive(true);
         tomatoSlice.PoopOnFood = shitOn;
@@ -148,6 +145,11 @@ public class Tomato : MonoBehaviour
 
 	public void ShouldDeactivateTomate()
     {
+        Hand hand = interactable.attachedToHand;
+        complexThrowable.PhysicsDetach(hand);
+
+        Invoke("DeactivateTomato", 0.5f);
+
         shouldDeactivate = true;
         tomatoSpawner.SpawnNewTomato(this);
     }
@@ -155,4 +157,11 @@ public class Tomato : MonoBehaviour
 	{
         gameObject.SetActive(false);
     }
+
+
+	private void OnDrawGizmos()
+	{
+        Gizmos.color = new Color(0, 128, 128);
+        Gizmos.DrawWireSphere(transform.position, Spawnoffset);
+	}
 }

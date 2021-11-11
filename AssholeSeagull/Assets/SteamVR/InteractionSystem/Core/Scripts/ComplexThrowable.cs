@@ -144,7 +144,7 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		private bool PhysicsDetach( Hand hand )
+		public bool PhysicsDetach( Hand hand )
 		{
 			int i = holdingHands.IndexOf( hand );
 
