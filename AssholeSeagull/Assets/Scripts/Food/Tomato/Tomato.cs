@@ -97,7 +97,6 @@ public class Tomato : MonoBehaviour
         }
 		else if (finished && startedSlicing)
         {
-            Debug.Log("Spawning tomato slice");
             SpawnTomatoSlice();
             amountCut++;
 
@@ -105,6 +104,7 @@ public class Tomato : MonoBehaviour
             {
                 DeactivateTomato();
             }
+            startedSlicing = false;
         }
     }
 
@@ -120,17 +120,10 @@ public class Tomato : MonoBehaviour
 
         FoodItem tomatoSlice = tomatoSpawner.GetTomatoSlice();
 
-        Debug.Log(tomatoSlice);
-
         tomatoSlice.transform.position = spawnPos;
         tomatoSlice.KinematicToggle(false);
         tomatoSlice.gameObject.SetActive(true);
         tomatoSlice.PoopOnFood = shitOn;
-
-        // get the direction that the knife is in from the center point 
-        // spawn a tomatoSlice with an offset in that direction
-        // rotate the slice appropriately
-        startedSlicing = false;
     }
 
 	public void DeactivateTomato()
