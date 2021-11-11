@@ -22,12 +22,15 @@ public class Tomato : MonoBehaviour
     private Rigidbody rb;
     private TomatoSpawner tomatoSpawner;
     private Interactable interactable;
+    private ComplexThrowable complexThrowable;
 
     private AudioSource audioSource;
     private GameObject blade;
 
     private bool shitOn;
-    public bool ShitOn
+	private bool shouldDeactivate;
+
+	public bool ShitOn
 	{
 		get
 		{
@@ -50,12 +53,20 @@ public class Tomato : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         interactable = GetComponent<Interactable>();
+        complexThrowable = GetComponent<ComplexThrowable>();
         tomatoSpawner = FindObjectOfType<TomatoSpawner>();
         Spawnoffset = transform.localScale.x / 2;
     }
 
 	private void FixedUpdate()
 	{
+        if(shouldDeactivate && interactable.attachedToHand == null)
+        {
+            complexThrowable.enabled = false;
+            interactable.enabled = false;
+            Invoke("DeactivateTomato" , 1f);
+		}
+
         if(startedSlicing && blade != null)
 		{
             if (Vector3.Distance(blade.transform.position, transform.position) >= maxDistance)
@@ -75,6 +86,10 @@ public class Tomato : MonoBehaviour
         poop.SetActive(false);
         shitOn = false;
 
+        complexThrowable.enabled = true;
+        interactable.enabled = true;
+        shouldDeactivate = false;
+
         rb.velocity = Vector3.zero;
         KinematicToggle(true);
 
@@ -88,6 +103,11 @@ public class Tomato : MonoBehaviour
 
     public void SlicingTomato(bool finished, GameObject blade)
     {
+        if(shouldDeactivate)
+		{
+            return;
+		}
+
         this.blade = blade;
 
         if (!startedSlicing && !finished)
@@ -102,7 +122,7 @@ public class Tomato : MonoBehaviour
 
             if (amountCut >= amountOfSlices)
             {
-                DeactivateTomato();
+                ShouldDeactivateTomate();
             }
             startedSlicing = false;
         }
@@ -126,14 +146,13 @@ public class Tomato : MonoBehaviour
         tomatoSlice.PoopOnFood = shitOn;
     }
 
-	public void DeactivateTomato()
+	public void ShouldDeactivateTomate()
     {
-        if(interactable.attachedToHand)
-		{
-            interactable.attachedToHand.DetachObject(gameObject);
-		}
-
+        shouldDeactivate = true;
         tomatoSpawner.SpawnNewTomato(this);
+    }
+    private void DeactivateTomato()
+	{
         gameObject.SetActive(false);
     }
 }

@@ -16,7 +16,7 @@ public class FoodDeactivator : MonoBehaviour
 		}
 		if(other.CompareTag("Tomato"))
 		{
-			other.GetComponent<Tomato>().DeactivateTomato();
+			other.GetComponentInParent<Tomato>().ShouldDeactivateTomate();
 		}
 	}
 }
