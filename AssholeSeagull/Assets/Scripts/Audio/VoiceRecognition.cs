@@ -52,6 +52,7 @@ public class VoiceRecognition : MonoBehaviour
 		Time.timeScale = 0;
 		Debug.Log("Pausing");
 	}
+
 	private void Resume()
 	{
 		Time.timeScale = 1;
@@ -67,4 +68,5 @@ public class VoiceRecognition : MonoBehaviour
 	{
 
 	}
+
 }

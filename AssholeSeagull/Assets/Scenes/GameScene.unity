@@ -3822,7 +3822,7 @@ GameObject:
   - component: {fileID: 1208248874}
   - component: {fileID: 1208248873}
   m_Layer: 0
-  m_Name: Seagull Hand Test
+  m_Name: Seagull Scare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3844,10 +3844,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   scareRadius: 5
-  scareVelocityThreshold: 5
+  scareVelocityThreshold: 3
   headTransform: {fileID: 238550177}
   rightHandTransform: {fileID: 238550176}
   leftHandTransform: {fileID: 238550175}
+  shout: -15
   shooSounds:
   - {fileID: 8300000, guid: 5a7478b1526f79742be4442791650a3f, type: 3}
   - {fileID: 8300000, guid: 7cc88d1d6fc11014d8b53018be7146ab, type: 3}

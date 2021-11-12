@@ -10,6 +10,7 @@ public static class GameManager
 	private static GameStatus currentGameStatus = GameStatus.none;
     private static GameSettings settings = (GameSettings)ScriptableObject.CreateInstance("GameSettings");
 	private static int score = 0;
+	private static string name = "null";
 
 	public static int Score
 	{
@@ -21,6 +22,14 @@ public static class GameManager
 		{
 			score = value;
 		}
+	}
+
+	public static string Name 
+	{ 
+		get 
+		{ 
+			return name;
+		} 
 	}
 
 	public static GameSettings Settings

@@ -142,7 +142,7 @@ namespace Valve.VR
             errorLog += "To attempt to force OpenVR initialization call SteamVR.Initialize(true). ";
 #endif
 
-            Debug.LogWarning(errorLog);
+            //Debug.LogWarning(errorLog);
         }
 
         private static SteamVR CreateInstance()
@@ -241,7 +241,7 @@ namespace Valve.VR
                     Debug.LogWarning("<b>[SteamVR]</b> Initialization Failed!  Make sure device's runtime is up to date.");
                     break;
                 default:
-                    Debug.LogWarning("<b>[SteamVR]</b> " + OpenVR.GetStringForHmdError(error));
+                    //Debug.LogWarning("<b>[SteamVR]</b> " + OpenVR.GetStringForHmdError(error));
                     break;
             }
         }
