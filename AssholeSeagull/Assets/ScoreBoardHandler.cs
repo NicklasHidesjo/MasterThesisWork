@@ -1,151 +1,201 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ScoreBoardHandler : MonoBehaviour
 {
-    const string normalPrivateCode = "kvTPuUPhA0ej7pKCVPGXIw5AVLBzaeFEOIcIsPdjfNWg";
-    const string normalPublicCode = "618e3af78f40bb127867c5c0";
+	const string normalPrivateCode = "kvTPuUPhA0ej7pKCVPGXIw5AVLBzaeFEOIcIsPdjfNWg";
+	const string normalPublicCode = "618e3af78f40bb127867c5c0";
 
-    void Start()
-    {
-        //GameManager.Score = 1000;
+	const string peacefulPrivateCode = "R3M4oftPNkmHIjVxu9E8QQ8ZOn9mBVpUGjojSMdjn23g";
+	const string peacefulPublicCode = "61922c9e8f40bb12786f1c21";
 
-        NormalScoreBoard.DownloadDone += ShowScoreBoard;
+	[SerializeField] private TextMeshProUGUI scoreBoardText;
 
-        LoadScoreBoard();
-    }
+	[Header("Names")]
+	[SerializeField] private TextMeshProUGUI[] names;
 
-    private static void LoadScoreBoard()
-    {
-        switch (GameManager.Settings.GameMode)
-        {
-            case GameModes.normal:
-                NormalScoreBoard.GetScoreBoardResult(normalPublicCode);
-                break;
-            case GameModes.sandbox:
-                break;
-            case GameModes.peaceful:
-                break;
-            case GameModes.chaos:
-                break;
-        }
-    }
+	[Header("Scores")]
+	[SerializeField] private TextMeshProUGUI[] scores;
 
-    // refactor this shizz
-    private void ShowScoreBoard(List<HighScore> highScores)
-    {
-        // if highscore isnt null.
-        if(highScores != null)
-        {
-            // (if we check highscore in main menu, display all highscore lists)
-            // (this is further development)
-            
-            // get what name the scoreboard should have (based on gamemode) 
-            string scoreBoardName = GameManager.Settings.GameMode.ToString();
+	NewHighScoreHandler newHighScoreHandler;
+	void Start()
+	{
+		newHighScoreHandler = FindObjectOfType<NewHighScoreHandler>();
+		GetScore.DownloadDone += ShowScoreBoard;
+		LoadScoreBoard();
+	}
 
-            int score = GameManager.Score;
-            
-            // make name unique for leaderboard (otherwise it will override and not show properly)
-            string uniqueName = GetUniqueName();
-            
-            if (highScores.Count > 0)
+	private static void LoadScoreBoard()
+	{
+		switch (GameManager.Settings.GameMode)
+		{
+			case GameModes.normal:
+				GetScore.GetScoreBoardResult(normalPublicCode);
+				break;
+			case GameModes.sandbox:
+
+				break;
+			case GameModes.peaceful:
+				GetScore.GetScoreBoardResult(peacefulPublicCode);
+				break;
+			case GameModes.chaos:
+
+				break;
+		}
+	}
+
+	// refactor this shizz
+	private void ShowScoreBoard(List<HighScore> highScores)
+	{
+		string scoreBoardName = GameManager.Settings.GameMode.ToString();
+
+		scoreBoardText.text = scoreBoardName;
+
+		string uniqueName = GetUniqueName();
+		// if highscore isnt null.
+		if(highScores != null)
+		{
+			// (if we check highscore in main menu, display all highscore lists)
+			// (this is further development)
+			int position = -1;
+
+			// get what name the scoreboard should have (based on gamemode) 
+
+			int score = GameManager.Score;
+
+			// make name unique for leaderboard (otherwise it will override and not show properly)
+
+			Debug.Log(highScores.Count);
+
+			if (highScores.Count >= 10)
+			{
+				if (score > highScores[highScores.Count].score)
+				{
+					Debug.Log("New Highscore");
+					// what position are we in.
+					position = highScores.Count -1;
+					for (int i = 0; i < highScores.Count; i++)
+					{
+						if (score > highScores[i].score)
+						{
+							position = i;
+							break;
+						}
+					}
+
+					HighScore replacement = new HighScore(uniqueName, score);
+
+					// Replace yourself with that position and move everyone else down.
+					for (int i = position; i < highScores.Count; i++)
+					{
+						HighScore toBeReplaced = highScores[i];
+						highScores[i] = replacement;
+						replacement = toBeReplaced;
+					}
+
+					// if new record placement make that slot shine and do fancy stuff.
+
+					for (int i = 0; i < highScores.Count; i++)
+					{
+						if (highScores[i].name == uniqueName)
+						{
+							uniqueName = GetUniqueName();
+							i = -1;
+						}
+					}
+
+					// Upload our score to online scoreboard.
+					AddScoreToBoard(new HighScore(uniqueName, score));
+				}
+				Debug.Log("No new highscore");
+			}
+			else
+			{
+				position = highScores.Count;
+				AddScoreToBoard(new HighScore(uniqueName, score));
+				highScores.Add(new HighScore(uniqueName, score));
+			}
+			// if not show your score under the highscores.
+			Debug.Log(position);
+
+			if(position >= 0)
             {
-                if (score > highScores[highScores.Count - 1].score)
+				newHighScoreHandler.NewHighScoreCelebration();
+            }
+			else
+            {
+				newHighScoreHandler.NoNewHighscore();
+				// display our score under all the other scores and do no new highscore stuff.
+            }
+
+            for (int i = 0; i < highScores.Count; i++)
+            {
+				string userName = highScores[i].name;
+				if(i == position)
                 {
-                    // what position are we in.
-                    int position = highScores.Count;
-                    for (int i = 0; i < highScores.Count; i++)
-                    {
-                        if (score > highScores[i].score)
-                        {
-                            position = i;
-                            break;
-                        }
-                    }
 
-                    HighScore replacement = new HighScore(uniqueName, score);
-
-                    // Replace yourself with that position and move everyone else down.
-                    for (int i = position; i < highScores.Count; i++)
-                    {
-                        HighScore toBeReplaced = highScores[i];
-                        highScores[i] = replacement;
-                        replacement = toBeReplaced;
-                    }
-
-                    // if new record placement make that slot shine and do fancy stuff.
-
-                    for (int i = 0; i < highScores.Count; i++)
-                    {
-                        if (highScores[i].name == uniqueName)
-                        {
-                            uniqueName = GetUniqueName();
-                            i = -1;
-                        }
-                    }
-
-                    // Upload our score to online scoreboard.
-                    AddScoreToBoard(new HighScore(uniqueName, score));
-                }
+					string[] name = userName.Split(new char[] { '#' });
+					userName = name[0];
+					// change the border and make it fancy!
+					// Effects and scale changes aswell as colours?
+				}
+				names[i].text = userName;
+				scores[i].text = highScores[i].score.ToString();
             }
-            else
-            {
-                AddScoreToBoard(new HighScore(uniqueName, score));
-            }
-            // if not show your score under the highscores.
-        }
-        else
-        {
-            Debug.Log("Could not retrieve highscore");
-        }
-        // else
-        // let player know that they couldnt retrieve scoreboard
-    }
+		}
+		else
+		{
+			// let player know that they couldnt retrieve scoreboard
+			Debug.Log("Could not retrieve highscore");
+		}
+	}
 
-    private static string GetUniqueName()
-    {
-        string uniqueName = GameManager.Name;
+	private static string GetUniqueName()
+	{
+		string uniqueName = GameManager.Name;
 
-        int number1 = Random.Range(0, 10);
-        int number2 = Random.Range(0, 10);
-        int number3 = Random.Range(0, 10);
-        int number4 = Random.Range(0, 10);
+		int number1 = Random.Range(0, 10);
+		int number2 = Random.Range(0, 10);
+		int number3 = Random.Range(0, 10);
+		int number4 = Random.Range(0, 10);
 
-        uniqueName += "#" + number1 + number2 + number3 + number4;
-        return uniqueName;
-    }
+		uniqueName += "#" + number1 + number2 + number3 + number4;
+		return uniqueName;
+	}
 
-    private static void AddScoreToBoard(HighScore highScore)
-    {
-        switch (GameManager.Settings.GameMode)
-        {
-            case GameModes.normal:
-                NormalScoreBoard.AddToScoreBoard(highScore, normalPrivateCode);
-                break;
-            case GameModes.sandbox:
-                break;
-            case GameModes.peaceful:
-                break;
-            case GameModes.chaos:
-                break;
-        }
-    }
+	private static void AddScoreToBoard(HighScore highScore)
+	{
+		switch (GameManager.Settings.GameMode)
+		{
+			case GameModes.normal:
+				GetScore.AddToScoreBoard(highScore, normalPrivateCode);
+				break;
+			case GameModes.sandbox:
+				break;
+			case GameModes.peaceful:
+				GetScore.AddToScoreBoard(highScore, peacefulPrivateCode);
+				break;
+			case GameModes.chaos:
+				break;
+		}
+	}
 
-    private void OnDestroy()
-    {
-        NormalScoreBoard.DownloadDone -= ShowScoreBoard;
-    }
+	private void OnDestroy()
+	{
+		GetScore.DownloadDone -= ShowScoreBoard;
+	}
 }
 
 public struct HighScore
 {
-    public string name;
-    public int score;
+	public string name;
+	public int score;
 
-    public HighScore(string name, int score)
-    {
-        this.name = name;
-        this.score = score;
-    }
+	public HighScore(string name, int score)
+	{
+		this.name = name;
+		this.score = score;
+	}
 }

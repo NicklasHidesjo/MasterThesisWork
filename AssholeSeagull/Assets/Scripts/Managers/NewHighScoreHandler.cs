@@ -6,8 +6,12 @@ public class NewHighScoreHandler : MonoBehaviour
 {
     [SerializeField] private GameObject newRecordObject;
     [SerializeField] private AudioSource celebrationSoundPlayer;
+
     [SerializeField] private AudioClip celebrationSound;
     [SerializeField] private GameObject CelebrationCanvasObject;
+
+    [SerializeField] private AudioClip noNewRecordSound;
+
 
     // maybe the sound related things here should be set into a audio script that
     // handles all audio everywhere.
@@ -22,6 +26,12 @@ public class NewHighScoreHandler : MonoBehaviour
         // set our celebrationSoundPlayers clip to our celebration sound
         celebrationSoundPlayer.clip = celebrationSound;
         // play the clip
+        celebrationSoundPlayer.Play();
+    }
+
+    public void NoNewHighscore()
+    {
+        celebrationSoundPlayer.clip = noNewRecordSound;
         celebrationSoundPlayer.Play();
     }
 }

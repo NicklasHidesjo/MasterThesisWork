@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public delegate void DownloadDone(List<HighScore> highScores);
-public static class NormalScoreBoard
+public static class GetScore
 {
 	const string webURL = "http://dreamlo.com/lb/";
 
@@ -17,12 +17,12 @@ public static class NormalScoreBoard
 		HttpClient www = new HttpClient();
 
 		var result = await www.GetStringAsync(webURL + publicCode + "/pipe/0/10");
-
 		List<HighScore> highScores = null;
 
 		if (string.IsNullOrEmpty(result))
 		{
-			Debug.Log("Error uploading: " + result);
+			highScores = new List<HighScore>();
+			Debug.Log("Error downloading: " + result);
 		}
 		else
 		{
