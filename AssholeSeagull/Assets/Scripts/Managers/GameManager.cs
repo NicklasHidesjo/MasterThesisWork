@@ -8,7 +8,7 @@ using UnityEngine;
 public static class GameManager
 {
 	private static GameStatus currentGameStatus = GameStatus.none;
-    private static GameSettings settings = (GameSettings)ScriptableObject.CreateInstance("GameSettings");
+	private static GameSettings settings = (GameSettings)ScriptableObject.CreateInstance("GameSettings");
 	private static int score = 0;
 	private static string name = "null";
 
@@ -27,9 +27,13 @@ public static class GameManager
 	public static string Name 
 	{ 
 		get 
-		{ 
+		{
 			return name;
-		} 
+		}
+		set 
+		{
+			name = value;
+		}
 	}
 
 	public static GameSettings Settings
@@ -46,37 +50,37 @@ public static class GameManager
 	}
 
 	public static GameStatus CurrentGameStatus
-    {
+	{
 		get 
 		{
-            if (currentGameStatus == GameStatus.none)
-            {
-                SetCurrentGameStatus();
-            }
-            return currentGameStatus;
+			if (currentGameStatus == GameStatus.none)
+			{
+				SetCurrentGameStatus();
+			}
+			return currentGameStatus;
 		}
 		set
-        {
+		{
 			currentGameStatus = value;
-        }
-    }
+		}
+	}
 
-    private static void SetCurrentGameStatus()
-    {
-        switch (SceneLoader.GetSceneName())
-        {
-            case "MainMenu":
-                currentGameStatus = GameStatus.menu;
-                break;
-            case "GameScene":
-                currentGameStatus = GameStatus.ingame;
-                break;
-            case "EndScene":
-                currentGameStatus = GameStatus.gameover;
-                break;
-            default:
-                Debug.LogError("Scene " + SceneLoader.GetSceneName() + " not found");
-                break;
-        }
-    }
+	private static void SetCurrentGameStatus()
+	{
+		switch (SceneLoader.GetSceneName())
+		{
+			case "MainMenu":
+				currentGameStatus = GameStatus.menu;
+				break;
+			case "GameScene":
+				currentGameStatus = GameStatus.ingame;
+				break;
+			case "EndScene":
+				currentGameStatus = GameStatus.gameover;
+				break;
+			default:
+				Debug.LogError("Scene " + SceneLoader.GetSceneName() + " not found");
+				break;
+		}
+	}
 }

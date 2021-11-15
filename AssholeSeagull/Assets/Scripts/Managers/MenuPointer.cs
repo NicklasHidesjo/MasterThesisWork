@@ -21,6 +21,9 @@ public class MenuPointer : MonoBehaviour // rename to something better
     [SerializeField] private GameSettings normalMode;
     [SerializeField] private GameSettings peacefulMode;
 
+    [SerializeField] private GameObject setNameField;
+    [SerializeField] private GameObject gameButtons;
+
     private AudioSource buttonPlayer;
 
     private void Start()
@@ -73,6 +76,11 @@ public class MenuPointer : MonoBehaviour // rename to something better
             SceneLoader.LoadScene("MainMenu");
 		}
 
+        if(e.target.name == "SetName")
+        {
+            setNameField.SetActive(true);
+            gameButtons.SetActive(false);
+        }
 
     }
 

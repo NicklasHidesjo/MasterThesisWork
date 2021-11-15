@@ -67,11 +67,9 @@ public class ScoreBoardHandler : MonoBehaviour
 
 			// make name unique for leaderboard (otherwise it will override and not show properly)
 
-			Debug.Log(highScores.Count);
-
 			if (highScores.Count >= 10)
 			{
-				if (score > highScores[highScores.Count].score)
+				if (score > highScores[highScores.Count - 1].score)
 				{
 					Debug.Log("New Highscore");
 					// what position are we in.
@@ -117,9 +115,8 @@ public class ScoreBoardHandler : MonoBehaviour
 				AddScoreToBoard(new HighScore(uniqueName, score));
 				highScores.Add(new HighScore(uniqueName, score));
 			}
-			// if not show your score under the highscores.
-			Debug.Log(position);
 
+			// if not show your score under the highscores.
 			if(position >= 0)
             {
 				newHighScoreHandler.NewHighScoreCelebration();
