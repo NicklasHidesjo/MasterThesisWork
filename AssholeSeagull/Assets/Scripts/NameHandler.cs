@@ -31,57 +31,82 @@ public class NameHandler : MonoBehaviour
 
     private void PointerClick(object sender, PointerEventArgs e)
     {
-        if(e.target.name == "Enter")
-        {
-            if(InappropriateName(playerName))
-            {
-                playerName = punishment;
-            }
+        HandleChangingName(e.target.name);
+    }
 
-            GameManager.Name = playerName;
-            nameText2.text = playerName;
-            gameButtons.SetActive(true);
-            gameObject.SetActive(false);
+    public void HandleChangingName(string input)
+    {
+        if (input == "Enter")
+        {
+            SetPlayerName();
             return;
         }
-        if(e.target.name == "Clear")
+        if (input == "Clear")
         {
-            playerName = "";
-
-            SetNameText();
+            EmptyPlayerName();
             return;
         }
-        if(e.target.name == "Delete")
+        if (input == "Delete" || input == "BackSpace")
         {
-            char[] characters = playerName.ToCharArray();
-            playerName = "";
+            RemoveLastCharacter();
+            return;
+        }
+        AddCharacter(input);
+    }
 
-            for (int i = 0; i < characters.Length - 1; i++)
-            {
-                playerName += characters[i];
-            }
-           
+    public void SetPlayerName()
+    {
+        if (InappropriateName(playerName))
+        {
+            playerName = punishment;
+        }
 
-            SetNameText();
+        GameManager.Name = playerName;
+        nameText2.text = playerName;
+        gameButtons.SetActive(true);
+        gameObject.SetActive(false);
+    }
+    
+    public void EmptyPlayerName()
+    {
+        playerName = "";
+
+        SetNameText();
+    }
+
+    public void RemoveLastCharacter()
+    {
+        char[] characters = playerName.ToCharArray();
+        playerName = "";
+
+        for (int i = 0; i < characters.Length - 1; i++)
+        {
+            playerName += characters[i];
+        }
+
+
+        SetNameText();
+    }
+
+    public void AddCharacter(string character)
+    {
+        if (playerName.ToCharArray().Length >= maxCharacters)
+        {
             return;
         }
 
-        if(playerName.ToCharArray().Length >= maxCharacters)
-        {
-            return;
-        }
-
-        if(e.target.name == "Space")
+        if (character == "Space" || character == "Dash")
         {
             playerName += " ";
         }
         else
         {
-            playerName += e.target.name;
+            playerName += character;
         }
 
         SetNameText();
     }
+
 
     private bool InappropriateName(string possibleName)
     {
