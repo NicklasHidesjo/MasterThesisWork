@@ -5,12 +5,24 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
+public delegate void Pause(bool value);
+public delegate void Restart();
+public delegate void MainMenu();
+public delegate void Recenter();
+public delegate void Quit();
 public class VoiceRecognition : MonoBehaviour
 {
 	/// <Todo>
 	/// Use events in here to call on different things, like scareSeagull, pause/play, 
 	/// recenter, etc.
 	/// </summary>
+	/// 
+	public static event Pause pause;
+	public static event Restart Restart;
+	public static event MainMenu MainMenu;
+	public static event Recenter Recenter;
+	public static event Quit Quit;
+
 
 	private KeywordRecognizer keywordRecognizer;
 
@@ -24,13 +36,18 @@ public class VoiceRecognition : MonoBehaviour
 
 	private void GenerateKeyWords()
 	{
-		actions.Add("Pause", Pause);
-		actions.Add("Stop", Pause);
-		actions.Add("Resume", Resume);
-		actions.Add("Play", Resume);
+		actions.Add("Pause", CallPause);
+		actions.Add("Stop", CallPause);
+		actions.Add("Resume", CallResume);
+		actions.Add("Play", CallResume);
 
-		actions.Add("Recenter", Recenter);
-		actions.Add("Restart", Restart);
+		actions.Add("Recenter", CallRecenter);
+		actions.Add("Restart", CallRestart);
+
+		actions.Add("Quit", CallQuit);
+		actions.Add("MainMenu", CallLoadMainMenu);
+		actions.Add("Main", CallLoadMainMenu);
+		actions.Add("Menu", CallLoadMainMenu);
 	}
 
 	private void InitializeSpeechRecognition()
@@ -47,26 +64,34 @@ public class VoiceRecognition : MonoBehaviour
 		actions[speech.text].Invoke();
 	}
 
-	private void Pause()
+	private void CallPause()
 	{
-		Time.timeScale = 0;
-		Debug.Log("Pausing");
+		pause?.Invoke(true);
 	}
 
-	private void Resume()
+	private void CallResume()
 	{
-		Time.timeScale = 1;
-		Debug.Log("Resuming");
+		pause.Invoke(false);
 	}
 
-	private void Restart()
+	private void CallRestart()
 	{
-		SceneLoader.ReloadScene();
+		Restart?.Invoke();
 	}
 
-	private void Recenter()
+	private void CallRecenter()
 	{
-
+		Recenter?.Invoke();
 	}
+
+	private void CallLoadMainMenu()
+    {
+		MainMenu?.Invoke();
+    }
+
+	private void CallQuit()
+    {
+		Quit?.Invoke();
+    }
 
 }

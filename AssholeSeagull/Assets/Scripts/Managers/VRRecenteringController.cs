@@ -76,7 +76,7 @@ public class VRRecenteringController : MonoBehaviour
         }
     }
 
-    private void Recenter()
+    public void Recenter()
     {
         // check so that we have a desired position for our head.
         if (desiredHeadPosition != null)

@@ -16,6 +16,7 @@ public class CharacterRecognizer : MonoBehaviour
 	{
 		GenerateKeyWords();
 		nameHandler = GetComponent<NameHandler>();
+		keywordRecognizer = new KeywordRecognizer(inputs.Keys.ToArray(), ConfidenceLevel.Medium);
 	}
 
 	private void OnEnable()
@@ -62,8 +63,6 @@ public class CharacterRecognizer : MonoBehaviour
 
 	private void InitializeSpeechRecognition()
 	{
-		keywordRecognizer = new KeywordRecognizer(inputs.Keys.ToArray(), ConfidenceLevel.Low);
-
 		keywordRecognizer.OnPhraseRecognized += WordRecognized;
 		keywordRecognizer.Start();
 	}

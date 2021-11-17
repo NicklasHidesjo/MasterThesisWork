@@ -1510,6 +1510,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7843707158497119932, guid: 542f3d5a57dbf954b8cd2fc8d43d1e0f, type: 3}
+      propertyPath: shout
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7843707158497119932, guid: 542f3d5a57dbf954b8cd2fc8d43d1e0f, type: 3}
       propertyPath: shooPlayer
       value: 
       objectReference: {fileID: 228855272}
