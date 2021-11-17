@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 8916402399794109883}
   - component: {fileID: 8916402399794109876}
   - component: {fileID: 1288685516}
+  - component: {fileID: -1296232076085465402}
   m_Layer: 0
   m_Name: ButterKnife_Handle
   m_TagString: Untagged
@@ -243,7 +244,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerTransform: {fileID: 0}
-  playerReach: 1.5
+  playerReach: 5
+--- !u!208 &-1296232076085465402
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916402399794109877}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.05, y: 0.28, z: 0.05}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.12, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8916402400118032844
 GameObject:
   m_ObjectHideFlags: 0

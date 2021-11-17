@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: -5484796284800143945}
   - component: {fileID: 805895612982077718}
   - component: {fileID: -3972678206421758922}
+  - component: {fileID: 2224908072412917628}
   m_Layer: 6
   m_Name: Food_Tomato_Prefab
   m_TagString: Food
@@ -277,6 +278,22 @@ MonoBehaviour:
   onPlateLayer:
     serializedVersion: 2
     m_Bits: 16448
+--- !u!208 &2224908072412917628
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6949967428795703072}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &5269822368163065306
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 7685560494329656661}
   - component: {fileID: 937725396493250931}
   - component: {fileID: -7832818227864093501}
+  - component: {fileID: 108270863}
   m_Layer: 0
   m_Name: Bread_Package_Prefab
   m_TagString: Untagged
@@ -257,9 +258,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodItem: {fileID: -7339756543294674793, guid: 9b1c76de4f645ad448a89cc3fef9c5f4, type: 3}
+  foodParent: {fileID: 0}
   foodName: Bread
   spawnPosition: {fileID: 4702336324981991718}
   foodPoolSize: 10
+  automaticSpawning: 1
   poop: {fileID: 997042677067829873}
 --- !u!82 &-7832818227864093501
 AudioSource:
@@ -357,6 +360,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!208 &108270863
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7685560494329656662}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.12, y: 0.14, z: 0.375}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.15, z: -0.16}
+  m_TimeToStationary: 0.5
 --- !u!1 &8953406500410178553
 GameObject:
   m_ObjectHideFlags: 0

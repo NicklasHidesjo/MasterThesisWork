@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2559719714737470067}
   - component: {fileID: 986989476917638192}
   - component: {fileID: 415265465}
+  - component: {fileID: 9174591063178444489}
   m_Layer: 0
   m_Name: CheeseSlicer
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 1730951323799996840}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.625, y: 3.453, z: 4.724}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.010000001, y: 0.01, z: 0.010000001}
   m_Children:
   - {fileID: 5070863830382625364}
   m_Father: {fileID: 0}
@@ -182,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerTransform: {fileID: 0}
-  playerReach: 1.5
+  playerReach: 5
 --- !u!54 &415265465
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -199,6 +200,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &9174591063178444489
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730951323799996840}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 4.991, y: 2.398, z: 14.376}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2098333557339951530
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +228,7 @@ GameObject:
   - component: {fileID: 2796128534928080450}
   - component: {fileID: 4542439012520263064}
   - component: {fileID: 2797576280321547286}
+  - component: {fileID: 3190262482584061624}
   m_Layer: 0
   m_Name: Tip
   m_TagString: Untagged
@@ -296,6 +314,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4068373912626513877, guid: fcbfcd8d8a3a04648b62885aaed62a21, type: 3}
+--- !u!208 &3190262482584061624
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098333557339951530}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 9.67, y: 1.5810001, z: 12.788001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.7120001, z: 11.161}
+  m_TimeToStationary: 0.5
 --- !u!1 &5701435143285821161
 GameObject:
   m_ObjectHideFlags: 0

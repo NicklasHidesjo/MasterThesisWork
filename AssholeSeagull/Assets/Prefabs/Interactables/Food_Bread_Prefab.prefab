@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 8178626319474782517}
   - component: {fileID: 1090416950764193368}
   - component: {fileID: 625748707447088132}
+  - component: {fileID: 4159900723799461256}
   m_Layer: 0
   m_Name: Food_Bread_Prefab
   m_TagString: Food
@@ -538,6 +539,22 @@ MonoBehaviour:
   onPlateLayer:
     serializedVersion: 2
     m_Bits: 16448
+--- !u!208 &4159900723799461256
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709186159823088714}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3676524338968520626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,13 +1199,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a55bd4a7c2aa46647a60456a4a4fd56d, type: 3}
---- !u!1 &6183704776147421921 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5615186446562917780, guid: a55bd4a7c2aa46647a60456a4a4fd56d, type: 3}
-  m_PrefabInstance: {fileID: 1746773136308647797}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8248032690270106296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7659267137382696397, guid: a55bd4a7c2aa46647a60456a4a4fd56d, type: 3}
+  m_PrefabInstance: {fileID: 1746773136308647797}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6183704776147421921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5615186446562917780, guid: a55bd4a7c2aa46647a60456a4a4fd56d, type: 3}
   m_PrefabInstance: {fileID: 1746773136308647797}
   m_PrefabAsset: {fileID: 0}

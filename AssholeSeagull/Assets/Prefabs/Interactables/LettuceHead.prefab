@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 3598575637077634255}
   - component: {fileID: 4333469412302729222}
   - component: {fileID: 7702793239958508256}
+  - component: {fileID: 2111582794793940833}
   m_Layer: 16
   m_Name: LettuceHead
   m_TagString: Head
@@ -470,6 +471,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!208 &2111582794793940833
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333346124301808654}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.15300001, y: 0.16800001, z: 0.091000006}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.004, y: 0, z: 0.089}
+  m_TimeToStationary: 0.5
 --- !u!1 &8128090556852904117
 GameObject:
   m_ObjectHideFlags: 0
