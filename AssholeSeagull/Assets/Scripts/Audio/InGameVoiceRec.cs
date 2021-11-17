@@ -7,7 +7,7 @@ using UnityEngine.Windows.Speech;
 
 public delegate void Pause(bool value);
 public delegate void Restart();
-public delegate void MainMenu();
+public delegate void MainMenuEvent();
 public delegate void Recenter();
 public delegate void Quit();
 public class InGameVoiceRec : MonoBehaviour
@@ -19,7 +19,7 @@ public class InGameVoiceRec : MonoBehaviour
 	/// 
 	public static event Pause pause;
 	public static event Restart Restart;
-	public static event MainMenu MainMenu;
+	public static event MainMenuEvent MainMenu;
 	public static event Recenter Recenter;
 	public static event Quit Quit;
 

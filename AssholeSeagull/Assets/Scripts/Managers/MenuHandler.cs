@@ -5,12 +5,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Valve.VR.Extras;
 
-public class MenuPointer : MonoBehaviour // rename to something better
+public class MenuHandler : MonoBehaviour // rename to something better
 {
     // this script uses events from SteamVR_LaserPointer 
     // to see if either the right or left hand clicks any
     // buttons. 
-
 
     // look into the posibility for it to not require being buttons in the canvas
     // but just objects with colliders.
@@ -35,6 +34,20 @@ public class MenuPointer : MonoBehaviour // rename to something better
 	{
 		rightHand.PointerClick += PointerClick;
 		leftHand.PointerClick += PointerClick;
+
+        MenuVoiceRec.Play += PlayNormal;
+        MenuVoiceRec.QuitGame += Quit;
+        MenuVoiceRec.FreeMode += PlayFreeRoam;
+
+        if(SceneLoader.GetSceneName() == "MainMenu")
+        {
+            MenuVoiceRec.ChangeName += ChangeName;
+        }
+        else if(SceneLoader.GetSceneName() == "EndScene")
+        {
+            MenuVoiceRec.MainMenu += MainMenu;
+            MenuVoiceRec.Replay += Replay;
+        }
 	}
 	private void GetReferences()
 	{
@@ -45,46 +58,76 @@ public class MenuPointer : MonoBehaviour // rename to something better
     {
         if (e.target.name == "Play")
         {
-            PlayButtonSound();
-            GameManager.Settings = normalMode;
-            Debug.Log(GameManager.Settings);
-            LoadGame();
+            PlayNormal();
         }
         if (e.target.name == "Free Roam")
         {
-            PlayButtonSound();
-            GameManager.Settings = peacefulMode;
-            Debug.Log(GameManager.Settings);
-            LoadGame();
+            PlayFreeRoam();
         }
         if (e.target.name == "Replay")
-		{
-			PlayButtonSound();
-			LoadGame();
-		}
-
-
-		if (e.target.name == "Quit")
         {
-            PlayButtonSound();
-            SceneLoader.Quit();
+            Replay();
         }
 
-        if(e.target.name == "Main Menu")
-		{
-            PlayButtonSound();
-            SceneLoader.LoadScene("MainMenu");
-		}
 
-        if(e.target.name == "SetName")
+        if (e.target.name == "Quit")
         {
-            setNameField.SetActive(true);
-            gameButtons.SetActive(false);
+            Quit();
+        }
+
+        if (e.target.name == "Main Menu")
+        {
+            MainMenu();
+        }
+
+        if (e.target.name == "SetName")
+        {
+            ChangeName();
         }
 
     }
 
-	private void LoadGame()
+    private void MainMenu()
+    {
+        PlayButtonSound();
+        SceneLoader.LoadScene("MainMenu");
+    }
+
+    private void Quit()
+    {
+        PlayButtonSound();
+        SceneLoader.Quit();
+    }
+
+    private void Replay()
+    {
+        PlayButtonSound();
+        LoadGame();
+    }
+
+    private void PlayFreeRoam()
+    {
+        PlayButtonSound();
+        GameManager.Settings = peacefulMode;
+        Debug.Log(GameManager.Settings);
+        LoadGame();
+    }
+
+    private void PlayNormal()
+    {
+        PlayButtonSound();
+        GameManager.Settings = normalMode;
+        Debug.Log(GameManager.Settings);
+        LoadGame();
+    }
+
+    private void ChangeName()
+    {
+        setNameField.SetActive(true);
+        gameButtons.SetActive(false);
+    }
+
+    private void LoadGame()
 	{
 		SceneLoader.LoadScene("NewGameScene");
 	}
@@ -102,5 +145,6 @@ public class MenuPointer : MonoBehaviour // rename to something better
 	{
 		rightHand.PointerClick -= PointerClick;
 		leftHand.PointerClick -= PointerClick;
+        MenuVoiceRec.ChangeName -= ChangeName;
 	}
 }
