@@ -10,7 +10,7 @@ public delegate void Restart();
 public delegate void MainMenu();
 public delegate void Recenter();
 public delegate void Quit();
-public class VoiceRecognition : MonoBehaviour
+public class InGameVoiceRec : MonoBehaviour
 {
 	/// <Todo>
 	/// Use events in here to call on different things, like scareSeagull, pause/play, 

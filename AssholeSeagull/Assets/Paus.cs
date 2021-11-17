@@ -105,11 +105,11 @@ public class Paus : MonoBehaviour
         rightHand.PointerOut += PointerEndHover;
 
 
-        VoiceRecognition.pause += TogglePaus;
-        VoiceRecognition.Recenter += Recenter;
-        VoiceRecognition.Restart += Restart;
-        VoiceRecognition.MainMenu += GoToMainMenu;
-        VoiceRecognition.Quit += Quit;
+        InGameVoiceRec.pause += TogglePaus;
+        InGameVoiceRec.Recenter += Recenter;
+        InGameVoiceRec.Restart += Restart;
+        InGameVoiceRec.MainMenu += GoToMainMenu;
+        InGameVoiceRec.Quit += Quit;
 
 
     }
@@ -204,10 +204,10 @@ public class Paus : MonoBehaviour
         leftHand.PointerOut -= PointerEndHover;
         rightHand.PointerOut -= PointerEndHover;
 
-        VoiceRecognition.pause -= TogglePaus;
-        VoiceRecognition.Recenter -= Recenter;
-        VoiceRecognition.Restart -= Restart;
-        VoiceRecognition.MainMenu -= GoToMainMenu;
-        VoiceRecognition.Quit -= Quit;
+        InGameVoiceRec.pause -= TogglePaus;
+        InGameVoiceRec.Recenter -= Recenter;
+        InGameVoiceRec.Restart -= Restart;
+        InGameVoiceRec.MainMenu -= GoToMainMenu;
+        InGameVoiceRec.Quit -= Quit;
     }
 }
