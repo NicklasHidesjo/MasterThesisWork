@@ -86,7 +86,7 @@ public class MenuPointer : MonoBehaviour // rename to something better
 
 	private void LoadGame()
 	{
-		SceneLoader.LoadScene("GameScene");
+		SceneLoader.LoadScene("NewGameScene");
 	}
 
 	public void PlayButtonSound()
