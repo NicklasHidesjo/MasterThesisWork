@@ -24,7 +24,7 @@ public class VoiceRecognition : MonoBehaviour
 	public static event Quit Quit;
 
 
-	private KeywordRecognizer keywordRecognizer;
+	private KeywordRecognizer actionRecognizer;
 
 	private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
@@ -52,10 +52,10 @@ public class VoiceRecognition : MonoBehaviour
 
 	private void InitializeSpeechRecognition()
 	{
-		keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray(),ConfidenceLevel.Low);
+		actionRecognizer = new KeywordRecognizer(actions.Keys.ToArray(),ConfidenceLevel.Low);
 
-		keywordRecognizer.OnPhraseRecognized += WordRecognized;
-		keywordRecognizer.Start();
+		actionRecognizer.OnPhraseRecognized += WordRecognized;
+		actionRecognizer.Start();
 	}
 
 	private void WordRecognized(PhraseRecognizedEventArgs speech)
