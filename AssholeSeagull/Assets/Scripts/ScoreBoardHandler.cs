@@ -40,10 +40,11 @@ public class ScoreBoardHandler : MonoBehaviour
 				break;
 
 			case GameModes.Peaceful:
+				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
 				break;
 
 			case GameModes.Chaos:
-
+				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
 				break;
 
 			default:
@@ -181,9 +182,11 @@ public class ScoreBoardHandler : MonoBehaviour
 				break;
 
 			case GameModes.Peaceful:
+				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
 				break;
 
 			case GameModes.Chaos:
+				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
 				break;
 
 			default:

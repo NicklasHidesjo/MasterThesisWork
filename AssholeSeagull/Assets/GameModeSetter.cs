@@ -12,20 +12,20 @@ public class GameModeSetter : MonoBehaviour
 	[SerializeField] private GameObject border;
 	[SerializeField] private List<Transform> borderPositions = new List<Transform>();
 
-	[SerializeField] private GameSettings normal;
-	[SerializeField] private GameSettings sandbox;
+	[SerializeField] private List<GameSettings> gameModes = new List<GameSettings>();
 
 	void Start()
 	{
 		rightHand.PointerClick += PointerClick;
 		leftHand.PointerClick += PointerClick;
 
-		SetBorderPos();
+		string lastGameMode = PlayerPrefs.GetString("LastGameMode", "Normal");
+
+		SetBorderPos(lastGameMode);
 	}
 
-	private void SetBorderPos()
+	private void SetBorderPos(string gameMode)
 	{
-		string gameMode = GameManager.Settings.GameMode.ToString();
 		Debug.Log(gameMode);
 
 		for (int index = 0; index < borderPositions.Count; index++)
@@ -33,6 +33,8 @@ public class GameModeSetter : MonoBehaviour
 			if (gameMode == borderPositions[index].name)
 			{
 				border.transform.position = borderPositions[index].position;
+				GameManager.Settings = gameModes[index];
+				PlayerPrefs.SetString("LastGameMode", gameMode);
 				break;
 			}
 		}
@@ -43,13 +45,15 @@ public class GameModeSetter : MonoBehaviour
 		switch (e.target.name)
 		{
 			case "Normal":
-				GameManager.Settings = normal;
-				SetBorderPos();
+				SetBorderPos("Normal");
 				break;
 
 			case "Sandbox":
-				GameManager.Settings = sandbox;
-				SetBorderPos();
+				SetBorderPos("Sandbox");
+				break;
+
+			case "Chaos":
+				SetBorderPos("Chaos");
 				break;
 
 			default:
