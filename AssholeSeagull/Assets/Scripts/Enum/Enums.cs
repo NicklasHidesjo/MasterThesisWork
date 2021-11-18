@@ -14,7 +14,6 @@ public enum GameModes
 {
     Normal,
     Sandbox,
-    Peaceful,
     Chaos
 }
 
