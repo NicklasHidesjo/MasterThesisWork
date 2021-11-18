@@ -19,12 +19,14 @@ public class GameModeSetter : MonoBehaviour
 		rightHand.PointerClick += PointerClick;
 		leftHand.PointerClick += PointerClick;
 
+		MenuVoiceRec.SetGameMode += SetGameMode;
+
 		string lastGameMode = PlayerPrefs.GetString("LastGameMode", "Normal");
 
-		SetBorderPos(lastGameMode);
+		SetGameMode(lastGameMode);
 	}
 
-	private void SetBorderPos(string gameMode)
+	private void SetGameMode(string gameMode)
 	{
 		Debug.Log(gameMode);
 
@@ -38,6 +40,7 @@ public class GameModeSetter : MonoBehaviour
 				break;
 			}
 		}
+		// play the sound
 	}
 
 	private void PointerClick(object sender, PointerEventArgs e)
@@ -45,15 +48,15 @@ public class GameModeSetter : MonoBehaviour
 		switch (e.target.name)
 		{
 			case "Normal":
-				SetBorderPos("Normal");
+				SetGameMode("Normal");
 				break;
 
 			case "Sandbox":
-				SetBorderPos("Sandbox");
+				SetGameMode("Sandbox");
 				break;
 
 			case "Chaos":
-				SetBorderPos("Chaos");
+				SetGameMode("Chaos");
 				break;
 
 			default:
@@ -61,4 +64,9 @@ public class GameModeSetter : MonoBehaviour
 				break;
 		}
 	}
+
+    private void OnDisable()
+    {
+        MenuVoiceRec.SetGameMode -= SetGameMode;
+    }
 }

@@ -11,16 +11,19 @@ public class CharacterRecognizer : MonoBehaviour
 	private Dictionary<string, string> inputs = new Dictionary<string, string>();
 
 	private NameHandler nameHandler;
+	private MenuVoiceRec menuVoiceRec;
 
 	private void Awake()
 	{
 		GenerateKeyWords();
+		menuVoiceRec = FindObjectOfType<MenuVoiceRec>();
 		nameHandler = GetComponent<NameHandler>();
-		keywordRecognizer = new KeywordRecognizer(inputs.Keys.ToArray(), ConfidenceLevel.Medium);
+		keywordRecognizer = new KeywordRecognizer(inputs.Keys.ToArray(), ConfidenceLevel.Low);
 	}
 
 	private void OnEnable()
     {
+		menuVoiceRec.StopRecognizer();
 		InitializeSpeechRecognition();
 	}
 
@@ -75,7 +78,13 @@ public class CharacterRecognizer : MonoBehaviour
 
 	private void OnDisable()
     {
+        menuVoiceRec.StartRecognizer();
+        StopReconizer();
+    }
+
+    private void StopReconizer()
+    {
         keywordRecognizer.OnPhraseRecognized -= WordRecognized;
-		keywordRecognizer.Stop();
+        keywordRecognizer.Stop();
     }
 }

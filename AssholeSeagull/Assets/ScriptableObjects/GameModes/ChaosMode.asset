@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ed92b7cbdd2204ba7f077a5305fcb2, type: 3}
   m_Name: ChaosMode
   m_EditorClassIdentifier: 
-  GameMode: 3
+  GameMode: 2
   GameDuration: 90
   TimerOff: 0
   AlwaysFreshFood: 0

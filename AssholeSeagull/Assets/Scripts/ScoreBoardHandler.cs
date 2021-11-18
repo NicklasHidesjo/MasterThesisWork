@@ -117,8 +117,34 @@ public class ScoreBoardHandler : MonoBehaviour
 				}
 				Debug.Log("No new highscore");
 			}
-			else
+			else if (highScores.Count > 0)
 			{
+				position = highScores.Count;
+				AddScoreToBoard(new HighScore(uniqueName, score));
+				highScores.Add(new HighScore(uniqueName, score));
+
+				position = highScores.Count - 1;
+				for (int i = 0; i < highScores.Count; i++)
+				{
+					if (score > highScores[i].score)
+					{
+						position = i;
+						break;
+					}
+				}
+
+				HighScore replacement = highScores[highScores.Count - 1];
+
+				// Replace yourself with that position and move everyone else down.
+				for (int i = position; i < highScores.Count; i++)
+				{
+					HighScore toBeReplaced = highScores[i];
+					highScores[i] = replacement;
+					replacement = toBeReplaced;
+				}
+			}
+			else
+            {
 				position = highScores.Count;
 				AddScoreToBoard(new HighScore(uniqueName, score));
 				highScores.Add(new HighScore(uniqueName, score));

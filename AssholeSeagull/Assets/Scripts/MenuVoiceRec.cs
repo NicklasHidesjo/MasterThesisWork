@@ -13,6 +13,8 @@ public delegate void FreeMode();
 public delegate void Replay();
 public delegate void MainMenu();
 
+public delegate void SetGameMode(string gameMode);
+
 public class MenuVoiceRec : MonoBehaviour
 {
     public static event ChangeName ChangeName;
@@ -21,6 +23,7 @@ public class MenuVoiceRec : MonoBehaviour
     public static event FreeMode FreeMode;
     public static event Replay Replay;
     public static event MainMenu MainMenu;
+    public static event SetGameMode SetGameMode;
     
     private KeywordRecognizer actionRecognizer;
 
@@ -47,6 +50,23 @@ public class MenuVoiceRec : MonoBehaviour
 
         actions.Add("Replay", CallReplay);
         actions.Add("PlayAgain", CallReplay);
+
+        actions.Add("Sandbox", CallSetSandbox);
+        actions.Add("Normal", CallSetNormal);
+        actions.Add("Chaos", CallSetChaos);
+    }
+
+    private void CallSetNormal()
+    {
+        SetGameMode?.Invoke("Normal");
+    }
+    private void CallSetChaos()
+    {
+        SetGameMode?.Invoke("Chaos");
+    }
+    private void CallSetSandbox()
+    {
+        SetGameMode?.Invoke("Sandbox");
     }
 
     private void CallChangeName()
@@ -93,4 +113,12 @@ public class MenuVoiceRec : MonoBehaviour
         actions[speech.text].Invoke();
     }
 
+    public void StopRecognizer()
+    {
+        actionRecognizer.Stop();
+    }
+    public void StartRecognizer()
+    {
+        actionRecognizer.Start();
+    }
 }

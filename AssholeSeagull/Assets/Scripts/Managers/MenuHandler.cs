@@ -19,7 +19,7 @@ public class MenuHandler : MonoBehaviour // rename to something better
 
     private AudioSource buttonPlayer;
 
-    private void Start()
+    private void Awake()
 	{
 		SubscribeToEvents();
 		GetReferences();
@@ -125,6 +125,18 @@ public class MenuHandler : MonoBehaviour // rename to something better
 	{
 		rightHand.PointerClick -= PointerClick;
 		leftHand.PointerClick -= PointerClick;
-        MenuVoiceRec.ChangeName -= ChangeName;
-	}
+
+        MenuVoiceRec.Play -= Play;
+        MenuVoiceRec.QuitGame -= Quit;
+
+        if (SceneLoader.GetSceneName() == "MainMenu")
+        {
+            MenuVoiceRec.ChangeName -= ChangeName;
+        }
+        else if (SceneLoader.GetSceneName() == "EndScene")
+        {
+            MenuVoiceRec.MainMenu -= MainMenu;
+            MenuVoiceRec.Replay -= Replay;
+        }
+    }
 }

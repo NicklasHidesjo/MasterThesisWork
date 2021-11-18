@@ -65,7 +65,7 @@ public static class GameManager
 		}
 	}
 
-	private static void SetCurrentGameStatus()
+	public static void SetCurrentGameStatus()
 	{
 		switch (SceneLoader.GetSceneName())
 		{

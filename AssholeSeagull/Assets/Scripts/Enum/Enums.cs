@@ -23,5 +23,6 @@ public enum GameStatus
     menu,
     pause,
     ingame,
-    gameover
+    gameover,
+    fading
 }
