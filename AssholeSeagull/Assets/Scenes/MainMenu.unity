@@ -2983,8 +2983,8 @@ MonoBehaviour:
   borderPositions:
   - {fileID: 1158807417}
   - {fileID: 719581683}
-  normal: {fileID: 0}
-  sandbox: {fileID: 0}
+  normal: {fileID: 11400000, guid: 17dd1c93424c73a45aea8b175917a4f9, type: 2}
+  sandbox: {fileID: 11400000, guid: 9360114f0fc889949a3f5e517910cdfc, type: 2}
 --- !u!1001 &555527631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7242,8 +7242,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightHand: {fileID: 1379848019}
   leftHand: {fileID: 1379848020}
-  normalMode: {fileID: 11400000, guid: 17dd1c93424c73a45aea8b175917a4f9, type: 2}
-  peacefulMode: {fileID: 11400000, guid: 9360114f0fc889949a3f5e517910cdfc, type: 2}
   setNameField: {fileID: 1921443980}
   gameButtons: {fileID: 65252212}
 --- !u!4 &1199608055

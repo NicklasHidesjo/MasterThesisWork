@@ -300,7 +300,7 @@
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/left/input/x"
+               "path" : "/user/hand/left/input/application_menu"
             },
             {
                "inputs" : {
@@ -309,7 +309,7 @@
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/right/input/x"
+               "path" : "/user/hand/right/input/application_menu"
             }
          ]
       },
