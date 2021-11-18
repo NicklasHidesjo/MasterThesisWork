@@ -9,7 +9,6 @@ using UnityEngine.Windows.Speech;
 public delegate void ChangeName();
 public delegate void Play();
 public delegate void QuitGame();
-public delegate void FreeMode();
 public delegate void Replay();
 public delegate void MainMenu();
 
@@ -20,7 +19,6 @@ public class MenuVoiceRec : MonoBehaviour
     public static event ChangeName ChangeName;
     public static event Play Play;
     public static event QuitGame QuitGame;
-    public static event FreeMode FreeMode;
     public static event Replay Replay;
     public static event MainMenu MainMenu;
     public static event SetGameMode SetGameMode;
@@ -39,7 +37,6 @@ public class MenuVoiceRec : MonoBehaviour
     {
         actions.Add("Play", CallPlay);
 
-        actions.Add("FreeMode", CallFreeMode);
         actions.Add("Quit", CallQuitGame);
 
         actions.Add("Change Name", CallChangeName);
@@ -77,11 +74,6 @@ public class MenuVoiceRec : MonoBehaviour
     private void CallQuitGame()
     {
         QuitGame?.Invoke();
-    }
-
-    private void CallFreeMode()
-    {
-        FreeMode?.Invoke();
     }
 
     private void CallPlay()
