@@ -10,4 +10,6 @@ public class SeagullSettings : ScriptableObject
 	public float acceleration = 0.5f;
 	public float deacceleration = 0.5f;
 	public float minSpeed = 1f;
+
+	public float YOffset = 2f;
 }

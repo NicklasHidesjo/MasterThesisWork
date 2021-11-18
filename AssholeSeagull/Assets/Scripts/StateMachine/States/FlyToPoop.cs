@@ -13,6 +13,7 @@ public class FlyToPoop : IState
     float minSpeed;
     float speed;
     float deacceleration;
+    private float yOffset;
 
     public FlyToPoop (SeagullController seagullController, StateMachine stateMachine)
     {
@@ -23,6 +24,7 @@ public class FlyToPoop : IState
     public void Enter()
     {
         SeagullController.Scared += Scared;
+        yOffset = seagullController.SeagullSettings.YOffset;
 
         transform = seagullController.transform;
 
@@ -31,7 +33,7 @@ public class FlyToPoop : IState
         deacceleration = seagullController.SeagullSettings.deacceleration;
 
         Vector3 foodPackage = seagullController.FoodPackage;
-        Vector3 packagePos = new Vector3(foodPackage.x, transform.position.y, foodPackage.z);
+        Vector3 packagePos = new Vector3(foodPackage.x, foodPackage.y + yOffset, foodPackage.z);
         target = packagePos;
 
         transform.LookAt(target);

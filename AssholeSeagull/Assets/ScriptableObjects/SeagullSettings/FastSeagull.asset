@@ -17,3 +17,4 @@ MonoBehaviour:
   acceleration: 5
   deacceleration: 0
   minSpeed: 1
+  YOffset: 2
