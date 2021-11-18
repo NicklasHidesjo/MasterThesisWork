@@ -31,16 +31,16 @@ public class ScoreBoardHandler : MonoBehaviour
 	{
 		switch (GameManager.Settings.GameMode)
 		{
-			case GameModes.normal:
+			case GameModes.Normal:
 				GetScore.GetScoreBoardResult(normalPublicCode);
 				break;
-			case GameModes.sandbox:
+			case GameModes.Sandbox:
 
 				break;
-			case GameModes.peaceful:
+			case GameModes.Peaceful:
 				GetScore.GetScoreBoardResult(peacefulPublicCode);
 				break;
-			case GameModes.chaos:
+			case GameModes.Chaos:
 
 				break;
 		}
@@ -166,15 +166,15 @@ public class ScoreBoardHandler : MonoBehaviour
 	{
 		switch (GameManager.Settings.GameMode)
 		{
-			case GameModes.normal:
+			case GameModes.Normal:
 				GetScore.AddToScoreBoard(highScore, normalPrivateCode);
 				break;
-			case GameModes.sandbox:
+			case GameModes.Sandbox:
 				break;
-			case GameModes.peaceful:
+			case GameModes.Peaceful:
 				GetScore.AddToScoreBoard(highScore, peacefulPrivateCode);
 				break;
-			case GameModes.chaos:
+			case GameModes.Chaos:
 				break;
 		}
 	}

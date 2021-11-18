@@ -11,14 +11,8 @@ public class MenuHandler : MonoBehaviour // rename to something better
     // to see if either the right or left hand clicks any
     // buttons. 
 
-    // look into the posibility for it to not require being buttons in the canvas
-    // but just objects with colliders.
-
     [SerializeField] private SteamVR_LaserPointer rightHand;
     [SerializeField] private SteamVR_LaserPointer leftHand;
-
-    [SerializeField] private GameSettings normalMode;
-    [SerializeField] private GameSettings peacefulMode;
 
     [SerializeField] private GameObject setNameField;
     [SerializeField] private GameObject gameButtons;
@@ -35,9 +29,8 @@ public class MenuHandler : MonoBehaviour // rename to something better
 		rightHand.PointerClick += PointerClick;
 		leftHand.PointerClick += PointerClick;
 
-        MenuVoiceRec.Play += PlayNormal;
+        MenuVoiceRec.Play += Play;
         MenuVoiceRec.QuitGame += Quit;
-        MenuVoiceRec.FreeMode += PlayFreeRoam;
 
         if(SceneLoader.GetSceneName() == "MainMenu")
         {
@@ -58,11 +51,7 @@ public class MenuHandler : MonoBehaviour // rename to something better
     {
         if (e.target.name == "Play")
         {
-            PlayNormal();
-        }
-        if (e.target.name == "Free Roam")
-        {
-            PlayFreeRoam();
+            Play();
         }
         if (e.target.name == "Replay")
         {
@@ -105,18 +94,9 @@ public class MenuHandler : MonoBehaviour // rename to something better
         LoadGame();
     }
 
-    private void PlayFreeRoam()
+    private void Play()
     {
         PlayButtonSound();
-        GameManager.Settings = peacefulMode;
-        Debug.Log(GameManager.Settings);
-        LoadGame();
-    }
-
-    private void PlayNormal()
-    {
-        PlayButtonSound();
-        GameManager.Settings = normalMode;
         Debug.Log(GameManager.Settings);
         LoadGame();
     }

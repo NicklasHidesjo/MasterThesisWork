@@ -22,7 +22,7 @@ public class EndScreen : MonoBehaviour
 
         switch (GameManager.Settings.GameMode)
         {
-            case GameModes.normal:
+            case GameModes.Normal:
                 highscore = PlayerPrefs.GetInt("highscore");
                 if (GameManager.Score > highscore)
                 {
@@ -31,7 +31,7 @@ public class EndScreen : MonoBehaviour
                     newHighscore = true;
                 }
                 break;
-            case GameModes.peaceful:
+            case GameModes.Peaceful:
                 highscore = PlayerPrefs.GetInt("freeRoamHighscore");
                 if (GameManager.Score > highscore)
                 {
@@ -40,10 +40,10 @@ public class EndScreen : MonoBehaviour
                     newHighscore = true;
                 }
                 break;
-            case GameModes.sandbox:
+            case GameModes.Sandbox:
                 Debug.Log("Gamemode not done in end screen");
                 break;
-            case GameModes.chaos:
+            case GameModes.Chaos:
                 Debug.Log("Gamemode not done in end screen");
                 break;
             default:

@@ -12,10 +12,10 @@ public enum States
 
 public enum GameModes
 {
-    normal,
-    sandbox,
-    peaceful,
-    chaos
+    Normal,
+    Sandbox,
+    Peaceful,
+    Chaos
 }
 
 public enum GameStatus
