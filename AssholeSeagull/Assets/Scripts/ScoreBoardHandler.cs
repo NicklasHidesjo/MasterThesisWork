@@ -8,8 +8,8 @@ public class ScoreBoardHandler : MonoBehaviour
 	const string normalPrivateCode = "kvTPuUPhA0ej7pKCVPGXIw5AVLBzaeFEOIcIsPdjfNWg";
 	const string normalPublicCode = "618e3af78f40bb127867c5c0";
 
-	const string peacefulPrivateCode = "R3M4oftPNkmHIjVxu9E8QQ8ZOn9mBVpUGjojSMdjn23g";
-	const string peacefulPublicCode = "61922c9e8f40bb12786f1c21";
+	const string sandboxPrivateCode = "R3M4oftPNkmHIjVxu9E8QQ8ZOn9mBVpUGjojSMdjn23g";
+	const string sandboxPublicCode = "61922c9e8f40bb12786f1c21";
 
 	[SerializeField] private TextMeshProUGUI scoreBoardText;
 
@@ -34,14 +34,20 @@ public class ScoreBoardHandler : MonoBehaviour
 			case GameModes.Normal:
 				GetScore.GetScoreBoardResult(normalPublicCode);
 				break;
-			case GameModes.Sandbox:
 
+			case GameModes.Sandbox:
+				GetScore.GetScoreBoardResult(sandboxPublicCode);
 				break;
+
 			case GameModes.Peaceful:
-				GetScore.GetScoreBoardResult(peacefulPublicCode);
 				break;
+
 			case GameModes.Chaos:
 
+				break;
+
+			default:
+				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
 				break;
 		}
 	}
@@ -169,12 +175,19 @@ public class ScoreBoardHandler : MonoBehaviour
 			case GameModes.Normal:
 				GetScore.AddToScoreBoard(highScore, normalPrivateCode);
 				break;
+
 			case GameModes.Sandbox:
+				GetScore.AddToScoreBoard(highScore, sandboxPrivateCode);
 				break;
+
 			case GameModes.Peaceful:
-				GetScore.AddToScoreBoard(highScore, peacefulPrivateCode);
 				break;
+
 			case GameModes.Chaos:
+				break;
+
+			default:
+				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
 				break;
 		}
 	}
