@@ -11,6 +11,11 @@ public class ScoreBoardHandler : MonoBehaviour
 	const string sandboxPrivateCode = "R3M4oftPNkmHIjVxu9E8QQ8ZOn9mBVpUGjojSMdjn23g";
 	const string sandboxPublicCode = "61922c9e8f40bb12786f1c21";
 
+	const string chaosPrivateCode = "nG6_dh0t8EGFooS88QmUVANhgXmNWuSEyLZvQe2Xf82A";
+	const string chaosPublicCode = "619655b78f40bb127874bb77";
+
+	// the website for chaos mode do not displace this! http://dreamlo.com/lb/nG6_dh0t8EGFooS88QmUVANhgXmNWuSEyLZvQe2Xf82A
+
 	[SerializeField] private TextMeshProUGUI scoreBoardText;
 
 	[Header("Names")]
@@ -39,12 +44,8 @@ public class ScoreBoardHandler : MonoBehaviour
 				GetScore.GetScoreBoardResult(sandboxPublicCode);
 				break;
 
-			case GameModes.Peaceful:
-				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
-				break;
-
 			case GameModes.Chaos:
-				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
+				GetScore.GetScoreBoardResult(chaosPublicCode);
 				break;
 
 			default:
@@ -181,11 +182,8 @@ public class ScoreBoardHandler : MonoBehaviour
 				GetScore.AddToScoreBoard(highScore, sandboxPrivateCode);
 				break;
 
-			case GameModes.Peaceful:
-				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
-				break;
-
 			case GameModes.Chaos:
+				GetScore.AddToScoreBoard(highScore, chaosPrivateCode);
 				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
 				break;
 
