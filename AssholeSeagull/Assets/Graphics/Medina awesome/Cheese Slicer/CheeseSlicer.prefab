@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerTransform: {fileID: 0}
-  playerReach: 5
+  playerReach: 1.5
 --- !u!54 &415265465
 Rigidbody:
   m_ObjectHideFlags: 0

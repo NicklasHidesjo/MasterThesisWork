@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerTransform: {fileID: 0}
-  playerReach: 5
+  playerReach: 1.5
 --- !u!208 &-1296232076085465402
 NavMeshObstacle:
   m_ObjectHideFlags: 0
