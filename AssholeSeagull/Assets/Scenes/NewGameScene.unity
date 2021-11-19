@@ -3886,7 +3886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8916402399794109887, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8916402399794109887, guid: efe5c748023be9f40b47ba38f52f8511, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3937,6 +3937,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2060416758}
     m_Modifications:
+    - target: {fileID: 1560159154397889062, guid: 10a2df97b8639a041a4488e377201de0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720344263917855568, guid: 10a2df97b8639a041a4488e377201de0, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2197006642540182992, guid: 10a2df97b8639a041a4488e377201de0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2283933654989040835, guid: 10a2df97b8639a041a4488e377201de0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351500413044437902, guid: 10a2df97b8639a041a4488e377201de0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5128854203788520030, guid: 10a2df97b8639a041a4488e377201de0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5129012384170864214, guid: 10a2df97b8639a041a4488e377201de0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011427579295795435, guid: 10a2df97b8639a041a4488e377201de0, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 8867159879265276392, guid: 10a2df97b8639a041a4488e377201de0, type: 3}
       propertyPath: m_Name
       value: LettuceSpawner
@@ -5613,7 +5645,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 522879561259487592, guid: cc48faf2f7120334d9c5c99870759bfc, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 522879561259487592, guid: cc48faf2f7120334d9c5c99870759bfc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6317,7 +6349,7 @@ PrefabInstance:
       objectReference: {fileID: 1682640159}
     - target: {fileID: 1391123699044127506, guid: 3fbd6ddac9549e64baa1ff56b695c10c, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1391123699044127506, guid: 3fbd6ddac9549e64baa1ff56b695c10c, type: 3}
       propertyPath: m_LocalPosition.x

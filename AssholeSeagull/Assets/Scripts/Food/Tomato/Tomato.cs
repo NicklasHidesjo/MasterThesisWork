@@ -77,6 +77,7 @@ public class Tomato : MonoBehaviour
 			}
 		}
 
+        // change this to use interactable onattached event
 		if(rb.isKinematic && interactable.attachedToHand)
 		{
             KinematicToggle(false);

@@ -274,7 +274,9 @@ public class FoodItem : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		// check if we are picked up or not
+		// change this into using interactable onattached event
+
+		// check if we are picked up or not  
 		InHand = interactable.attachedToHand;
 
 		if (rb.isKinematic && inHand)

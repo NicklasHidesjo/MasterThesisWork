@@ -65,7 +65,8 @@ public class LettuceSpawner : MonoBehaviour
 				return;
 			}
 		}
-		HandleSpawningHead();
+
+		// here we should start a timer that deactivates it.
 	}
 
 	private void CreateHeadPool()

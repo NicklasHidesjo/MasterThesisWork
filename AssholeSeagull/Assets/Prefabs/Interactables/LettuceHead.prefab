@@ -184,9 +184,9 @@ GameObject:
   - component: {fileID: 7168859954272203195}
   - component: {fileID: 7059272416857870559}
   - component: {fileID: 3598575637077634255}
-  - component: {fileID: 4333469412302729222}
   - component: {fileID: 7702793239958508256}
   - component: {fileID: 2111582794793940833}
+  - component: {fileID: 591052662083502194}
   m_Layer: 16
   m_Name: LettuceHead
   m_TagString: Head
@@ -362,19 +362,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poop: {fileID: 1046562408411459116}
---- !u!135 &4333469412302729222
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4333346124301808654}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0, z: 0.1}
 --- !u!82 &7702793239958508256
 AudioSource:
   m_ObjectHideFlags: 0
@@ -487,6 +474,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.004, y: 0, z: 0.089}
   m_TimeToStationary: 0.5
+--- !u!64 &591052662083502194
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333346124301808654}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1019087286148318701, guid: 238e43b1bd66f3843a8af3bfe6199e67, type: 3}
 --- !u!1 &8128090556852904117
 GameObject:
   m_ObjectHideFlags: 0
