@@ -106,7 +106,7 @@ public class TomatoSpawner : MonoBehaviour
 		}
 		if(newTomatoSlice == null)
 		{
-			newTomatoSlice = Instantiate(tomatoSlice);
+			newTomatoSlice = Instantiate(tomatoSlice, tomatoParent);
 			newTomatoSlice.Init("Tomato Slice");
 		}
 		return newTomatoSlice;

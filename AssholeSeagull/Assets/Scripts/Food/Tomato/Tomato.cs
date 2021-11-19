@@ -47,8 +47,7 @@ public class Tomato : MonoBehaviour
 	}
     
 	void Awake()
-    {
-        
+    {     
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
 
@@ -102,16 +101,16 @@ public class Tomato : MonoBehaviour
         if (!startedSlicing && !finished)
 		{
 			startedSlicing = true;
-            SetSpawnPosition(blade);
         }
 		else if (finished && startedSlicing)
         {
+            SetSpawnPosition(blade);
             SpawnTomatoSlice();
             amountCut++;
 
             if (amountCut >= amountOfSlices)
             {
-                ShouldDeactivateTomate();
+                ShouldDeactivateTomato();
             }
             startedSlicing = false;
         }
@@ -124,10 +123,10 @@ public class Tomato : MonoBehaviour
 
         Vector2 rawDirection = (bladePos - tomatoPos).normalized;
 
-        Vector3 direction = new Vector3(rawDirection.x, transform.position.y, rawDirection.y);
+        Vector3 direction = new Vector3(rawDirection.x, 0, rawDirection.y);
 
         spawnRotation = Quaternion.LookRotation(direction);
-
+        Debug.Log("My direction is: " + direction);
         spawnPos = transform.position + (direction * Spawnoffset);
     }
 
@@ -144,7 +143,7 @@ public class Tomato : MonoBehaviour
         tomatoSlice.PoopOnFood = shitOn;
     }
 
-	public void ShouldDeactivateTomate()
+	public void ShouldDeactivateTomato()
     {
         Hand hand = interactable.attachedToHand;
         complexThrowable.PhysicsDetach(hand);
