@@ -22,11 +22,10 @@ public class Lettuce : MonoBehaviour
         UnsubscribeFromEvents();
     }
 
-
     private void OnEnable()
     {
-        ToggleCollider(false);
         SubscribeToEvents();
+        meshCollider.enabled = false;
     }
 
     private void SubscribeToEvents()
@@ -36,20 +35,27 @@ public class Lettuce : MonoBehaviour
         head = GetComponentInParent<LettuceHead>();
         if (head != null)
         {
-            head.PickedUp += ToggleCollider;
+            head.PickedUp += PickedUp;
+            head.PutDown += PutDown;
         }
     }
 
-    private void ToggleCollider(bool value)
+    private void PickedUp()
     {
-        meshCollider.enabled = value;
+        meshCollider.enabled = true;
     }
+    private void PutDown()
+    {
+        meshCollider.enabled = false;
+    }
+
     private void UnsubscribeFromEvents()
     {
         interactable.onAttachedToHand -= GotPickedUp;
         if (head != null)
         {
-            head.PickedUp -= ToggleCollider;
+            head.PickedUp -= PickedUp;
+            head.PutDown -= PutDown;
         }
         head = null;
     }

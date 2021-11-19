@@ -126,7 +126,7 @@ public class Tomato : MonoBehaviour
         Vector3 direction = new Vector3(rawDirection.x, 0, rawDirection.y);
 
         spawnRotation = Quaternion.LookRotation(direction);
-        Debug.Log("My direction is: " + direction);
+
         spawnPos = transform.position + (direction * Spawnoffset);
     }
 

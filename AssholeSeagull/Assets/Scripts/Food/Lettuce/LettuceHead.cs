@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public delegate void PickedUp(bool pickedUp);
+public delegate void PickedUp();
+public delegate void PutDown();
 public class LettuceHead : MonoBehaviour
 {
 	public event PickedUp PickedUp;
+    public event PutDown PutDown;
 
 	[SerializeField] GameObject poop;
 
@@ -19,20 +21,6 @@ public class LettuceHead : MonoBehaviour
 	private AudioSource audioSource;
 
 	List<Hand> attachedHands = new List<Hand>();
-
-	public void GotShitOn()
-	{
-		audioSource.Play();
-
-		poop.SetActive(true);
-
-		LeafSpawnPoint[] leafSpawnPoints = GetComponentsInChildren<LeafSpawnPoint>();
-		foreach (var leaf in leafSpawnPoints)
-		{
-			leaf.SmearShitOnLeaf();
-		}
-	}
-
 
 	private void Start()
     {
@@ -46,33 +34,34 @@ public class LettuceHead : MonoBehaviour
 
     private void SubscribeToEvents()
     {
-        interactable.onAttachedToHand += ToggleKinematic;
-        interactable.onAttachedToHand += TooglePickedUp;
-        interactable.onDetachedFromHand += TogglePutDown;
+        interactable.onAttachedToHand += TurnOffKinematic;
+
+        interactable.onAttachedToHand += HandlePickedUp;
+        interactable.onDetachedFromHand += HandlePutDown;
     }
 
-    private void TogglePutDown(Hand hand)
+    private void HandlePutDown(Hand hand)
     {
 		attachedHands.Remove(hand);
-		attachedHands.RemoveAll(hand => hand == null);
-		
 
-		if(attachedHands.Count < 1)
+		attachedHands.RemoveAll(hand => hand == null);
+
+		if(attachedHands.Count == 0)
         {
-			PickedUp?.Invoke(false);
+			PutDown?.Invoke();
 		}
     }
 
-    private void TooglePickedUp(Hand hand)
+    private void HandlePickedUp(Hand hand)
     {
 		attachedHands.Add(hand);
 		if(attachedHands.Count == 1)
         {
-			PickedUp?.Invoke(true);
+			PickedUp?.Invoke();
 		}
     }
 
-    private void ToggleKinematic(Hand hand)
+    private void TurnOffKinematic(Hand hand)
     {
         if(rb.isKinematic)
         {
@@ -92,8 +81,21 @@ public class LettuceHead : MonoBehaviour
 
     private void UnsubscribeFromEvents()
     {
-        interactable.onAttachedToHand += ToggleKinematic;
-        interactable.onAttachedToHand -= TooglePickedUp;
-        interactable.onDetachedFromHand -= TogglePutDown;
+        interactable.onAttachedToHand += TurnOffKinematic;
+        interactable.onAttachedToHand -= HandlePickedUp;
+        interactable.onDetachedFromHand -= HandlePutDown;
     }
+
+	public void GotShitOn()
+	{
+		audioSource.Play();
+
+		poop.SetActive(true);
+
+		LeafSpawnPoint[] leafSpawnPoints = GetComponentsInChildren<LeafSpawnPoint>();
+		foreach (var leaf in leafSpawnPoints)
+		{
+			leaf.SmearShitOnLeaf();
+		}
+	}
 }
