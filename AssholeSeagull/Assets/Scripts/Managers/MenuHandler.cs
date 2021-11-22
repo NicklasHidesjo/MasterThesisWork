@@ -69,7 +69,7 @@ public class MenuHandler : MonoBehaviour // rename to something better
             MainMenu();
         }
 
-        if (e.target.name == "SetName")
+        if (e.target.name == "NamePoster")
         {
             ChangeName();
         }
