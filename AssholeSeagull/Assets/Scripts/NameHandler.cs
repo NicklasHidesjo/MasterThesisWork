@@ -7,20 +7,28 @@ using Valve.VR.Extras;
 
 public class NameHandler : MonoBehaviour
 {
+    public static event RotateBoards RotateBoards;
+
     [Header("inappropriate names")]
     [SerializeField] private List<string> inappropriateNames = new List<string>();
     [SerializeField] private string punishment;
     [Header("Other stuff")]
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI nameText2;
-    [SerializeField] private GameObject gameButtons;
 
     [SerializeField] private SteamVR_LaserPointer rightHand;
     [SerializeField] private SteamVR_LaserPointer leftHand;
 
     [SerializeField] private int maxCharacters;
 
+    private CorkBoardController corkBoardController;
+
     private string playerName = "";
+
+    private void Awake()
+    {
+        corkBoardController = FindObjectOfType<CorkBoardController>();
+    }
 
     void OnEnable()
     {
@@ -31,6 +39,10 @@ public class NameHandler : MonoBehaviour
 
     private void PointerClick(object sender, PointerEventArgs e)
     {
+        if(corkBoardController.Rotating)
+        {
+            return;
+        }
         HandleChangingName(e.target.name);
     }
 
@@ -63,8 +75,7 @@ public class NameHandler : MonoBehaviour
 
         GameManager.Name = playerName;
         nameText2.text = playerName;
-        gameButtons.SetActive(true);
-        gameObject.SetActive(false);
+        RotateBoards?.Invoke("Back");
     }
     
     public void EmptyPlayerName()
@@ -90,6 +101,11 @@ public class NameHandler : MonoBehaviour
 
     public void AddCharacter(string character)
     {
+        if(character.Length >1)
+        {
+            return;
+        }
+
         if (playerName.ToCharArray().Length >= maxCharacters)
         {
             return;

@@ -5,11 +5,14 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Valve.VR.Extras;
 
+
+public delegate void RotateBoards(string board);
 public class MenuHandler : MonoBehaviour // rename to something better
 {
     // this script uses events from SteamVR_LaserPointer 
     // to see if either the right or left hand clicks any
     // buttons. 
+    public static event RotateBoards RotateBoards;
 
     [SerializeField] private SteamVR_LaserPointer rightHand;
     [SerializeField] private SteamVR_LaserPointer leftHand;
@@ -17,6 +20,8 @@ public class MenuHandler : MonoBehaviour // rename to something better
     [SerializeField] private GameObject setNameField;
     [SerializeField] private GameObject gameButtons;
 
+
+    CorkBoardController boardController;
     private AudioSource buttonPlayer;
 
     private void Awake()
@@ -44,36 +49,58 @@ public class MenuHandler : MonoBehaviour // rename to something better
 	}
 	private void GetReferences()
 	{
+        boardController = FindObjectOfType<CorkBoardController>();
         buttonPlayer = GetComponent<AudioSource>();
 	}
 
 	public void PointerClick(object sender, PointerEventArgs e)
     {
-        if (e.target.name == "Play")
+        if(boardController != null )
         {
-            Play();
-        }
-        if (e.target.name == "Replay")
-        {
-            Replay();
-        }
-
-
-        if (e.target.name == "Quit")
-        {
-            Quit();
+            if(boardController.Rotating)
+            {
+                return;
+            }
         }
 
-        if (e.target.name == "Main Menu")
+        switch(e.target.name)
         {
-            MainMenu();
-        }
+            case "Play":
+                Play();
+                break;
 
-        if (e.target.name == "NamePoster")
-        {
-            ChangeName();
-        }
+            case "Replay":
+                Replay();
+                break;
 
+            case "Quit":
+                Quit();
+                break;
+
+            case "Main Menu":
+                MainMenu();
+                break;
+
+            case "NamePoster":
+                RotateBoards?.Invoke("Name");
+                break;
+            case "Settings":
+                RotateBoards?.Invoke("Settings");
+                break;
+            case "How To":
+                RotateBoards?.Invoke("HowTo");
+                break;
+            case "Credits":
+                RotateBoards?.Invoke("Credits");
+                break;
+            case "Back":
+                RotateBoards?.Invoke("Back");
+                break;
+
+            default:
+                Debug.LogWarning(e.target.name + " Was not found in the Switch!");
+                break;
+        }
     }
 
     private void MainMenu()
