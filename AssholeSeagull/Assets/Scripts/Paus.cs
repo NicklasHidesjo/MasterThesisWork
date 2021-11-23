@@ -48,22 +48,6 @@ public class Paus : MonoBehaviour
         }
     }
 
-    private void PointerEndHover(object sender, PointerEventArgs e)
-    {
-        rightHand.thickness = 0;
-        leftHand.thickness = 0;
-    }
-
-    private void PointerBeginHover(object sender, PointerEventArgs e)
-    {
-        if (!inPauseMenu)
-        {
-            return;
-        }
-        rightHand.thickness = rayThickness;
-        leftHand.thickness = rayThickness;
-    }
-
     public void PointerClick(object sender, PointerEventArgs e)
     {
         if (e.target.name == "Resume")
@@ -97,13 +81,6 @@ public class Paus : MonoBehaviour
     {
         rightHand.PointerClick += PointerClick;
         leftHand.PointerClick += PointerClick;
-
-        rightHand.PointerIn += PointerBeginHover;
-        leftHand.PointerIn += PointerBeginHover;
-
-        leftHand.PointerOut += PointerEndHover;
-        rightHand.PointerOut += PointerEndHover;
-
 
         InGameVoiceRec.pause += TogglePaus;
         InGameVoiceRec.Recenter += Recenter;
@@ -197,12 +174,6 @@ public class Paus : MonoBehaviour
     {
         rightHand.PointerClick -= PointerClick;
         leftHand.PointerClick -= PointerClick;
-
-        rightHand.PointerIn -= PointerBeginHover;
-        leftHand.PointerIn -= PointerBeginHover;
-
-        leftHand.PointerOut -= PointerEndHover;
-        rightHand.PointerOut -= PointerEndHover;
 
         InGameVoiceRec.pause -= TogglePaus;
         InGameVoiceRec.Recenter -= Recenter;

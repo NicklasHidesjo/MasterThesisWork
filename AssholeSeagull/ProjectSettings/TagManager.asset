@@ -15,6 +15,7 @@ TagManager:
   - Head
   - TomatoSpawner
   - Tomato
+  - UIButton
   layers:
   - Default
   - TransparentFX
