@@ -107,6 +107,13 @@ public class VRRecenteringController : MonoBehaviour
 
             // Reposition CameraRig to desired position minus offset
             cameraRig.position = (desiredHeadPos.position - offsetPos);
+            if(SceneLoader.GetSceneName() == "NewEndScene")
+            {
+                Vector3 rotation = desiredHeadPos.rotation.eulerAngles;
+                rotation.y -= offsetAngle;
+
+                cameraRig.rotation = Quaternion.Euler(rotation);
+            }
         }
         else
         {
