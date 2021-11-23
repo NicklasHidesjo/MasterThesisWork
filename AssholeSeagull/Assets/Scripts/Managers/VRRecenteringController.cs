@@ -39,8 +39,6 @@ public class VRRecenteringController : MonoBehaviour
 
         highestY = desiredHeadPosition.position.y + yMaxChange;
         lowestY = desiredHeadPosition.position.y - yMaxChange;
-
-        Recenter();
     }
 
     private void Update()
