@@ -175,7 +175,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/recenter"
+                     "output" : "/actions/default/in/pause"
                   }
                },
                "mode" : "button",
@@ -184,7 +184,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/recenter"
+                     "output" : "/actions/default/in/pause"
                   }
                },
                "mode" : "button",
@@ -218,6 +218,9 @@
                   }
                },
                "mode" : "dpad",
+               "parameters" : {
+                  "sub_mode" : "click"
+               },
                "path" : "/user/hand/right/input/trackpad"
             },
             {

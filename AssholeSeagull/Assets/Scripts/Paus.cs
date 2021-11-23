@@ -147,7 +147,7 @@ public class Paus : MonoBehaviour
         }
         PlayButtonSound();
         vrRecenteringController.Recenter();
-        ResumeGame();
+        //ResumeGame();
     }
 
     private void Restart()

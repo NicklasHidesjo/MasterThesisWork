@@ -94,4 +94,8 @@ public class InGameVoiceRec : MonoBehaviour
 		Quit?.Invoke();
     }
 
+    private void OnDestroy()
+    {
+		actionRecognizer.Dispose();
+    }
 }
