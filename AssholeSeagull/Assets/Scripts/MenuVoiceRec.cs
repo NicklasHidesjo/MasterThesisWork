@@ -11,6 +11,9 @@ public delegate void Play();
 public delegate void QuitGame();
 public delegate void Replay();
 public delegate void MainMenu();
+public delegate void Credits();
+public delegate void Settings();
+public delegate void HowTo();
 
 public delegate void SetGameMode(string gameMode);
 
@@ -22,6 +25,9 @@ public class MenuVoiceRec : MonoBehaviour
     public static event Replay Replay;
     public static event MainMenu MainMenu;
     public static event SetGameMode SetGameMode;
+    public static event HowTo HowTo;
+    public static event Settings Settings;
+    public static event Credits Credits;
     
     private KeywordRecognizer actionRecognizer;
 
@@ -51,7 +57,12 @@ public class MenuVoiceRec : MonoBehaviour
         actions.Add("Sandbox", CallSetSandbox);
         actions.Add("Normal", CallSetNormal);
         actions.Add("Chaos", CallSetChaos);
+
+        actions.Add("Settings", CallSettings);
+        actions.Add("Credits", CallCredits);
+        actions.Add("HowTo", CallHowTo);
     }
+
 
     private void CallSetNormal()
     {
@@ -89,6 +100,19 @@ public class MenuVoiceRec : MonoBehaviour
     private void CallMainMenu()
     {
         MainMenu?.Invoke();
+    }
+
+    private void CallSettings()
+    {
+        Settings?.Invoke();
+    }
+    private void CallCredits()
+    {
+        Credits?.Invoke();
+    }
+    private void CallHowTo()
+    {
+        HowTo?.Invoke();
     }
 
     private void InitializeSpeechRecognition()

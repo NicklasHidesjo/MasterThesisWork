@@ -48,6 +48,11 @@ public class NameHandler : MonoBehaviour
 
     public void HandleChangingName(string input)
     {
+        if (corkBoardController.Rotating)
+        {
+            return;
+        }
+
         if (input == "Enter")
         {
             SetPlayerName();

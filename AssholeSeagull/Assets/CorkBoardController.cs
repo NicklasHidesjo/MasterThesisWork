@@ -38,7 +38,9 @@ public class CorkBoardController : MonoBehaviour
         if(rotating)
         {
 			timer += Time.deltaTime / rotationDuration;
-			transform.rotation = Quaternion.Slerp(startingRotation, targetRotation ,timer);
+
+			transform.rotation = Quaternion.Slerp(startingRotation, targetRotation, timer);
+
 			if(timer >= 1)
             {
 				if(rotatingBack)
@@ -46,6 +48,7 @@ public class CorkBoardController : MonoBehaviour
 					rotatingBack = false;
 					DeactivateAll();
                 }
+
 				rotating = false;
 				timer = 0;
             }
@@ -54,12 +57,16 @@ public class CorkBoardController : MonoBehaviour
 
     private void RotateBoard(string board)
 	{
+		if(rotating)
+        {
+			return;
+        }
+
 		Vector3 target = transform.eulerAngles;
 		startingRotation = transform.rotation;
 		switch (board)
 		{
 			case "Back":
-				// rotate backwards to show main menu again.
 				target.y = 0;
 				targetRotation = Quaternion.Euler(target);
 				rotating = true;
@@ -71,17 +78,13 @@ public class CorkBoardController : MonoBehaviour
 				targetRotation = Quaternion.Euler(target);
 				rotating = true;
 				ActivateBoard(0);
-				// set settings board to be active 
-				// rotate towards it
 				break;
 
 			case "HowTo":
-				target.y = 180;
+				target.y = -180;
 				targetRotation = Quaternion.Euler(target);
 				rotating = true;
 				ActivateBoard(1);
-				// set How to board to be active 
-				// rotate towards it
 				break;
 
 			case "Credits":
@@ -89,21 +92,17 @@ public class CorkBoardController : MonoBehaviour
 				targetRotation = Quaternion.Euler(target);
 				rotating = true;
 				ActivateBoard(2);
-				// set Credits board to be active 
-				// rotate towards it
 				break;
 
 			case "Name":
-				target.y = 180;
+				target.y = -180;
 				targetRotation = Quaternion.Euler(target);
 				rotating = true;
 				ActivateBoard(3);
-				// set Name board to be active 
-				// rotate towards it
 				break;
 
 			default:
-				Debug.LogWarning(board + " Was not found in the swithc!");
+				Debug.LogWarning(board + " Was not found in the switch!");
 				break;
 		}
     }

@@ -1120,7 +1120,7 @@ GameObject:
   - component: {fileID: 4239402551486958883}
   - component: {fileID: 9147746537381585436}
   - component: {fileID: 7748659513568332025}
-  m_Layer: 10
+  m_Layer: 20
   m_Name: FoodTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
