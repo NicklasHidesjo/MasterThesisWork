@@ -5742,18 +5742,6 @@ PrefabInstance:
       value: 852
       objectReference: {fileID: 0}
     - target: {fileID: 2763932934204696103, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.006776411
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934204696103, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.006776411
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934204696103, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.006776411
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934204696103, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -5801,69 +5789,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2763932934204696120, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934204696120, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934204696120, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_PlaneDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934204696120, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934204696121, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2763932934204696123, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
       propertyPath: m_Name
       value: PauseCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934289631815, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_Size.z
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934289631815, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934551760893, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_Size.z
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934551760893, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934935953998, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_Size.z
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932934935953998, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932935129128726, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_Size.z
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932935129128726, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932935695084659, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_Size.z
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2763932935695084659, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 419fe2760b18c8d4289612ac72e5df28, type: 3}
