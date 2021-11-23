@@ -62,43 +62,28 @@ public class CorkBoardController : MonoBehaviour
 			return;
         }
 
-		Vector3 target = transform.eulerAngles;
 		startingRotation = transform.rotation;
+
 		switch (board)
 		{
-			case "Back":
-				target.y = 0;
-				targetRotation = Quaternion.Euler(target);
-				rotating = true;
-				rotatingBack = true;
+            case "Back":
+                GoBackToMain();
+                break;
+
+            case "Settings":
+				HandleActivatingBoard(0);
 				break;
 
-			case "Settings":
-				target.y = 180;
-				targetRotation = Quaternion.Euler(target);
-				rotating = true;
-				ActivateBoard(0);
-				break;
+            case "HowTo":
+                HandleActivatingBoard(1);
+                break;
 
-			case "HowTo":
-				target.y = -180;
-				targetRotation = Quaternion.Euler(target);
-				rotating = true;
-				ActivateBoard(1);
-				break;
-
-			case "Credits":
-				target.y = 180;
-				targetRotation = Quaternion.Euler(target);
-				rotating = true;
-				ActivateBoard(2);
+            case "Credits":
+				HandleActivatingBoard(2);
 				break;
 
 			case "Name":
-				target.y = -180;
-				targetRotation = Quaternion.Euler(target);
-				rotating = true;
-				ActivateBoard(3);
+				HandleActivatingBoard(3);
 				break;
 
 			default:
@@ -107,7 +92,25 @@ public class CorkBoardController : MonoBehaviour
 		}
     }
 
-	private void DeactivateAll()
+    private void GoBackToMain()
+    {
+		Vector3 target = transform.eulerAngles;
+		target.y = 0;
+        targetRotation = Quaternion.Euler(target);
+        rotating = true;
+        rotatingBack = true;
+    }
+
+    private void HandleActivatingBoard(int index)
+    {
+		Vector3 target = transform.eulerAngles;
+		target.y = 180 * (Random.Range(0, 2) * 2 - 1);
+        targetRotation = Quaternion.Euler(target);
+        rotating = true;
+        ActivateBoard(index);
+    }
+
+    private void DeactivateAll()
     {
         foreach (var board in corkBoards)
         {
