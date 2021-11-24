@@ -23,6 +23,7 @@ public class StealFood : IState
         foodTarget.transform.parent = seagullController.transform;
         foodTarget.Stolen = true;
         foodTarget.GetComponent<Rigidbody>().isKinematic = true;
+        seagullController.StolenFood = foodTarget;
         //grabbyFeet.SetFoodRB(foodTarget.GetComponent<Rigidbody>());
 
         stateMachine.ChangeState(States.FlyToExit);

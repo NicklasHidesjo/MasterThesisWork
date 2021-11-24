@@ -16,10 +16,10 @@ public class Idle : IState
     }
     public void Enter()
     {
+        seagullController.StolenFood = null;
         seagullController.SetFoodCollider = true;
 
         seagullAudio.PlaySpawnSound();
-
 
         if (seagullController.FoodTarget == null)
         {
@@ -30,8 +30,8 @@ public class Idle : IState
 
         int random = Random.Range(0, 2);
 
-/*        //Remove this, only for testing
-        random = 1;*/
+        //Remove this, only for testing
+        random = 1;
 
         if (random == 0)
         {

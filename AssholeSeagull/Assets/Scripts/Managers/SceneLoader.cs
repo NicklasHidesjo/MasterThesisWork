@@ -11,10 +11,8 @@ public static class SceneLoader
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
         while (!asyncLoad.isDone)
         {
-            Debug.Log(asyncLoad.progress);
             yield return null;
         }
-        Debug.Log("Finished loading scene");
     }
 
     public static void LoadScene(string scene)

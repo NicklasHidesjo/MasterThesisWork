@@ -55,11 +55,11 @@ public class FlyToExit : IState
 	
     private void DeactivateBird()
 	{
-		FoodItem foodTarget = seagullController.FoodTarget;
+		FoodItem stolenFood = seagullController.StolenFood;
 
-		if (foodTarget != null)
+		if (stolenFood != null)
 		{
-			foodTarget.DeactivateFood();
+			stolenFood.DeactivateFood();
 		}
 
 		transform.gameObject.SetActive(false);

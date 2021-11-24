@@ -23,6 +23,8 @@ public class SeagullController : MonoBehaviour
 
 	private FoodItem foodTarget;
 
+	private FoodItem stolenFood;
+
 	public SeagullSettings SeagullSettings
     {
 		get
@@ -94,5 +96,17 @@ public class SeagullController : MonoBehaviour
         {
 			foodCollider.SetActive(value);
         }
+    }
+
+	public FoodItem StolenFood
+    {
+		get 
+		{ 
+			return stolenFood; 
+		}
+		set 
+		{ 
+			stolenFood = value; 
+		}
     }
 }
