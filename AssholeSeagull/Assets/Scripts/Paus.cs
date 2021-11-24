@@ -104,12 +104,18 @@ public class Paus : MonoBehaviour
 
     private void Pause()
     {
+        rightHand.pointer.SetActive(true);
+        leftHand.pointer.SetActive(true);
+
         inPauseMenu = true;
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
     }
     private void ResumeGame()
     {
+        leftHand.pointer.SetActive(false);
+        rightHand.pointer.SetActive(false);
+
         inPauseMenu = false;
         PlayButtonSound();
         Time.timeScale = 1;
