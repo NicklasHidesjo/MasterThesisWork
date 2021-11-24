@@ -9,6 +9,8 @@ public class SeagullController : MonoBehaviour
 	// this script will be rewriten using animation events
 	// this script might be split into several smaller ones.
 
+	[SerializeField] GameObject foodCollider;
+
 	public static event Scared Scared;
 
 	private GrabbyFeet grabbyFeet; // use this in states instead if we will use it.
@@ -81,4 +83,16 @@ public class SeagullController : MonoBehaviour
 			foodTarget = value;
 		}
 	}
+
+	public bool SetFoodCollider
+    {
+        private get
+        {
+			return foodCollider.activeSelf;
+        }
+        set
+        {
+			foodCollider.SetActive(value);
+        }
+    }
 }

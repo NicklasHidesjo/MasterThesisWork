@@ -30,6 +30,6 @@ public class ScoreManager : MonoBehaviour
 
 		GameManager.Score = score;
 		// load our EndScene
-		SceneLoader.LoadScene("NewEndScene");
+		StartCoroutine(SceneLoader.LoadSceneAsync("NewEndScene"));
 	}
 }

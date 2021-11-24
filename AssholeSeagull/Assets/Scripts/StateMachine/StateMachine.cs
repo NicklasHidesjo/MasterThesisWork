@@ -37,6 +37,8 @@ public class StateMachine : MonoBehaviour
 
     public void ChangeState(States state) // change to take a enum for state
     {
+        Debug.Log(state);
+
         if(currentState != null)
         {
             currentState.Exit();

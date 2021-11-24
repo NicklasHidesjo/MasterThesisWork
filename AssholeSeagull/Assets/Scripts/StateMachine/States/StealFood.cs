@@ -17,8 +17,8 @@ public class StealFood : IState
     public void Enter()
     {
         // maybe have noisy irritating stealing food in your face sound.
-
         FoodItem foodTarget = seagullController.FoodTarget;
+        Debug.Log("Stealing Food: " + foodTarget.gameObject.name);
 
         foodTarget.transform.parent = seagullController.transform;
         foodTarget.Stolen = true;

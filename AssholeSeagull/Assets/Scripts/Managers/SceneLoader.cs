@@ -5,18 +5,20 @@ using UnityEngine.SceneManagement;
 
 public static class SceneLoader
 {
-	public static void ReloadScene ()
+	// load a specific scene using its name
+	public static IEnumerator LoadSceneAsync(string scene)
     {
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+        Debug.Log("I am doing something");
+        while (!asyncLoad.isDone)
+        {
+            Debug.Log(asyncLoad.progress);
+            yield return null;
+        }
+        Debug.Log(asyncLoad.progress);
     }
 
-	// load a specific scene using its name
-	public static void LoadScene(string scene)
-	{
-		SceneManager.LoadScene(scene);
-	}
-
-	public static void Quit()
+    public static void Quit()
 	{
 		Application.Quit();
 	}

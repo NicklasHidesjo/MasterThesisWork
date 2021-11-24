@@ -105,7 +105,7 @@ public class MenuHandler : MonoBehaviour // rename to something better
 	private void MainMenu()
 	{
 		PlayButtonSound();
-		SceneLoader.LoadScene("MainMenu");
+		StartCoroutine(SceneLoader.LoadSceneAsync("MainMenu"));
 	}
 
 	private void Quit()
@@ -151,7 +151,7 @@ public class MenuHandler : MonoBehaviour // rename to something better
 
 	private void LoadGame()
 	{
-		SceneLoader.LoadScene("NewGameScene");
+		StartCoroutine(SceneLoader.LoadSceneAsync("NewGameScene"));
 	}
 
 	public void PlayButtonSound()

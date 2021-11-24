@@ -16,6 +16,8 @@ public class Idle : IState
     }
     public void Enter()
     {
+        seagullController.SetFoodCollider = true;
+
         seagullAudio.PlaySpawnSound();
 
 

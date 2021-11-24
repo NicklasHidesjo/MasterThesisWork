@@ -137,4 +137,9 @@ public class MenuVoiceRec : MonoBehaviour
     {
         actionRecognizer.Start();
     }
+
+    private void OnDisable()
+    {
+        actionRecognizer?.Dispose();
+    }
 }

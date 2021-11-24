@@ -12,4 +12,7 @@ public class SeagullSettings : ScriptableObject
 	public float minSpeed = 1f;
 
 	public float YOffset = 2f;
+    public float distanceToFood = 3f; // maybe we can remove this?
+    public float velocityLimit = 4f;
+	public float diveDistance = 3f;
 }

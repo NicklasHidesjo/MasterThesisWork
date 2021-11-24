@@ -141,7 +141,7 @@ public class Paus : MonoBehaviour
         }
         Time.timeScale = 1;
         PlayButtonSound();
-        SceneLoader.ReloadScene();
+        SceneLoader.LoadSceneAsync(SceneLoader.GetSceneName());
     }
 
     private void Quit()
@@ -161,7 +161,7 @@ public class Paus : MonoBehaviour
             return;
         }
         PlayButtonSound();
-        SceneLoader.LoadScene("MainMenu");
+        StartCoroutine(SceneLoader.LoadSceneAsync("MainMenu"));
     }
 
 
@@ -173,6 +173,7 @@ public class Paus : MonoBehaviour
 
     private void OnDisable()
     {
+        Time.timeScale = 1;
         UnsubscribeFromEvents();
     }
 
