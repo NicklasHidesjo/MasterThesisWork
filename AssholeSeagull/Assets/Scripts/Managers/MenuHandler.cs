@@ -105,7 +105,7 @@ public class MenuHandler : MonoBehaviour // rename to something better
 	private void MainMenu()
 	{
 		PlayButtonSound();
-		StartCoroutine(SceneLoader.LoadSceneAsync("MainMenu"));
+		FindObjectOfType<SceneFader>().ChangeScene("MainMenu");
 	}
 
 	private void Quit()
@@ -151,7 +151,7 @@ public class MenuHandler : MonoBehaviour // rename to something better
 
 	private void LoadGame()
 	{
-		StartCoroutine(SceneLoader.LoadSceneAsync("NewGameScene"));
+		FindObjectOfType<SceneFader>().ChangeScene("NewGameScene");
 	}
 
 	public void PlayButtonSound()

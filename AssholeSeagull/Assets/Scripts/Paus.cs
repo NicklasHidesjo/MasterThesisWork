@@ -38,6 +38,8 @@ public class Paus : MonoBehaviour
         vrRecenteringController = FindObjectOfType<VRRecenteringController>();
         buttonPlayer = GetComponent<AudioSource>();
         SubscribeToEvents();
+
+        GameManager.CurrentGameStatus = GameStatus.ingame;
     }
 
     private void Update()
@@ -104,6 +106,8 @@ public class Paus : MonoBehaviour
 
     private void Pause()
     {
+        GameManager.CurrentGameStatus = GameStatus.menu;
+
         rightHand.pointer.SetActive(true);
         leftHand.pointer.SetActive(true);
 
@@ -113,6 +117,8 @@ public class Paus : MonoBehaviour
     }
     private void ResumeGame()
     {
+        GameManager.CurrentGameStatus = GameStatus.ingame;
+
         leftHand.pointer.SetActive(false);
         rightHand.pointer.SetActive(false);
 
@@ -141,7 +147,9 @@ public class Paus : MonoBehaviour
         }
         Time.timeScale = 1;
         PlayButtonSound();
-        SceneLoader.LoadSceneAsync(SceneLoader.GetSceneName());
+
+        // have fade when restarting level?
+        FindObjectOfType<SceneFader>().ChangeScene(SceneLoader.GetSceneName());
     }
 
     private void Quit()
@@ -161,7 +169,7 @@ public class Paus : MonoBehaviour
             return;
         }
         PlayButtonSound();
-        StartCoroutine(SceneLoader.LoadSceneAsync("MainMenu"));
+		FindObjectOfType<SceneFader>().ChangeScene("MainMenu");
     }
 
 

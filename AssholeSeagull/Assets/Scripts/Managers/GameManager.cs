@@ -72,10 +72,10 @@ public static class GameManager
 			case "MainMenu":
 				currentGameStatus = GameStatus.menu;
 				break;
-			case "GameScene":
+			case "NewGameScene":
 				currentGameStatus = GameStatus.ingame;
 				break;
-			case "EndScene":
+			case "NewEndScene":
 				currentGameStatus = GameStatus.gameover;
 				break;
 			default:

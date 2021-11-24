@@ -17,6 +17,10 @@ public class GameTimer : MonoBehaviour
 	}
 	private void Update()
 	{
+		if(GameManager.CurrentGameStatus != GameStatus.ingame)
+        {
+			return;
+        }
 		// increase our gameTimer
 		gameTimer += Time.deltaTime;
 

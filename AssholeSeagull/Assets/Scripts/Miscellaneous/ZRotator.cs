@@ -34,6 +34,10 @@ public class ZRotator : MonoBehaviour
 
 	void Update()
 	{
+		if(GameManager.CurrentGameStatus != GameStatus.ingame)
+        {
+			return;
+        }
 		// increase the time that has passed since we started our rotation.
 		timer += Time.deltaTime / rotationTime;
 
