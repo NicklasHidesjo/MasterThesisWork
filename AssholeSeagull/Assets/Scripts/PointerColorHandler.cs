@@ -16,7 +16,9 @@ public class PointerColorHandler : MonoBehaviour
     
     private SteamVR_LaserPointer hand;
 
-    private void Awake()
+    private bool deactivateMe = false; // this is ugly should be fixed! All code that uses it also needs to be fixed! ugly, ugly hacky hacky code (duct tape anyone?)
+
+    private void Start()
     {
         hand = GetComponent<SteamVR_LaserPointer>();
 
@@ -24,8 +26,21 @@ public class PointerColorHandler : MonoBehaviour
 
         hand.PointerIn += PointerBeginHover;
         hand.PointerOut += PointerEndHover;
+
+        if(SceneLoader.GetSceneName() == "NewGameScene")
+        {
+            deactivateMe = true;
+        }
     }
 
+    private void Update()
+    {
+        if(deactivateMe && hand.pointer != null)
+        {
+            deactivateMe = false;
+            hand.pointer.SetActive(false);
+        }
+    }
 
     private void PointerEndHover(object sender, PointerEventArgs e)
     {
@@ -40,5 +55,11 @@ public class PointerColorHandler : MonoBehaviour
             hand.thickness = interactiveThickness;
             hand.color = interactiveColor;
         }
+    }
+
+    private void OnDisable()
+    {
+        hand.PointerIn -= PointerBeginHover;
+        hand.PointerOut -= PointerEndHover;
     }
 }
