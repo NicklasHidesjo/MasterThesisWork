@@ -9,13 +9,17 @@ public static class SceneLoader
 	public static IEnumerator LoadSceneAsync(string scene)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
-        Debug.Log("I am doing something");
         while (!asyncLoad.isDone)
         {
             Debug.Log(asyncLoad.progress);
             yield return null;
         }
-        Debug.Log(asyncLoad.progress);
+        Debug.Log("Finished loading scene");
+    }
+
+    public static void LoadScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 
     public static void Quit()

@@ -37,6 +37,8 @@ public class FlyToStealFood : IState
 
     public void Enter()
     {
+        diving = false;
+
         SeagullController.Scared += Scared;
 
         minSpeed = seagullController.SeagullSettings.minSpeed;

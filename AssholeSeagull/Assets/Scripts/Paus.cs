@@ -18,8 +18,6 @@ public class Paus : MonoBehaviour
 
     [SerializeField] private GameObject pauseMenu;
 
-    private float rayThickness;
-
     private bool inPauseMenu;
 
     private void Start()
@@ -30,10 +28,6 @@ public class Paus : MonoBehaviour
             Debug.LogError("No SteamVR_Behaviour_Pose component found on this object", this);
 
         pauseMenu.SetActive(false);
-        rayThickness = leftHand.thickness;
-
-        leftHand.thickness = 0;
-        rightHand.thickness = 0;
 
         vrRecenteringController = FindObjectOfType<VRRecenteringController>();
         buttonPlayer = GetComponent<AudioSource>();
@@ -141,7 +135,7 @@ public class Paus : MonoBehaviour
         }
         Time.timeScale = 1;
         PlayButtonSound();
-        SceneLoader.LoadSceneAsync(SceneLoader.GetSceneName());
+        StartCoroutine(SceneLoader.LoadSceneAsync(SceneLoader.GetSceneName()));
     }
 
     private void Quit()

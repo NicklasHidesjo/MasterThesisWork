@@ -18,3 +18,6 @@ MonoBehaviour:
   deacceleration: 1
   minSpeed: 1
   YOffset: 2
+  distanceToFood: 1
+  velocityLimit: 1
+  diveDistance: 3

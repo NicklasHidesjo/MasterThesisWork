@@ -210,7 +210,6 @@ public class ScoreBoardHandler : MonoBehaviour
 
 			case GameModes.Chaos:
 				GetScore.AddToScoreBoard(highScore, chaosPrivateCode);
-				Debug.LogError("The scoreboard for this gamemode has not been added to the switch: " + GameManager.Settings.GameMode);
 				break;
 
 			default:
